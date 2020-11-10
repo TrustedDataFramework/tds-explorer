@@ -63,7 +63,7 @@
 								        <!-- 内层盒子——内容区 -->
 								        <div class="con">
 								        	 <div class="row block-row">
-								        	 	   <div class="col-sm-5">
+								        	 	   <div class="col-sm-4">
 								        	 	   	  <div class="btn-icon btn-soft-secondary">Bk</div>
 								        	 	   	  <div class="blockInfo">
 								        	 	   	  	 <p class="b-height">
@@ -72,11 +72,12 @@
 								        	 	   	  	 <p class="b-time text-secondary text-nowrap">2 mins ago</p>
 								        	 	   	  </div>
 								        	 	   </div>
-								        	 	   <div class="col-sm-7">
+								        	 	   <div class="col-sm-8">
 								        	 	   	  <div class="blockInfo blockInfo-1">
 								        	 	   	  	  <div class="b-height b-address">ddkfkffllglglglkdjdk</div>
 								        	 	   	  	  <div class="b-height b-txns">
 								        	 	   	  	  	<a class="b-height txns">223 txns</a>
+								        	 	   	  	  	<span class="b-time text-secondary text-nowrap">in 15 secs</span>
 								        	 	   	  	  </div>
 								        	 	   	  </div>
 								        	 	   	  <div class="fr b-num text-secondary">
