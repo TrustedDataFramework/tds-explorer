@@ -19,17 +19,23 @@
         </div>
         <div class="navlist">
           <ul>
+            <!--
             <li><a>Home</a></li>
             <li><a>Block</a></li>
             <li><a>Transaction</a></li>
             <li><a>Contract</a></li>
+			-->
+            <li><a>主页</a></li>
+            <li><a>区块</a></li>
+            <li><a>事务</a></li>
+            <li><a>合约</a></li>
           </ul>
         </div>
       </div>
     </div>
     <div class="h-bg-dark">
       <div class="container">
-        <h1 class="h4 text-white mb-3">The Ethereum Blockchain Explorer</h1>
+        <h1 class="h4 text-white mb-3">The TDS Blockchain Explorer</h1>
 
         <div class="input-group input-group-shadow">
           <div class="input-group-prepend d-none d-md-block">
@@ -59,21 +65,85 @@
           />
 
           <div class="input-group-append">
-            <button class="btn btn-primary">
-              <i class="fa fa-search"></i>
-            </button>
+            <button class="btn btn-primary"> <i class="fa fa-search"></i> </button>
           </div>
         </div>
       </div>
     </div>
 
     <div class="page-content home-page-content">
+      <!--参数-->
+      <div class="container  t-h-param">
+        <div class="row tab-css">
+          <div class="col-lg-6">
+            <div class="tran-box box-flex flex-between">
+                <div class="tran-left box-flex flex-middle">
+                  <div class="icon"><img src="../assets/img/icon-2-1.svg"/></div>
+                  <div class="tran-params">
+                     <h2 class="font-size-1 text-secondary">TRANSACTIONS</h2>
+                     <div>
+                       <a class="text-size-1 text-link" 
+                         data-html="true" title="Total Transactions Counter<br>(Update every 5 mins)" 
+                         data-toggle="tooltip"   data-placement="left">
+                         900.49M
+                         </a>
+                       <span class="small text-secondary" title="Transactions per Second" data-toggle="tooltip" data-placement="bottom">(13.7TPs)</span>
+                     </div>
+                  </div >
+                </div>
+                
+                <div class="tran-right box-flex">
+                    <div>
+                        <h2 class="font-size-1 text-secondary">TRANSACTIONS</h2>
+                        <div>
+                          <a class="text-size-1 text-link" >
+                              25 Gwei
+                            </a>
+                          <span class="small text-secondary">($0.24)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="tran-box box-flex flex-between">
+                <div class="tran-left box-flex flex-middle">
+                  <div class="icon"><img src="../assets/img/icon-51.svg"/></div>
+                  <div class="tran-params">
+                     <h2 class="font-size-1 text-secondary">Difficulty</h2>
+                     <div>
+                       <a class="text-size-1 text-link" 
+                         data-html="true" title="Total Transactions Counter<br>(Update every 5 mins)" 
+                         data-toggle="tooltip"   data-placement="left">
+                         3,375.11 TH
+                         </a>
+                       <span class="small text-secondary" title="Transactions per Second" data-toggle="tooltip" data-placement="bottom">(13.7TPs)</span>
+                     </div>
+                  </div >
+                </div>
+                
+                <div class="tran-right box-flex">
+                    <div>
+                        <h2 class="font-size-1 text-secondary">Hash Rate</h2>
+                        <div>
+                          <a class="text-size-1 text-link" title="Average Hash Rate (The last 12 hours)" data-toggle="tooltip" data-placement="bottom">       
+                          272,817.15 (GH/s)
+                            </a>
+                        
+                        </div>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="container" style="margin-top: 1.25rem">
         <div class="row">
           <div class="col-lg-6 mb-4 mb-lg-0">
             <div class="card">
               <div class="card-header">
-                <h2 class="card-header-title">Latest Blocks</h2>
+                <h2 class="card-header-title"><!--Latest Blocks-->最新区块</h2>
               </div>
               <div class="list-box block-list">
                 <el-scrollbar class="block-tab">
@@ -101,19 +171,14 @@
                         <div class="media-body">
                           <span class="d-inline-block d-sm-none">Block</span>
                           <a class="b-color-active">{{ item.height }}</a>
-                          <span class="b-time text-secondary text-nowrap">{{
-                            item.time
-                          }}</span>
+                          <span class="b-time text-secondary text-nowrap">{{ item.time }}</span>
                         </div>
                       </div>
                       <div class="col-sm-8 w-media">
                         <div class="blockInfo blockInfo-1">
                           <div class="b-address">
-                            <span class="color-default b-miner">Miner</span>
-                            <span
-                              class="b-color-active b-height p-hash line1"
-                              >{{ item.hash }}</span
-                            >
+                            <span class="color-default b-miner" ><!--Miner-->矿工</span >
+                            <span class="b-color-active b-height p-hash line1" >{{ item.hash }}</span >
                           </div>
                           <div class="b-txns">
                             <!--事务数为0的时候显示下面的span-->
@@ -125,9 +190,7 @@
                               >{{ item.anum }} txns</a
                             >
                             <!--<span class="color-default no-txn">0 txn</span>-->
-                            <span class="b-time text-secondary text-nowrap">{{
-                              item.atime
-                            }}</span>
+                            <span class="b-time text-secondary text-nowrap">{{ item.atime }}</span>
                           </div>
                         </div>
                         <div class="fr b-num text-secondary">
@@ -148,7 +211,7 @@
               </div>
               <div class="card-footer">
                 <a class="btn btn-xs btn-block btn-soft-primary"
-                  >View all blocks</a
+                  ><!--View all blocks-->查看所有区块</a
                 >
               </div>
             </div>
@@ -156,7 +219,9 @@
           <div class="col-lg-6">
             <div class="card">
               <div class="card-header">
-                <h2 class="card-header-title">Latest Transactions</h2>
+                <h2 class="card-header-title">
+                  <!--Latest Transactions-->最新交易
+                </h2>
               </div>
               <div class="list-box block-list transactions-list">
                 <el-scrollbar class="block-tab">
@@ -226,7 +291,7 @@
               </div>
               <div class="card-footer">
                 <a class="btn btn-xs btn-block btn-soft-primary"
-                  >View all blocks</a
+                  ><!--View all blocks-->查看所有事务</a
                 >
               </div>
             </div>
