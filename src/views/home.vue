@@ -105,6 +105,7 @@
                 </div>
             </div>
           </div>
+          <hr class="line">
           <div class="col-lg-6">
             <div class="tran-box box-flex flex-between">
                 <div class="tran-left box-flex flex-middle">
