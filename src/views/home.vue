@@ -1,71 +1,42 @@
 <template>
   <div class="wraper">
-    <div class="h-header">
-      <div class="container clearfix">
-        <div class="w-lg-auto">
-          <a
-            class="navbar-brand pt-md-0"
-            href="/"
-            target="_parent"
-            aria-label="Etherscan"
-          >
-            <img
-              id="logo-header"
-              width="160"
-              src="../assets/img/logo-ether.png"
-              alt="TDS Logo"
-            />
-          </a>
-        </div>
-        <div class="navlist">
-          <ul>
-            <!--
-            <li><a>Home</a></li>
-            <li><a>Block</a></li>
-            <li><a>Transaction</a></li>
-            <li><a>Contract</a></li>
-			-->
-            <li><a>主页</a></li>
-            <li><a>区块</a></li>
-            <li><a>事务</a></li>
-            <li><a>合约</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
+    <comheader :tabindex="tabindex"></comheader>
     <div class="h-bg-dark">
       <div class="container">
-        <h1 class="h4 text-white mb-3">The TDS Blockchain Explorer</h1>
+        
+        <div class="home-banner">
+          <h1 class="h4 text-white mb-3">The TDS Blockchain Explorer</h1>
 
-        <div class="input-group input-group-shadow">
-          <div class="input-group-prepend d-none d-md-block">
-            <!-- Select -->
-            <select
-              name="f"
-              class="custom-select custom-arrow-select input-group-text font-size-base filterby"
-            >
-              <option selected="" value="0">All Filters</option>
-              <option value="1">Addresses</option>
-              <option value="2">Txn Hash</option>
-              <option value="3">Block</option>
-            </select>
-            <!-- End Select -->
-          </div>
+          <div class="input-group input-group-shadow">
+            <div class="input-group-prepend d-none d-md-block">
+              <!-- Select -->
+              <select
+                name="f"
+                class="custom-select custom-arrow-select input-group-text font-size-base filterby"
+              >
+                <option selected="" value="0">All Filters</option>
+                <option value="1">Addresses</option>
+                <option value="2">Txn Hash</option>
+                <option value="3">Block</option>
+              </select>
+              <!-- End Select -->
+            </div>
 
-          <input
-            id="txtSearchInput"
-            type="text"
-            class="form-control searchautocomplete ui-autocomplete-input list-unstyled py-3 mb-0"
-            autocomplete="off"
-            spellcheck="false"
-            placeholder="Search by Address / Txn Hash / Block"
-            aria-describedby="button-header-search"
-            name="q"
-            maxlength="68"
-          />
+            <input
+              id="txtSearchInput"
+              type="text"
+              class="form-control searchautocomplete ui-autocomplete-input list-unstyled py-3 mb-0"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="Search by Address / Txn Hash / Block"
+              aria-describedby="button-header-search"
+              name="q"
+              maxlength="68"
+            />
 
-          <div class="input-group-append">
-            <button class="btn btn-primary"> <i class="fa fa-search"></i> </button>
+            <div class="input-group-append">
+              <button class="btn btn-primary"> <i class="fa fa-search"></i> </button>
+            </div>
           </div>
         </div>
       </div>
@@ -94,7 +65,7 @@
                 
                 <div class="tran-right box-flex">
                     <div>
-                        <h2 class="font-size-1 text-secondary">TRANSACTIONS</h2>
+                        <h2 class="font-size-1 text-secondary">MED GAS PRICE</h2>
                         <div>
                           <a class="text-size-1 text-link" >
                               25 Gwei
@@ -211,7 +182,7 @@
                 </el-scrollbar>
               </div>
               <div class="card-footer">
-                <a class="btn btn-xs btn-block btn-soft-primary"
+                <a class="btn btn-xs btn-block btn-soft-primary" @click="linkBlock"
                   ><!--View all blocks-->查看所有区块</a
                 >
               </div>
@@ -307,10 +278,14 @@
 
 <script>
 import comfooter from "@/components/footer";
-
+import comheader from "@/components/header"; 
 export default {
+ 
   data() {
     return {
+      
+      tabindex:1,
+
       blockList: [
         {
           height: "1365789",
@@ -406,15 +381,20 @@ export default {
     };
   },
   components: {
-    comfooter,
+    comfooter,comheader
   },
-  methods: {},
+
   mounted() {
     let that = this;
     that.$nextTick(() => {
       $('[data-toggle="tooltip"]').tooltip();
     });
   },
+  methods:{
+    linkBlock(){
+      that.$router.push({path:'/blocks'})
+    }
+  }
 };
 </script>
 

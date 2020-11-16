@@ -53,9 +53,10 @@ ul,li{list-style: none; }
     .w-lg-auto{float: left;}
     .navlist{float: right;}
     ul{display: inline-block;
-      li{display: inline-block;}
+      li{display: inline-block;  }
       a{color: #6c757e !important;    padding: .8rem 1rem; font-size:0.845rem; display: inline-block;}
       a:hover{color: #3498db!important;}
+      li.active a{color: #3498db!important;}
     }
     
 }
@@ -320,6 +321,16 @@ white-space: nowrap;
 .clearfix:after{content:"";height:0;line-height:0;display:block;visibility:hidden;clear:both;}
 .clearfix{zoom:1;}
 
+@media (min-width: 1400px){
+.container {
+    max-width: 1270px;
+}
+.container {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+}
+
 .text-uppercase {
     text-transform: uppercase!important;
 }
@@ -334,4 +345,82 @@ a.text-link:hover{
 }
 .text-size-1 {
     font-size: .9375rem;
+}
+
+.pb-3, .py-3 {
+    padding-bottom: .75rem!important;
+}
+.pt-3, .py-3 {
+    padding-top: .75rem!important;
+}
+
+button {
+    border: 0 none;
+    background: #5B88ED;
+    border-radius: 5px;
+    outline: none;
+}
+
+/*取消button点击的默认样式*/
+button:focus {
+    border: 0 none;
+    outline: none;
+}
+
+.page-title{
+    border-top: 1px solid #e7eaf3!important;
+    color:#4a4f55;
+    font-size: 1.21875rem;
+}
+
+/*分页*/
+.page-block{
+    padding:10px 0;
+    text-align:right;
+    overflow-x: auto;
+    .el-pagination__sizes{float:left;}
+   
+
+}
+.el-popper{
+    .el-scrollbar{height:148px;}
+}
+.tab-box{width:100%}
+.tds-table{width: 100%;}
+
+.el-table__header{
+    width: 100% !important;
+}
+.el-table__body{
+    width: 100% !important;
+}
+
+.tab-height{width:180px !important;}
+
+
+.el-backtop{
+    background:#3498db !important;;
+    .el-icon-caret-top{color:#fff !important;}
+}
+.ntab-hash{width:25%;}
+
+
+@media(max-width:767px){
+
+    
+
+   .h-header .navbar-nav{display: block;}
+   .h-header .navbar-nav li{display:block; padding-left: 20px;}
+   .h-header{
+       .navbar-toggler{padding: 0px; border: 0 none;}
+       .navbar-toggler .navbar-toggler-icon{background: url(../assets/img/icon_menu.png) center no-repeat !important; 
+    background-size:1.2em;-webkit-background-size:1.2em;
+
+   }
+   .navbar-toggler:hover .navbar-toggler-icon{background: url(../assets/img/icon_menu1.png) center no-repeat !important; 
+    background-size:1.2em;-webkit-background-size:1.2em;
+
+   }
+   
+}
 }
