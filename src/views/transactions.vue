@@ -165,14 +165,16 @@
      mounted(){
      	let that = this;
        that.defaultBlockList = JSON.parse(JSON.stringify(that.transactionList))
-       
+
        that.getTransactionList();
      },
      methods:{
       //跳转到事务详情
-      linDetail(){
+      linDetail(hash){
          let that = this;
-         that.$router.push({name:'transactionsDetail'})
+         that.$router.push({name:'transactionsDetail',params: {
+             hash: hash
+           }})
       },
       //跳转到地址事务
       linkAddressTransaction(){
@@ -300,7 +302,7 @@
          })
        },
      },
-   
+
 
    }
 </script>
