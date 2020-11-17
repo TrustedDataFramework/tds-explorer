@@ -26,14 +26,18 @@
                 	  	 <tr v-for="(item,index) in transactionList" :key="index">
                 	  	 	<td>
                             <div class="d-hash ">
-                              <a class="line1" @click="linDetail(item.hash)" :title="item.hash"  data-toggle="tooltip" data-placement="top">{{item.hash}}</a>
+                              <el-tooltip class="item" effect="dark" :content="item.hash" popper-class="atooltip" placement="bottom">
+                                <a class="line1" @click="linDetail" >{{item.hash}}</a>
+                              </el-tooltip>
                             </div>
                         </td>
                 	  	 	<td><div><span class="text-pri-default"><a>{{item.nonce}}</a></span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
                 	  	 	<td>
                             <div class="d-hash">
-                              <a class="line1" :title="item.from"  data-toggle="tooltip" data-placement="top" @click="linkAddressTransaction">{{item.from}}</a>
+                             <el-tooltip class="item" effect="dark" :content="item.from" popper-class="atooltip" placement="bottom">
+                                <a class="line1"  @click="linkAddressTransaction">{{item.from}}</a>
+                              </el-tooltip>
                             </div>
                         </td>
                         <td>
@@ -41,7 +45,9 @@
                         </td>
                 	  	 	<td>
                            <div class="d-hash">
-                               <a class="line1" :title="item.to"  data-toggle="tooltip" data-placement="top" @click="linkAddressTransaction">{{item.to}}</a>
+                               <el-tooltip class="item" effect="dark" :content="item.to" popper-class="atooltip" placement="bottom">
+                                 <a class="line1" @click="linkAddressTransaction">{{item.to}}</a>
+                               </el-tooltip>
                             </div>
                         </td>
 
@@ -159,9 +165,7 @@
      mounted(){
      	let that = this;
        that.defaultBlockList = JSON.parse(JSON.stringify(that.transactionList))
-        that.$nextTick(() => {
-          $('[data-toggle="tooltip"]').tooltip();
-        });
+
        that.getTransactionList();
      },
      methods:{
@@ -298,11 +302,7 @@
          })
        },
      },
-    beforeDestroy(){
-      if($(".tooltip ")){
-         $(".tooltip ").remove();
-      }
-     }
+
 
    }
 </script>

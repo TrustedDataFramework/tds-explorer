@@ -27,8 +27,11 @@
                 	  	 	<td><div class="d-hash"><a class="line1">{{item.transcationSize}}</a></div></td>
                 	  	 	<td>
                                 <div class="d-hash">
-                                   <a class="line1"  :title="item.miner_address"
-                                   data-toggle="tooltip" data-placement="top">{{item.miner_address}}</a>
+                                     <el-tooltip class="item" effect="dark" :content="item.miner_address" popper-class="atooltip" placement="top">
+                               
+                              
+                                   <a class="line1"  >{{item.miner_address}}</a>
+                                   </el-tooltip>
                                 </div>
                              </td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.all_fee}}</span></div></td>
@@ -142,9 +145,7 @@
      mounted(){
      	let that = this;
         that.defaultBlockList = JSON.parse(JSON.stringify(that.blockList))
-          that.$nextTick(() => {
-          $('[data-toggle="tooltip"]').tooltip();
-        });
+        
         that.getBlockList();
      },
      methods:{
@@ -271,11 +272,7 @@
           })
         }
      },
-     beforeDestroy(){
-      if($(".tooltip ")){
-         $(".tooltip ").remove();
-      }
-     }
+    
 
    }
 </script>
