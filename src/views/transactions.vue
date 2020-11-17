@@ -27,7 +27,7 @@
                 	  	 	<td>
                             <div class="d-hash ">
                               <el-tooltip class="item" effect="dark" :content="item.hash" popper-class="atooltip" placement="bottom">
-                                <a class="line1" @click="linDetail" >{{item.hash}}</a>
+                                <a class="line1" @click="linDetail(item.hash)" >{{item.hash}}</a>
                               </el-tooltip>
                             </div>
                         </td>
