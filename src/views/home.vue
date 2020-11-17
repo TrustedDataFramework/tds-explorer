@@ -3,7 +3,7 @@
     <comheader :tabindex="tabindex"></comheader>
     <div class="h-bg-dark">
       <div class="container">
-        
+
         <div class="home-banner">
           <h1 class="h4 text-white mb-3">The TDS Blockchain Explorer</h1>
 
@@ -53,8 +53,8 @@
                   <div class="tran-params">
                      <h2 class="font-size-1 text-secondary">TRANSACTIONS</h2>
                      <div>
-                       <a class="text-size-1 text-link" 
-                         data-html="true" title="Total Transactions Counter<br>(Update every 5 mins)" 
+                       <a class="text-size-1 text-link"
+                         data-html="true" title="Total Transactions Counter<br>(Update every 5 mins)"
                          data-toggle="tooltip"   data-placement="left">
                          900.49M
                          </a>
@@ -62,7 +62,7 @@
                      </div>
                   </div >
                 </div>
-                
+
                 <div class="tran-right box-flex">
                     <div>
                         <h2 class="font-size-1 text-secondary">MED GAS PRICE</h2>
@@ -84,8 +84,8 @@
                   <div class="tran-params">
                      <h2 class="font-size-1 text-secondary">Difficulty</h2>
                      <div>
-                       <a class="text-size-1 text-link" 
-                         data-html="true" title="Total Transactions Counter<br>(Update every 5 mins)" 
+                       <a class="text-size-1 text-link"
+                         data-html="true" title="Total Transactions Counter<br>(Update every 5 mins)"
                          data-toggle="tooltip"   data-placement="left">
                          3,375.11 TH
                          </a>
@@ -93,15 +93,15 @@
                      </div>
                   </div >
                 </div>
-                
+
                 <div class="tran-right box-flex">
                     <div>
                         <h2 class="font-size-1 text-secondary">Hash Rate</h2>
                         <div>
-                          <a class="text-size-1 text-link" title="Average Hash Rate (The last 12 hours)" data-toggle="tooltip" data-placement="bottom">       
+                          <a class="text-size-1 text-link" title="Average Hash Rate (The last 12 hours)" data-toggle="tooltip" data-placement="bottom">
                           272,817.15 (GH/s)
                             </a>
-                        
+
                         </div>
                     </div>
                 </div>
@@ -278,95 +278,16 @@
 
 <script>
 import comfooter from "@/components/footer";
-import comheader from "@/components/header"; 
+import comheader from "@/components/header";
+import {getBlockList} from '@/API/api';
 export default {
- 
+
   data() {
     return {
-      
+
       tabindex:1,
 
       blockList: [
-        {
-          height: "1365789",
-          hash: "ffllelfjeokdksllkflflskldk",
-          time: "2 mins ago",
-          anum: "168",
-          atime: "in 4 secs",
-          amount: 20,
-        },
-        {
-          height: "1365789",
-          hash: "ffllelfjeokdksllkflflskldk",
-          time: "2 mins ago",
-          anum: "168",
-          atime: "in 4 secs",
-          amount: 20,
-        },
-        {
-          height: "1365789",
-          hash: "ffllelfjeokdksllkflflskldk",
-          time: "2 mins ago",
-          anum: "0",
-          atime: "in 4 secs",
-          amount: 20,
-        },
-        {
-          height: "1365789",
-          hash: "ffllelfjeokdksllkflflskldk",
-          time: "2 mins ago",
-          anum: "168",
-          atime: "in 4 secs",
-          amount: 20,
-        },
-        {
-          height: "1365789",
-          hash: "ffllelfjeokdksllkflflskldk",
-          time: "2 mins ago",
-          anum: "168",
-          atime: "in 4 secs",
-          amount: 20,
-        },
-        {
-          height: "1365789",
-          hash: "ffllelfjeokdksllkflflskldk",
-          time: "2 mins ago",
-          anum: "0",
-          atime: "in 4 secs",
-          amount: 20,
-        },
-        {
-          height: "1365789",
-          hash: "ffllelfjeokdksllkflflskldk",
-          time: "2 mins ago",
-          anum: "168",
-          atime: "in 4 secs",
-          amount: 20,
-        },
-        {
-          height: "1365789",
-          hash: "ffllelfjeokdksllkflflskldk",
-          time: "2 mins ago",
-          anum: "168",
-          atime: "in 4 secs",
-          amount: 20,
-        },
-        {
-          height: "1365789",
-          hash: "ffllelfjeokdksllkflflskldk",
-          time: "2 mins ago",
-          anum: "168",
-          atime: "in 4 secs",
-          amount: 20,
-        },
-        {
-          height: "1365789",
-          hash: "ffllelfjeokdksllkflflskldk",
-          time: "2 mins ago",
-          anum: "168",
-          atime: "in 4 secs",
-          amount: 20,
-        },
       ],
       transitionList: [
         {
@@ -389,11 +310,26 @@ export default {
     that.$nextTick(() => {
       $('[data-toggle="tooltip"]').tooltip();
     });
+    this.getBlockList();
   },
   methods:{
     linkBlock(){
       that.$router.push({path:'/blocks'})
-    }
+    },
+    getBlockList(){
+      let that = this;
+      let obj = {};
+      obj.per_page = 10
+      obj.page = 0
+      getBlockList(obj).then(res=> {
+        if(res.code==2000){
+          let that = this;
+          that.blockList = res.data.content;
+        }else{
+          that.$toast(res.message,3000)
+        }
+      })
+    },
   }
 };
 </script>
