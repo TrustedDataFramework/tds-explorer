@@ -26,7 +26,7 @@
                 	  	 <tr v-for="(item,index) in transactionList" :key="index">
                 	  	 	<td>
                             <div class="d-hash ">
-                              <a class="line1" @click="linDetail" :title="item.hash"  data-toggle="tooltip" data-placement="top">{{item.hash}}</a>
+                              <a class="line1" @click="linDetail(item.hash)" :title="item.hash"  data-toggle="tooltip" data-placement="top">{{item.hash}}</a>
                             </div>
                         </td>
                 	  	 	<td><div><span class="text-pri-default"><a>{{item.nonce}}</a></span></div></td>
@@ -166,9 +166,11 @@
      },
      methods:{
       //跳转到事务详情
-      linDetail(){
+      linDetail(hash){
          let that = this;
-         that.$router.push({name:'transactionsDetail'})
+         that.$router.push({name:'transactionsDetail',params: {
+             hash: hash
+           }})
       },
       //跳转到地址事务
       linkAddressTransaction(){
