@@ -26,7 +26,7 @@
                 	  	 <tr v-for="(item,index) in transactionList" :key="index">
                 	  	 	<td>
                             <div class="d-hash ">
-                              <el-tooltip class="item" effect="dark" :content="item.hash" popper-class="atooltip" placement="top">
+                              <el-tooltip class="item" effect="dark" :content="item.hash" popper-class="atooltip" placement="bottom">
                                 <a class="line1" @click="linDetail" >{{item.hash}}</a>
                               </el-tooltip>
                             </div>
@@ -35,7 +35,7 @@
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
                 	  	 	<td>
                             <div class="d-hash">
-                             <el-tooltip class="item" effect="dark" :content="item.from" popper-class="atooltip" placement="top">
+                             <el-tooltip class="item" effect="dark" :content="item.from" popper-class="atooltip" placement="bottom">
                                 <a class="line1"  @click="linkAddressTransaction">{{item.from}}</a>
                               </el-tooltip>
                             </div>
@@ -45,7 +45,7 @@
                         </td>
                 	  	 	<td>
                            <div class="d-hash">
-                               <el-tooltip class="item" effect="dark" :content="item.to" popper-class="atooltip" placement="top">
+                               <el-tooltip class="item" effect="dark" :content="item.to" popper-class="atooltip" placement="bottom">
                                  <a class="line1" @click="linkAddressTransaction">{{item.to}}</a>
                                </el-tooltip>
                             </div>
