@@ -226,8 +226,37 @@
           })
         },
         handleCurrentChange(val) {
-            console.log(`当前页: ${val}`);
-        }
+          console.log(`当前页: ${val}`);
+          let that = this;
+          that.currentPage = val;
+          let obj = {};
+          obj.per_page = that.pageSize;
+          obj.page = val-1;
+          getTransactionList(obj).then(res=> {
+            if(res.code==2000){
+              let that = this;
+              that.totalElements = res.data.totalElements;
+              that.transactionList = res.data.content;
+            }else{
+              that.$toast(res.message,3000)
+            }
+          })
+        },
+       getTransactionList(){
+         let that = this;
+         let obj = {};
+         obj.per_page = 10
+         obj.page = 0
+         getTransactionList(obj).then(res=> {
+           if(res.code==2000){
+             let that = this;
+             that.totalElements = res.data.totalElements;
+             that.transactionList = res.data.content;
+           }else{
+             that.$toast(res.message,3000)
+           }
+         })
+       },
      },
     beforeDestroy(){
       if($(".tooltip ")){
