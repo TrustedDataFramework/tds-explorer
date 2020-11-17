@@ -310,8 +310,8 @@ export default {
     that.$nextTick(() => {
       $('[data-toggle="tooltip"]').tooltip();
     });
-    this.getBlockList();
-    this.getTransactionList();
+    that.getBlockList();
+    that.getTransactionList();
   },
   methods:{
     linkBlock(){
@@ -339,59 +339,61 @@ export default {
       getTransactionList(obj).then(res=> {
         if(res.code==2000){
           let that = this;
-          res.data.content[0].created_at = that.getTimeShow(res.data.content[0].created_at)
+          res.data.content[0].created_at = that.getTime(res.data.content[0].created_at)
           that.transitionList = res.data.content;
         }else{
           that.$toast(res.message,3000)
         }
       })
     },
-    //客户端时间转换为北京时间
-    getBeijingtime(time_str) {
-      let currentDate = new Date(time_str);
-      let tmpHours = currentDate.getHours();
-      //算得时区
-      let time_zone = -currentDate.getTimezoneOffset() / 60;
-      if (time_zone < 0) {
-        time_zone = Math.abs(time_zone) + 8; currentDate.setHours(tmpHours + time_zone);
-      } else {
-        time_zone -= 8;
-        currentDate.setHours(tmpHours - time_zone);
+    getTime(UTCDateString) {
+      //获取当前时区
+      var offset = new Date().getTimezoneOffset()/60;
+      if(!UTCDateString){
+        return '-';
       }
-      return currentDate;
+      //UTCDateString = renderTime(UTCDateString);
+      UTCDateString = UTCDateString.replace("-","/");
+      UTCDateString = UTCDateString.replace("T"," ");
+      UTCDateString = this.replaceAll(UTCDateString);
+      UTCDateString = UTCDateString.substring(0,19);
+
+      function formatFunc(str) {    //格式化显示
+        return str > 9 ? str : '0' + str
+      }
+      var date2 = new Date(UTCDateString);//这步是关键
+      var year = date2.getFullYear();
+      var mon = formatFunc(date2.getMonth() + 1);
+      var day = formatFunc(date2.getDate());
+      var hour = date2.getHours();
+      hour = formatFunc(hour);
+      var min = formatFunc(date2.getMinutes());
+      var sec = formatFunc(date2.getSeconds());
+      var dateStr = year+'/'+mon+'/'+day+' '+hour+':'+min+':'+sec;
+      //var dateStr = "2020/9/2 23:01:01";
+      var dateStr1 = this.eosFormatTime2(dateStr,offset);
+      var year1 = dateStr1.getFullYear();
+      var mon1 = formatFunc(dateStr1.getMonth() + 1);
+      var day1 = formatFunc(dateStr1.getDate());
+      var hour1 = dateStr1.getHours();
+      hour1 = formatFunc(hour1);
+      var min1 = formatFunc(dateStr1.getMinutes());
+      var sec1 = formatFunc(dateStr1.getSeconds());
+      var dateStr2 = year1+'-'+mon1+'-'+day1+' '+hour1+':'+min1+':'+sec1;
+      return dateStr2;
+  },
+
+    eosFormatTime2(oldTimes1,offset) {
+      var x = oldTimes1; // 取得时间"2017-07-08 13:00:00"
+      var time = new Date(x);
+      var timeNum = offset;//小时数
+      time.setHours(time.getHours() - timeNum);
+      return time;
     },
-    //计算事务时间与现在的时间间隔
-    getTimeShow(time_str){
-      if(time_str!=null) {
-        time_str = this.getBeijingtime(time_str)
-      }
-      var now = new Date();
-      var date = new Date(time_str);
-      //计算时间间隔，单位为分钟
-      var inter = parseInt((now.getTime() - date.getTime())/1000/60);
-      if(inter == 0){
-        return "刚刚";
-      }
-      //多少分钟前
-      else if(inter < 60){
-        return inter.toString() + "分钟前";
-      }
-      //多少小时前
-      else if(inter < 60*24){
-        return parseInt(inter/60).toString() + "小时前";
-      }
-      else if(now.getFullYear() == date.getFullYear()){
-        let mS = date.getMonth() + 1;
-        mS = mS < 10 ? ('0' + mS) : mS;
-        let dS = date.getDate();
-        dS = dS < 10 ? ('0' + dS) : dS;
-        let mE = date.getMinutes();
-        mE = mE < 10 ? ('0' + mE) : mE;
-        let dE = date.getSeconds();
-        dE = dE < 10 ? ('0' + dE) : dE;
-        return date.getFullYear() + "-" + mS + "-" + dS + " " +
-          date.getHours() + ":" + mE + ":" + dE;
-      }
+    replaceAll(str) {
+      if(str!=null)
+        str = str.replace(/-/g,"/")
+      return str;
     },
   }
 };

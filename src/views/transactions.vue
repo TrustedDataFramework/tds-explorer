@@ -2,9 +2,9 @@
     <div class="wrapper">
         <comheader :tabindex="tabindex"></comheader>
         <div class="tds-block-main">
-            
+
             <div class="container">
-                <div class="page-tilte pb-3 pt-3">区块</div>
+                <div class="page-tilte pb-3 pt-3">事务</div>
                 <div  class=" tab-css tab-box ">
                 	<div class="com-table-box">
                 	  <table class="com-table">
@@ -23,7 +23,7 @@
                 	  	 	 <th>amount</th>
                 	  	 	 <th>手续费</th>
                 	  	 </tr>
-                	  	 <tr v-for="(item,index) in blockList" :key="index">
+                	  	 <tr v-for="(item,index) in transactionList" :key="index">
                 	  	 	<td>
                             <div class="d-hash ">
                               <a class="line1" @click="linDetail" :title="item.hash"  data-toggle="tooltip" data-placement="top">{{item.hash}}</a>
@@ -44,14 +44,14 @@
                                <a class="line1" :title="item.to"  data-toggle="tooltip" data-placement="top">{{item.to}}</a>
                             </div>
                         </td>
-                      
+
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.amount}}</span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.fee}}</span></div></td>
                 	  	 </tr>
                 	  </table>
-                  </div> 
+                  </div>
                     <div class="page-block">
-                      
+
                         <el-pagination
                         @size-change="handleSizeChange"
                         @current-change="handleCurrentChange"
@@ -65,7 +65,7 @@
                 </div>
             </div>
         </div>
-        
+
 
 
         <comfooter></comfooter>
@@ -77,29 +77,21 @@
 
 </template>
 <script>
-   import comheader from "@/components/header"; 
-   import comfooter from "@/components/footer"; 
+   import comheader from "@/components/header";
+   import comfooter from "@/components/footer";
+   import {getTransactionList} from '@/API/api';
    export default{
      inject: ['reload'],
      data(){
         return {
          tabindex:3,
          sortType:0,//1升序，2降序
-         blockList:[
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'31049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'32049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'3049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0}
-           
+         transactionList:[
+           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'31049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0}
+
          ],
          defaultBlockList:[],
-         totalElements:6000, //总条数
+         totalElements:10, //总条数
          pageSize:10,//默认每页条数
          currentPage:0,//当前页
         }
@@ -114,25 +106,26 @@
                 return "暂无时间";
             } else {
                 let d = new Date(val);   //val 为表格内取到的后台时间
- 
+
                 let month =d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth() + 1;
                 let day = d.getDate() < 10 ? "0" + d.getDate() : d.getDate();
                 let hours = d.getHours() < 10 ? "0" + d.getHours() : d.getHours();
                 let min = d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes();
                 let sec = d.getSeconds() < 10 ? "0" + d.getSeconds() : d.getSeconds();
                 let times=d.getFullYear() + '-' + month + '-' + day + ' ' + hours + ':' + min + ':' + sec;
-                
+
                 return times;
-               
+
             }
         }
      },
      mounted(){
      	let that = this;
-       that.defaultBlockList = JSON.parse(JSON.stringify(that.blockList))
+       that.defaultBlockList = JSON.parse(JSON.stringify(that.transactionList))
         that.$nextTick(() => {
           $('[data-toggle="tooltip"]').tooltip();
         });
+       that.getTransactionList();
      },
      methods:{
       //跳转到事务详情
@@ -142,36 +135,36 @@
       },
 
       sort(num){
-      	
-      	
+
+
       	let sortType = 0
       	if(this.sortType==0){
       		if(num==1){
-	      		this.blockList.sort(this.compare1('nonce'))
+	      		this.transitionList.sort(this.compare1('nonce'))
 	      	}else{
-	      		this.blockList.sort(this.compare('nonce'))
+	      		this.transitionList.sort(this.compare('nonce'))
 	      	}
 	      	sortType = num;
       	}
-      	
+
       	if(this.sortType==1){
       		if(num==1){
       			sortType = 0
-      			this.blockList = JSON.parse(JSON.stringify(this.defaultBlockList))
-      			
+      			this.transitionList = JSON.parse(JSON.stringify(this.defaultBlockList))
+
       		}else{
       			sortType = num;
-      			this.blockList.sort(this.compare('nonce'))
+      			this.transitionList.sort(this.compare('nonce'))
       		}
       	}
-      	
+
       	if(this.sortType==2){
       		if(num==2){
       			sortType = 0
-      			this.blockList = JSON.parse(JSON.stringify(this.defaultBlockList))
+      			this.transitionList = JSON.parse(JSON.stringify(this.defaultBlockList))
       		}else{
       			sortType = num;
-      			this.blockList.sort(this.compare1('nonce'))
+      			this.transitionList.sort(this.compare1('nonce'))
       		}
       	}
       	this.sortType = sortType
@@ -184,7 +177,7 @@
               var val2 = b[attr];
               return val2 - val1;
           }
-          
+
       },
       //升序
       compare1(attr) {
@@ -212,13 +205,56 @@
       },
 
         handleSizeChange(val) {
-            console.log(`每页 ${val} 条`);
+          console.log(`每页 ${val} 条`);
+          let that = this;
+          that.pageSize = val;
+          let obj = {};
+          obj.per_page = val;
+          obj.page = that.currentPage;
+          getTransactionList(obj).then(res=> {
+            if(res.code==2000){
+              let that = this;
+              that.totalElements = res.data.totalElements;
+              that.transactionList = res.data.content;
+            }else{
+              that.$toast(res.message,3000)
+            }
+          })
         },
         handleCurrentChange(val) {
-            console.log(`当前页: ${val}`);
-        }
+          console.log(`当前页: ${val}`);
+          let that = this;
+          that.currentPage = val;
+          let obj = {};
+          obj.per_page = that.pageSize;
+          obj.page = val-1;
+          getTransactionList(obj).then(res=> {
+            if(res.code==2000){
+              let that = this;
+              that.totalElements = res.data.totalElements;
+              that.transactionList = res.data.content;
+            }else{
+              that.$toast(res.message,3000)
+            }
+          })
+        },
+       getTransactionList(){
+         let that = this;
+         let obj = {};
+         obj.per_page = 10
+         obj.page = 0
+         getTransactionList(obj).then(res=> {
+           if(res.code==2000){
+             let that = this;
+             that.totalElements = res.data.totalElements;
+             that.transactionList = res.data.content;
+           }else{
+             that.$toast(res.message,3000)
+           }
+         })
+       },
      }
-     
+
    }
 </script>
 
