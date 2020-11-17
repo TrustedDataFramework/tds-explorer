@@ -53,11 +53,9 @@
                   <div class="tran-params">
                      <h2 class="font-size-1 text-secondary">TRANSACTIONS</h2>
                      <div>
-                       <a class="text-size-1 text-link"
-                         data-html="true" title="Total Transactions Counter<br>(Update every 5 mins)"
-                         data-toggle="tooltip"   data-placement="left">
-                         900.49M
-                         </a>
+                        <el-tooltip class="item" effect="dark" content="Total Transactions Counter (Update every 5 mins)" popper-class="atooltip" placement="left">
+                       <a class="text-size-1 text-link">900.49M</a>
+                        </el-tooltip>
                        <span class="small text-secondary" title="Transactions per Second" data-toggle="tooltip" data-placement="bottom">(13.7TPs)</span>
                      </div>
                   </div >
@@ -84,12 +82,14 @@
                   <div class="tran-params">
                      <h2 class="font-size-1 text-secondary">Difficulty</h2>
                      <div>
-                       <a class="text-size-1 text-link"
-                         data-html="true" title="Total Transactions Counter<br>(Update every 5 mins)"
-                         data-toggle="tooltip"   data-placement="left">
+                       <el-tooltip class="item" effect="dark" content="Total Transactions Counter (Update every 5 mins)" popper-class="atooltip" placement="left">
+                       <a class="text-size-1 text-link">
                          3,375.11 TH
                          </a>
-                       <span class="small text-secondary" title="Transactions per Second" data-toggle="tooltip" data-placement="bottom">(13.7TPs)</span>
+                       </el-tooltip>
+                        <el-tooltip class="item" effect="dark" content="Transactions per Second" popper-class="atooltip" placement="bottom">
+                          <span class="small text-secondary" >(13.7TPs)</span>
+                        </el-tooltip>
                      </div>
                   </div >
                 </div>
@@ -98,10 +98,11 @@
                     <div>
                         <h2 class="font-size-1 text-secondary">Hash Rate</h2>
                         <div>
-                          <a class="text-size-1 text-link" title="Average Hash Rate (The last 12 hours)" data-toggle="tooltip" data-placement="bottom">
+                          <el-tooltip class="item" effect="dark" content="Average Hash Rate (The last 12 hours)" popper-class="atooltip" placement="bottom">
+                          <a class="text-size-1 text-link" >
                           272,817.15 (GH/s)
                             </a>
-
+                          </el-tooltip>
                         </div>
                     </div>
                 </div>
@@ -307,9 +308,7 @@ export default {
 
   mounted() {
     let that = this;
-    that.$nextTick(() => {
-      $('[data-toggle="tooltip"]').tooltip();
-    });
+   
     that.getBlockList();
     that.getTransactionList();
   },
