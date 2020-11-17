@@ -44,7 +44,7 @@
                         class="tab-address"
                         >
                             <template slot-scope="scope">
-                                <div ><a >{{scope.row.miner_address}}</a></div>      
+                                <div class="line1"><a >{{scope.row.miner_address}}</a></div>      
                             </template>
                         </el-table-column>
                         <el-table-column

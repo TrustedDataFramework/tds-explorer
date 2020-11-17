@@ -10,9 +10,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.21.0",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.5.3",
-    "font-awesome": "^4.7.0",
     "element-ui": "^2.14.1",
     "jquery": "^3.5.1",
     "less": "^3.12.2",

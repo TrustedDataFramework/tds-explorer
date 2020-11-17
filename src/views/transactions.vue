@@ -18,16 +18,21 @@
                 	  	 	 </th>
                 	  	 	 <th>出块时间</th>
                 	  	 	 <th>from</th>
+                         <th></th>
                 	  	 	 <th>to</th>
                 	  	 	 <th>amount</th>
                 	  	 	 <th>手续费</th>
                 	  	 </tr>
-                	  	 <tr v-for="(item,index) in blockList">
+                	  	 <tr v-for="(item,index) in blockList" :key="index">
                 	  	 	<td><div class="d-hash "><a class="line1">{{item.hash}}</a></div></td>
                 	  	 	<td><div><span class="text-pri-default"><a>{{item.nonce}}</a></span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at}}</span></div></td>
                 	  	 	<td><div class="d-hash"><a class="line1">{{item.from}}</a></div></td>
+                        <td>
+                          <span class="btn btn-xs btn-icon btn-soft-success rounded-circle"><i class="arrow-right"></i></span>
+                        </td>
                 	  	 	<td><div class="d-hash"><a class="line1">{{item.to}}</a></div></td>
+                      
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.amount}}</span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.fee}}</span></div></td>
                 	  	 </tr>
@@ -66,7 +71,7 @@
      inject: ['reload'],
      data(){
         return {
-         tabindex:2,
+         tabindex:3,
          sortType:0,//1升序，2降序
          blockList:[
            {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'31049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0},

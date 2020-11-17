@@ -6,10 +6,11 @@ import App from './App'
 import 'babel-polyfill'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min'
-import 'font-awesome/css/font-awesome.min.css' 
+
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 Vue.use(ElementUI);
+
 import './assets/custom.less';
 
 import router from './router'
