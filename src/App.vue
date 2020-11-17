@@ -36,5 +36,6 @@ export default {
 
 body,html{width: 100%; height: 100%;}
 
+body{padding-right: 0 !important }
 </style>
 

@@ -4,18 +4,33 @@
         <div class="tds-block-main address-transaction-main">
             
             <div class="container">
-                <div class="page-tilte pb-3 pt-3">
-                  地址
-                  <span class="title-address text-secondary">0xbF4E525435cfafc77fB3Db3D29e1C34621278Ae0</span>
-                  <span class="at-btn at-btn-copy" :class="{'btn-copy-suc':copySecs>0}" title="点击将地址复制到剪贴板"  data-toggle="tooltip" data-placement="top"
-                     v-clipboard:copy="address"
-                     v-clipboard:success="onCopy"
-                     v-clipboard:error="onError"  
-                  >
+                <div class="page-tilte pb-3 pt-3 row">
+                  
+                  <div class="col-md-9">
+                      
+                      地址
+                      <span class="title-address text-secondary">0xbF4E525435cfafc77fB3Db3D29e1C34621278Ae0</span>
+                      <span class="at-btn at-btn-copy" :class="{'btn-copy-suc':copySecs>0}" title="点击将地址复制到剪贴板"  data-toggle="tooltip" data-placement="top"
+                        v-clipboard:copy="address"
+                        v-clipboard:success="onCopy"
+                        v-clipboard:error="onError"  
+                      >
 
-                  </span>
-                  <span class="at-btn at-btn-see" title="点击查看二维码"  data-toggle="tooltip" data-placement="top" @click="codeDialogVisible=true;qrcodeScan();"></span>
+                      </span>
+                      <span class="at-btn at-btn-see" title="点击查看二维码"  data-toggle="tooltip" data-placement="top"  >
+                        <em data-target="#myModal" data-toggle="modal"  @click="qrcodeScan();"></em>
+                      </span>
+                  </div>
+
+                  <div class="col-md-3 col-balance">
+                      余额：0
+                  </div>
+              
+
                 </div>
+
+               
+
                 <div  class=" tab-css tab-box ">
                 	<div class="com-table-box">
                 	  <table class="com-table">
@@ -44,15 +59,18 @@
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at}}</span></div></td>
                 	  	 	<td>
                             <div class="d-hash">
-                              <a class="line1" :title="item.from"  data-toggle="tooltip" data-placement="top">{{item.from}}</a>
+                              <a class="line1" :title="item.from"  data-toggle="tooltip" data-placement="top" v-if="item.from==address">{{item.from}}</a>
+                              <span class="line1" :title="item.from"  data-toggle="tooltip" data-placement="top" v-if="item.from!=address">{{item.from}}</span>
                             </div>
                         </td>
                         <td>
-                          <span class="btn btn-xs btn-icon btn-soft-success rounded-circle"><i class="arrow-right"></i></span>
+                           <span class="transType" :class="{'type-out':item.type==1,'type-in':item.type==2}">{{item.type==1?'out':'in'}}</span>
                         </td>
                 	  	 	<td>
                            <div class="d-hash">
-                               <a class="line1" :title="item.to"  data-toggle="tooltip" data-placement="top">{{item.to}}</a>
+                               <a class="line1" :title="item.to"  data-toggle="tooltip" data-placement="top" v-if="item.to==address">{{item.to}}</a>
+                             
+                              <span class="line1 text-pri-default" :title="item.to"  data-toggle="tooltip" data-placement="top" v-if="item.to!=address">{{item.to}}</span>
                             </div>
                         </td>
                       
@@ -81,29 +99,27 @@
 
         <comfooter></comfooter>
        
-        <el-dialog
-            width="90%"
-            title="账号详情"
-            :visible.sync="codeDialogVisible"
-            class="dialog-code-box"
-          >
-            <div class="accountDetail-box">
-              <div class="code qrcodeimg">
-                <div id="qrcode" ref="qrcode"></div>
+        
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog code-modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                  &times;
+                </button>
+                <div class="code-address">{{address}}</div>
               </div>
-              <div class="readonly-input ellip-address-wrapper">
-                <input
-                  class="readonly-input__input"
-                  readonly=""
-                  :value="address"
-                />
+              <div class="modal-body">
+                 <div class="code qrcodeimg">
+                  <div id="qrcode" ref="qrcode"></div>
+                 </div>
               </div>
-            </div>
-            <div class="account-details-modal__divider"></div>
-            <div class="account-btn-box">
               
             </div>
-          </el-dialog>
+          </div>
+        </div>
+
+
            
     </div>
 
@@ -119,16 +135,16 @@
          tabindex:3,
          sortType:0,//1升序，2降序
          blockList:[
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'31049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'32049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'3049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0}
+           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'31049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:1},
+           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'32049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:2},
+           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:2},
+           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:1},
+           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'3049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:1},
+           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:2},
+           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:1},
+           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:1},
+           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:2},
+           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:1}
            
          ],
          defaultBlockList:[],
@@ -138,7 +154,7 @@
 
          address:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',//传过来的地址赋值
          copySecs:0,
-         codeDialogVisible: false, //二维码
+         
         }
      },
      components: {
@@ -181,7 +197,7 @@
       onCopy(e) {
         let that = this;
         this.copySecs=0
-        
+       
         this.timer = setInterval(function(){
             that.copySecs++;
   
@@ -283,8 +299,8 @@
           //console.log(document.getElementById("qrcode").innerHTML)
           this.$nextTick(() => {
             let qrcode = new QRCode("qrcode", {
-              width: 200, // 二维码宽度
-              height: 200, // 二维码高度
+              width: 235, // 二维码宽度
+              height: 235, // 二维码高度
               text: that.address,
               correctLevel: 3,
             });
