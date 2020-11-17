@@ -32,9 +32,25 @@ export default new Router({
       }
     },
     {
+      path: '/blocksDetail',
+      name: 'blocksDetail',
+      component: () =>import('@/views/blocksDetail'),
+      meta:{
+      	title:'事务详情'
+      }
+    },
+    {
       path: '/transactions',
       name: 'transactions',
       component: () =>import('@/views/transactions'),
+      meta:{
+      	title:'事务'
+      }
+    },
+    {
+      path: '/addressTransactions',
+      name: 'addressTransactions',
+      component: () =>import('@/views/addressTransactions'),
       meta:{
       	title:'事务'
       }

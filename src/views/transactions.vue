@@ -33,7 +33,7 @@
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at}}</span></div></td>
                 	  	 	<td>
                             <div class="d-hash">
-                              <a class="line1" :title="item.from"  data-toggle="tooltip" data-placement="top">{{item.from}}</a>
+                              <a class="line1" :title="item.from"  data-toggle="tooltip" data-placement="top" @click="linkAddressTransaction">{{item.from}}</a>
                             </div>
                         </td>
                         <td>
@@ -41,7 +41,7 @@
                         </td>
                 	  	 	<td>
                            <div class="d-hash">
-                               <a class="line1" :title="item.to"  data-toggle="tooltip" data-placement="top">{{item.to}}</a>
+                               <a class="line1" :title="item.to"  data-toggle="tooltip" data-placement="top" @click="linkAddressTransaction">{{item.to}}</a>
                             </div>
                         </td>
 
@@ -125,13 +125,17 @@
         that.$nextTick(() => {
           $('[data-toggle="tooltip"]').tooltip();
         });
-       that.getTransactionList();
      },
      methods:{
       //跳转到事务详情
       linDetail(){
          let that = this;
          that.$router.push({name:'transactionsDetail'})
+      },
+      //跳转到地址事务
+      linkAddressTransaction(){
+         let that = this;
+         that.$router.push({name:'addressTransactions'})
       },
 
       sort(num){
@@ -222,37 +226,13 @@
           })
         },
         handleCurrentChange(val) {
-          console.log(`当前页: ${val}`);
-          let that = this;
-          that.currentPage = val;
-          let obj = {};
-          obj.per_page = that.pageSize;
-          obj.page = val-1;
-          getTransactionList(obj).then(res=> {
-            if(res.code==2000){
-              let that = this;
-              that.totalElements = res.data.totalElements;
-              that.transactionList = res.data.content;
-            }else{
-              that.$toast(res.message,3000)
-            }
-          })
-        },
-       getTransactionList(){
-         let that = this;
-         let obj = {};
-         obj.per_page = 10
-         obj.page = 0
-         getTransactionList(obj).then(res=> {
-           if(res.code==2000){
-             let that = this;
-             that.totalElements = res.data.totalElements;
-             that.transactionList = res.data.content;
-           }else{
-             that.$toast(res.message,3000)
-           }
-         })
-       },
+            console.log(`当前页: ${val}`);
+        }
+     },
+    beforeDestroy(){
+      if($(".tooltip ")){
+         $(".tooltip ").remove();
+      }
      }
 
    }
