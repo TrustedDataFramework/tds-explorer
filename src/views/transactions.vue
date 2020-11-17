@@ -30,7 +30,7 @@
                             </div>
                         </td>
                 	  	 	<td><div><span class="text-pri-default"><a>{{item.nonce}}</a></span></div></td>
-                	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at}}</span></div></td>
+                	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
                 	  	 	<td>
                             <div class="d-hash">
                               <a class="line1" :title="item.from"  data-toggle="tooltip" data-placement="top" @click="linkAddressTransaction">{{item.from}}</a>
@@ -105,16 +105,53 @@
             if (val == null || val == "") {
                 return "暂无时间";
             } else {
-                let d = new Date(val);   //val 为表格内取到的后台时间
+              var offset = new Date().getTimezoneOffset()/60;
+              if(!val){
+                return '-';
+              }
+              let that = this;
+              //UTCDateString = renderTime(UTCDateString);
+              val = val.replace("-","/");
+              val = val.replace("T"," ");
+              val = replaceAll(val);
+              val = val.substring(0,19);
 
-                let month =d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth() + 1;
-                let day = d.getDate() < 10 ? "0" + d.getDate() : d.getDate();
-                let hours = d.getHours() < 10 ? "0" + d.getHours() : d.getHours();
-                let min = d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes();
-                let sec = d.getSeconds() < 10 ? "0" + d.getSeconds() : d.getSeconds();
-                let times=d.getFullYear() + '-' + month + '-' + day + ' ' + hours + ':' + min + ':' + sec;
+              function formatFunc(str) {    //格式化显示
+                return str > 9 ? str : '0' + str
+              }
+              var date2 = new Date(val);//这步是关键
+              var year = date2.getFullYear();
+              var mon = formatFunc(date2.getMonth() + 1);
+              var day = formatFunc(date2.getDate());
+              var hour = date2.getHours();
+              hour = formatFunc(hour);
+              var min = formatFunc(date2.getMinutes());
+              var sec = formatFunc(date2.getSeconds());
+              var dateStr = year+'/'+mon+'/'+day+' '+hour+':'+min+':'+sec;
+              //var dateStr = "2020/9/2 23:01:01";
+              var dateStr1 = eosFormatTime2(dateStr,offset);
+              var year1 = dateStr1.getFullYear();
+              var mon1 = formatFunc(dateStr1.getMonth() + 1);
+              var day1 = formatFunc(dateStr1.getDate());
+              var hour1 = dateStr1.getHours();
+              hour1 = formatFunc(hour1);
+              var min1 = formatFunc(dateStr1.getMinutes());
+              var sec1 = formatFunc(dateStr1.getSeconds());
+              var dateStr2 = year1+'-'+mon1+'-'+day1+' '+hour1+':'+min1+':'+sec1;
+              return dateStr2;
 
-                return times;
+              function eosFormatTime2(oldTimes1,offset) {
+                var x = oldTimes1; // 取得时间"2017-07-08 13:00:00"
+                var time = new Date(x);
+                var timeNum = offset;//小时数
+                time.setHours(time.getHours() - timeNum);
+                return time;
+              }
+              function replaceAll(str) {
+                if(str!=null)
+                  str = str.replace(/-/g,"/")
+                return str;
+              }
 
             }
         }
@@ -125,6 +162,7 @@
         that.$nextTick(() => {
           $('[data-toggle="tooltip"]').tooltip();
         });
+       that.getTransactionList();
      },
      methods:{
       //跳转到事务详情
