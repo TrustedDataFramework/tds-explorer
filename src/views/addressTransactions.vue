@@ -1,10 +1,21 @@
 <template>
     <div class="wrapper">
         <comheader :tabindex="tabindex"></comheader>
-        <div class="tds-block-main">
+        <div class="tds-block-main address-transaction-main">
             
             <div class="container">
-                <div class="page-tilte pb-3 pt-3">区块</div>
+                <div class="page-tilte pb-3 pt-3">
+                  地址
+                  <span class="title-address text-secondary">0xbF4E525435cfafc77fB3Db3D29e1C34621278Ae0</span>
+                  <span class="at-btn at-btn-copy" :class="{'btn-copy-suc':copySecs>0}" title="点击将地址复制到剪贴板"  data-toggle="tooltip" data-placement="top"
+                     v-clipboard:copy="address"
+                     v-clipboard:success="onCopy"
+                     v-clipboard:error="onError"  
+                  >
+
+                  </span>
+                  <span class="at-btn at-btn-see" title="点击查看二维码"  data-toggle="tooltip" data-placement="top" @click="codeDialogVisible=true;qrcodeScan();"></span>
+                </div>
                 <div  class=" tab-css tab-box ">
                 	<div class="com-table-box">
                 	  <table class="com-table">
@@ -69,14 +80,36 @@
 
 
         <comfooter></comfooter>
-        <template>
-          <el-backtop target=".wrapper" :bottom=80></el-backtop>
-       </template>
-
+       
+        <el-dialog
+            width="90%"
+            title="账号详情"
+            :visible.sync="codeDialogVisible"
+            class="dialog-code-box"
+          >
+            <div class="accountDetail-box">
+              <div class="code qrcodeimg">
+                <div id="qrcode" ref="qrcode"></div>
+              </div>
+              <div class="readonly-input ellip-address-wrapper">
+                <input
+                  class="readonly-input__input"
+                  readonly=""
+                  :value="address"
+                />
+              </div>
+            </div>
+            <div class="account-details-modal__divider"></div>
+            <div class="account-btn-box">
+              
+            </div>
+          </el-dialog>
+           
     </div>
 
 </template>
 <script>
+   import QRCode from "qrcode2";
    import comheader from "@/components/header"; 
    import comfooter from "@/components/footer"; 
    export default{
@@ -102,6 +135,10 @@
          totalElements:6000, //总条数
          pageSize:10,//默认每页条数
          currentPage:0,//当前页
+
+         address:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',//传过来的地址赋值
+         copySecs:0,
+         codeDialogVisible: false, //二维码
         }
      },
      components: {
@@ -139,6 +176,24 @@
       linDetail(){
          let that = this;
          that.$router.push({name:'transactionsDetail'})
+      },
+
+      onCopy(e) {
+        let that = this;
+        this.copySecs=0
+        
+        this.timer = setInterval(function(){
+            that.copySecs++;
+  
+            if(that.copySecs==5){
+         
+              that.copySecs =0
+               clearInterval(that.timer);
+            }
+        }, 200);
+      },
+      onError(e) {
+        //alert('复制失败')
       },
 
       sort(num){
@@ -216,12 +271,34 @@
         },
         handleCurrentChange(val) {
             console.log(`当前页: ${val}`);
-        }
+        },
+        //字符串转为二维码
+        qrcodeScan() {
+          //生成二维码
+          let that = this;
+
+          if (document.getElementById("qrcode") != null) {
+            document.getElementById("qrcode").innerHTML = "";
+          }
+          //console.log(document.getElementById("qrcode").innerHTML)
+          this.$nextTick(() => {
+            let qrcode = new QRCode("qrcode", {
+              width: 200, // 二维码宽度
+              height: 200, // 二维码高度
+              text: that.address,
+              correctLevel: 3,
+            });
+          });
+        },
      },
     beforeDestroy(){
       if($(".tooltip ")){
          $(".tooltip ").remove();
-      }       
+      }
+      if(this.timer){
+        clearInterval(this.timer);
+      }   
+          
      }
      
    }

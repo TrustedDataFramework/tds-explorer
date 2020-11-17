@@ -23,7 +23,7 @@
                 	  	 </tr>
                 	  	 <tr v-for="(item,index) in blockList" :key="index">	 	
                 	  	 	<td><div><span class="text-pri-default"><a @click="linbkDetail">{{item.height}}</a></span></div></td>
-                	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at}}</span></div></td>
+                	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
                 	  	 	<td><div class="d-hash"><a class="line1">{{item.size}}</a></div></td>
                 	  	 	<td>
                                 <div class="d-hash">
