@@ -39,6 +39,16 @@ export default new Router({
       	title:'事务'
       }
     },
+    
+    {
+      path: '/transactionsDetail',
+      name: 'transactionsDetail',
+      component: () =>import('@/views/transactionsDetail'),
+      meta:{
+      	title:'事务详情'
+      }
+    },
+
     {
       path: '/contract',
       name: 'contract',

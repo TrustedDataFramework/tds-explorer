@@ -429,8 +429,10 @@ button:focus {
           position: relative;
           vertical-align: middle;
          padding: 12px 10px;
+         padding-right: 30px;
        }
        .tab-th{position: relative;}
+       .b-tran-num{width: 15%;}
     }
     
     .caret-wrapper {
@@ -446,10 +448,11 @@ button:focus {
     align-items: center;
     height: 34px;
     width: 24px;
-    vertical-align: middle;
+    vertical-align: top;
     cursor: pointer;
     overflow: initial;
-    position: relative;
+    position: absolute;
+    top:50%; margin-top: -15px;
 }
     
      .sort-caret.ascending {
@@ -465,7 +468,7 @@ button:focus {
     }
      .sort-caret.descending {
         border-top-color: #C0C4CC;
-        bottom: 7px;
+        bottom:5px;
     }
     .ascending .sort-caret.ascending {
       border-bottom-color: #409EFF;
@@ -514,7 +517,7 @@ background-size:10px;-webkit-background-size: 10px;position: absolute; left:50%;
     }
 }
 
-.fa-search{width:20px;height:19px;display:inline-block; vertical-align: top;
+.fa-search{width:20px;height:19ypx;display:inline-block; vertical-align: top;
 background: url(../assets/img/icon_search.png) center no-repeat; background-size: contain; -webkit-background-size: contain;}
 
 @media(max-width:767px){

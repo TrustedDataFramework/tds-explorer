@@ -24,14 +24,26 @@
                 	  	 	 <th>手续费</th>
                 	  	 </tr>
                 	  	 <tr v-for="(item,index) in blockList" :key="index">
-                	  	 	<td><div class="d-hash "><a class="line1">{{item.hash}}</a></div></td>
+                	  	 	<td>
+                            <div class="d-hash ">
+                              <a class="line1" @click="linDetail" :title="item.hash"  data-toggle="tooltip" data-placement="top">{{item.hash}}</a>
+                            </div>
+                        </td>
                 	  	 	<td><div><span class="text-pri-default"><a>{{item.nonce}}</a></span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at}}</span></div></td>
-                	  	 	<td><div class="d-hash"><a class="line1">{{item.from}}</a></div></td>
+                	  	 	<td>
+                            <div class="d-hash">
+                              <a class="line1" :title="item.from"  data-toggle="tooltip" data-placement="top">{{item.from}}</a>
+                            </div>
+                        </td>
                         <td>
                           <span class="btn btn-xs btn-icon btn-soft-success rounded-circle"><i class="arrow-right"></i></span>
                         </td>
-                	  	 	<td><div class="d-hash"><a class="line1">{{item.to}}</a></div></td>
+                	  	 	<td>
+                           <div class="d-hash">
+                               <a class="line1" :title="item.to"  data-toggle="tooltip" data-placement="top">{{item.to}}</a>
+                            </div>
+                        </td>
                       
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.amount}}</span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.fee}}</span></div></td>
@@ -117,9 +129,18 @@
      },
      mounted(){
      	let that = this;
-     	that.defaultBlockList = JSON.parse(JSON.stringify(that.blockList))
+       that.defaultBlockList = JSON.parse(JSON.stringify(that.blockList))
+        that.$nextTick(() => {
+          $('[data-toggle="tooltip"]').tooltip();
+        });
      },
      methods:{
+      //跳转到事务详情
+      linDetail(){
+         let that = this;
+         that.$router.push({name:'transactionsDetail'})
+      },
+
       sort(num){
       	
       	
