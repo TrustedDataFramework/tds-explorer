@@ -213,7 +213,7 @@
                               <a>{{ item.hash }}</a>
                             </p>
                             <p class="b-time text-secondary text-nowrap">
-                              {{ item.time }}
+                              {{ item.created_at }}
                             </p>
                           </div>
                         </div>
@@ -224,7 +224,7 @@
                             item.hash
                           }}</a>
                           <span class="b-time text-secondary text-nowrap">{{
-                            item.time
+                            item.created_at
                           }}</span>
                         </div>
                       </div>
@@ -234,14 +234,14 @@
                             <span class="color-default b-miner">From</span>
                             <span
                               class="b-color-active b-height p-hash line1"
-                              >{{ item.From }}</span
+                              >{{ item.from }}</span
                             >
                           </div>
                           <div class="b-txns">
                             <span class="color-default b-miner">To</span>
                             <span
                               class="b-color-active b-height p-hash p-hash2 line1"
-                              >{{ item.To }}</span
+                              >{{ item.to }}</span
                             >
                           </div>
                         </div>
@@ -279,7 +279,7 @@
 <script>
 import comfooter from "@/components/footer";
 import comheader from "@/components/header";
-import {getBlockList} from '@/API/api';
+import {getBlockList,getTransactionList} from '@/API/api';
 export default {
 
   data() {
@@ -311,6 +311,7 @@ export default {
       $('[data-toggle="tooltip"]').tooltip();
     });
     this.getBlockList();
+    this.getTransactionList();
   },
   methods:{
     linkBlock(){
@@ -329,6 +330,68 @@ export default {
           that.$toast(res.message,3000)
         }
       })
+    },
+    getTransactionList(){
+      let that = this;
+      let obj = {};
+      obj.per_page = 1
+      obj.page = 0
+      getTransactionList(obj).then(res=> {
+        if(res.code==2000){
+          let that = this;
+          res.data.content[0].created_at = that.getTimeShow(res.data.content[0].created_at)
+          that.transitionList = res.data.content;
+        }else{
+          that.$toast(res.message,3000)
+        }
+      })
+    },
+    //客户端时间转换为北京时间
+    getBeijingtime(time_str) {
+      let currentDate = new Date(time_str);
+      let tmpHours = currentDate.getHours();
+      //算得时区
+      let time_zone = -currentDate.getTimezoneOffset() / 60;
+      if (time_zone < 0) {
+        time_zone = Math.abs(time_zone) + 8; currentDate.setHours(tmpHours + time_zone);
+      } else {
+        time_zone -= 8;
+        currentDate.setHours(tmpHours - time_zone);
+      }
+      return currentDate;
+    },
+    //计算事务时间与现在的时间间隔
+    getTimeShow(time_str){
+      if(time_str!=null) {
+        time_str = this.getBeijingtime(time_str)
+      }
+      var now = new Date();
+      var date = new Date(time_str);
+      //计算时间间隔，单位为分钟
+      var inter = parseInt((now.getTime() - date.getTime())/1000/60);
+      if(inter == 0){
+        return "刚刚";
+      }
+      //多少分钟前
+      else if(inter < 60){
+        return inter.toString() + "分钟前";
+      }
+      //多少小时前
+      else if(inter < 60*24){
+        return parseInt(inter/60).toString() + "小时前";
+      }
+      else if(now.getFullYear() == date.getFullYear()){
+        let mS = date.getMonth() + 1;
+        mS = mS < 10 ? ('0' + mS) : mS;
+        let dS = date.getDate();
+        dS = dS < 10 ? ('0' + dS) : dS;
+        let mE = date.getMinutes();
+        mE = mE < 10 ? ('0' + mE) : mE;
+        let dE = date.getSeconds();
+        dE = dE < 10 ? ('0' + dE) : dE;
+        return date.getFullYear() + "-" + mS + "-" + dS + " " +
+          date.getHours() + ":" + mE + ":" + dE;
+      }
     },
   }
 };
