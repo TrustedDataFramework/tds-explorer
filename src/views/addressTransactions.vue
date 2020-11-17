@@ -52,15 +52,19 @@
                 	  	 <tr v-for="(item,index) in blockList" :key="index">
                 	  	 	<td>
                             <div class="d-hash ">
-                              <a class="line1" @click="linDetail" :title="item.hash"  data-toggle="tooltip" data-placement="top">{{item.hash}}</a>
+                               <el-tooltip class="item" effect="dark" :content="item.hash" popper-class="atooltip" placement="top">
+                                 <a class="line1" @click="linDetail" >{{item.hash}}</a>
+                               </el-tooltip>
                             </div>
                         </td>
                 	  	 	<td><div><span class="text-pri-default"><a>{{item.nonce}}</a></span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at}}</span></div></td>
                 	  	 	<td>
                             <div class="d-hash">
-                              <a class="line1" :title="item.from"  data-toggle="tooltip" data-placement="top" v-if="item.from==address">{{item.from}}</a>
-                              <span class="line1" :title="item.from"  data-toggle="tooltip" data-placement="top" v-if="item.from!=address">{{item.from}}</span>
+                              <el-tooltip class="item" effect="dark" :content="item.from" popper-class="atooltip" placement="top">
+                              <a class="line1" v-if="item.from==address">{{item.from}}</a>
+                              <span class="line1"  v-if="item.from!=address">{{item.from}}</span>
+                              </el-tooltip>
                             </div>
                         </td>
                         <td>
@@ -68,9 +72,10 @@
                         </td>
                 	  	 	<td>
                            <div class="d-hash">
-                               <a class="line1" :title="item.to"  data-toggle="tooltip" data-placement="top" v-if="item.to==address">{{item.to}}</a>
-                             
-                              <span class="line1 text-pri-default" :title="item.to"  data-toggle="tooltip" data-placement="top" v-if="item.to!=address">{{item.to}}</span>
+                             <el-tooltip class="item" effect="dark" :content="item.to" popper-class="atooltip" placement="top">
+                               <a class="line1"  v-if="item.to==address">{{item.to}}</a>              
+                              <span class="line1 text-pri-default"  v-if="item.to!=address">{{item.to}}</span>
+                             </el-tooltip>
                             </div>
                         </td>
                       

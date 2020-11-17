@@ -45,7 +45,7 @@
                         </td>
                 	  	 	<td>
                            <div class="d-hash">
-                               <el-tooltip class="item" effect="dark" :content="item.to" popper-class="atooltip" placement="bottom">
+                               <el-tooltip class="item" effect="dark" :content="item.to" popper-class="atooltip" placement="top">
                                  <a class="line1" @click="linkAddressTransaction">{{item.to}}</a>
                                </el-tooltip>
                             </div>
