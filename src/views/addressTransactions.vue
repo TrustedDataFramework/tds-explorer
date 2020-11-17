@@ -33,7 +33,7 @@
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at}}</span></div></td>
                 	  	 	<td>
                             <div class="d-hash">
-                              <a class="line1" :title="item.from"  data-toggle="tooltip" data-placement="top" @click="linkAddressTransaction">{{item.from}}</a>
+                              <a class="line1" :title="item.from"  data-toggle="tooltip" data-placement="top">{{item.from}}</a>
                             </div>
                         </td>
                         <td>
@@ -41,7 +41,7 @@
                         </td>
                 	  	 	<td>
                            <div class="d-hash">
-                               <a class="line1" :title="item.to"  data-toggle="tooltip" data-placement="top" @click="linkAddressTransaction">{{item.to}}</a>
+                               <a class="line1" :title="item.to"  data-toggle="tooltip" data-placement="top">{{item.to}}</a>
                             </div>
                         </td>
                       
@@ -139,11 +139,6 @@
       linDetail(){
          let that = this;
          that.$router.push({name:'transactionsDetail'})
-      },
-      //跳转到地址事务
-      linkAddressTransaction(){
-         let that = this;
-         that.$router.push({name:'addressTransactions'})
       },
 
       sort(num){

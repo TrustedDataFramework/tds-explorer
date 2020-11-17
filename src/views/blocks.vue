@@ -22,7 +22,7 @@
                 	  	 	 <th>总收益</th>
                 	  	 </tr>
                 	  	 <tr v-for="(item,index) in blockList" :key="index">	 	
-                	  	 	<td><div><span class="text-pri-default"><a>{{item.height}}</a></span></div></td>
+                	  	 	<td><div><span class="text-pri-default"><a @click="linbkDetail">{{item.height}}</a></span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at}}</span></div></td>
                 	  	 	<td><div class="d-hash"><a class="line1">{{item.size}}</a></div></td>
                 	  	 	<td>
@@ -119,6 +119,12 @@
         });
      },
      methods:{
+        //区块详情
+        linbkDetail(){
+        let that = this;
+        that.$router.push({name:'blocksDetail'})
+        },
+
         
         sort(num){
       	
@@ -180,6 +186,11 @@
         handleCurrentChange(val) {
             console.log(`当前页: ${val}`);
         }
+     },
+     beforeDestroy(){
+      if($(".tooltip ")){
+         $(".tooltip ").remove();
+      }       
      }
      
    }
