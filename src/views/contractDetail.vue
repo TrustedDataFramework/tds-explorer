@@ -150,9 +150,10 @@
                             v-model="contract_content"
                             @init="editorInit"
                             :options="options"
-                            :autoComplete=true
+                            autoComplete=true
                             width="100%"
                             height="300"
+                            :lang="'java'"
                           >
                           </editor>
                      </div>
@@ -199,6 +200,9 @@
 <script>
    import comheader from "@/components/header";
    import comfooter from "@/components/footer";
+   import editor from 'vue2-ace-editor'
+   
+import 'brace/ext/language_tools'
    import {getTransactionByTxHash} from '@/API/api';
    export default{
      inject: ['reload'],
@@ -236,7 +240,7 @@
 
      },
      components: {
-        comfooter,comheader,editor: require("vue2-ace-editor")
+        comfooter,comheader,editor
      },
      filters:{
        timefilters(val) {
@@ -298,19 +302,23 @@
      mounted(){
        let that = this;
         that.defaultBlockList = JSON.parse(JSON.stringify(that.transactionList))
-        that.getTransactionDetail();
+        //that.getTransactionDetail();
      },
      methods:{
        editorInit: function() {
-          require("brace/ext/language_tools"); //language extension prerequsite...
+          //require("brace/ext/language_tools"); //language extension prerequsite...
+            require("brace");
           require("brace/mode/html");
           require("brace/mode/javascript"); //language
           require("brace/mode/less");
           require("brace/mode/java");
           require('brace/theme/chrome')
-          require("brace");
+        
           require("brace/mode/json");
-  
+          require('brace/snippets/javascript') 
+          require('brace/snippets/java') 
+          let _this = this;
+        //_this.$refs.aaa.editor.setShowFoldWidgets(true);折叠属性
 
       
 
