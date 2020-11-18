@@ -151,7 +151,6 @@
                             @init="editorInit"
                             :options="options"
                             :autoComplete=true
-                            theme="monokai"
                             width="100%"
                             height="300"
                           >
@@ -308,14 +307,10 @@
           require("brace/mode/javascript"); //language
           require("brace/mode/less");
           require("brace/mode/java");
-
-          require("brace/snippets/javascript"); //snippet
-
+          require('brace/theme/chrome')
           require("brace");
           require("brace/mode/json");
-          require("brace/snippets/json");
-          
-          require("brace/snippets/html");
+  
 
       
 
