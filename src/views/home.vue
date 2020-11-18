@@ -263,7 +263,7 @@
                 </el-scrollbar>
               </div>
               <div class="card-footer">
-                <a class="btn btn-xs btn-block btn-soft-primary"
+                <a class="btn btn-xs btn-block btn-soft-primary" @click="linkTransaction"
                   ><!--View all blocks-->查看所有事务</a
                 >
               </div>
@@ -371,6 +371,10 @@ export default {
     linkBlock(){
       let that = this;
       that.$router.push({path:'/blocks'})
+    },
+    linkTransaction(){
+      let that = this;
+      that.$router.push({path:'/transactions'})
     },
     link(){
       let that = this;
