@@ -606,8 +606,13 @@ pre{
     margin-bottom: .5rem;
 }
 pre {
-    resize:both;
-    /* overflow: auto; */
+    //resize:vertical;
+    overflow: auto; 
+    -webkit-resize: vertical;
+  -moz-resize: vertical;
+  -o-resize: vertical;
+  -ms-resize: vertical;
+  resize: vertical;
 }
 .wordwrap {
     white-space: pre-wrap;

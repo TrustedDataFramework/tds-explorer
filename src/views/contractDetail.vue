@@ -166,7 +166,7 @@
                                       <a class="fun-btn copy"></a>
                                  </el-tooltip>
                                  <el-tooltip class="item" effect="dark" content="切换全屏" popper-class="top" placement="top">
-                                      <a class="fun-btn qp"></a>
+                                      <a class="fun-btn qp" :class="{'bp':a_Screen==1}" @click="abiScreen"></a>
                                  </el-tooltip>
                               </div>
                          </div>
@@ -233,11 +233,11 @@ import 'brace/ext/language_tools'
          transaction:{
             },
           iscopyed:0,//是否复制成功  1成功
-          content_tab:2 //1表示事务列表  2表示合约详情
+          content_tab:2, //1表示事务列表  2表示合约详情
+          
+          a_Screen:0,//0表示abi全屏  1表示abi半屏
+          
         }
-
-        
-
      },
      components: {
         comfooter,comheader,editor
@@ -305,6 +305,14 @@ import 'brace/ext/language_tools'
         //that.getTransactionDetail();
      },
      methods:{
+     	 //abi全屏
+     	 abiScreen(){
+     	 	if(this.a_Screen==0){
+     	 		this.a_Screen = 1
+     	 	}else{
+     	 		this.a_Screen = 0
+     	 	}
+     	 },
        editorInit: function() {
           //require("brace/ext/language_tools"); //language extension prerequsite...
             require("brace");
