@@ -4,7 +4,7 @@
         <div class="tds-block-main">
 
             <div class="container">
-                <div class="page-tilte pb-3 pt-3">交易明细</div>
+                <div class="page-tilte pb-3 pt-3">事务详情</div>
                 <div  class=" tab-css tab-box detail-tab">
                    <div class="row">
                        <div class="col-md-3 detail-col">

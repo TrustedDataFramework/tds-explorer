@@ -22,14 +22,14 @@
                 	  	 	 <th>总收益</th>
                 	  	 </tr>
                 	  	 <tr v-for="(item,index) in blockList" :key="index">
-                	  	 	<td><div><span class="text-pri-default"><a @click="linbkDetail">{{item.height}}</a></span></div></td>
+                	  	 	<td><div><span class="text-pri-default"><a @click="linbkDetail(item.height)">{{item.height}}</a></span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
                 	  	 	<td><div class="d-hash"><a class="line1">{{item.transcationSize}}</a></div></td>
                 	  	 	<td>
                                 <div class="d-hash">
                                      <el-tooltip class="item" effect="dark" :content="item.miner_address" popper-class="atooltip" placement="top">
-                               
-                              
+
+
                                    <a class="line1"  >{{item.miner_address}}</a>
                                    </el-tooltip>
                                 </div>
@@ -145,14 +145,16 @@
      mounted(){
      	let that = this;
         that.defaultBlockList = JSON.parse(JSON.stringify(that.blockList))
-        
+
         that.getBlockList();
      },
      methods:{
         //区块详情
-        linbkDetail(){
+        linbkDetail(height){
         let that = this;
-        that.$router.push({name:'blocksDetail'})
+        that.$router.push({name:'blocksDetail',params: {
+            height: height
+          }})
         },
 
 
@@ -272,7 +274,7 @@
           })
         }
      },
-    
+
 
    }
 </script>

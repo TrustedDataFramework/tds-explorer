@@ -26,8 +26,13 @@ var getTransactionByTo = function(data){
   return axios.get('/get_transaction_by_to?to='+data.to+'&per_page='+data.per_page+'&page='+data.page)
 }
 
+//区块高度获取区块详情
+var getBlockByHeight = function(data){
+  return axios.get('/get_block_by_height?height='+data.height)
+}
+
 export{
-  getBlockList,getTransactionList,getTransactionByTxHash,getTransactionByFrom,getTransactionByTo
+  getBlockList,getTransactionList,getTransactionByTxHash,getTransactionByFrom,getTransactionByTo,getBlockByHeight
 }
 
 function getJson (data) {
