@@ -72,6 +72,14 @@ export default new Router({
       meta:{
       	title:'合约'
       }
+    },
+    {
+      path: '/contractDetail',
+      name: 'contractDetail',
+      component: () =>import('@/views/contractDetail'),
+      meta:{
+      	title:'合约详情'
+      }
     }
   ]
 })
