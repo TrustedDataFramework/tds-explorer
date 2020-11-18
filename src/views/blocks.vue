@@ -88,7 +88,6 @@
      },
      filters:{
         timefilters(val) {
-            console.log(val)
             if (val == null || val == "") {
                 return "暂无时间";
             } else {
@@ -254,12 +253,12 @@
             })
         },
         handleCurrentChange(val) {
-            console.log(`当前页: ${val}`);
+          console.log(`当前页: ${val}`);
           let that = this;
           that.currentPage = val;
           let obj = {};
           obj.per_page = that.pageSize;
-          obj.page = val;
+          obj.page = val-1;
           getBlockList(obj).then(res=> {
             if(res.code==2000){
               let that = this;

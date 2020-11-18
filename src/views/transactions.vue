@@ -107,7 +107,6 @@
      },
      filters:{
         timefilters(val) {
-            console.log(val)
             if (val == null || val == "") {
                 return "暂无时间";
             } else {
