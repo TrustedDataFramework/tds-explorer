@@ -150,7 +150,7 @@
                       <div class="col-sm-8 w-media">
                         <div class="blockInfo blockInfo-1">
                           <div class="b-address">
-                            <span class="color-default b-miner" ><!--Miner-->矿工</span >
+                            <span class="color-default b-miner" ><!--Miner--></span >
                             <span class="b-color-active b-height p-hash line1" >{{ item.hash }}</span >
                           </div>
                           <div class="b-txns">
@@ -160,10 +160,10 @@
                               data-toggle="tooltip"
                               data-placement="top"
                               title="Transactions in this Block"
-                              >{{ item.anum }} txns</a
+                              >{{ item.transcationSize }} txns</a
                             >
                             <!--<span class="color-default no-txn">0 txn</span>-->
-                            <span class="b-time text-secondary text-nowrap">{{ item.atime }}</span>
+                            <span class="b-time text-secondary text-nowrap">{{ item.created_at | timefilters}}</span>
                           </div>
                         </div>
                         <div class="fr b-num text-secondary">
@@ -214,7 +214,7 @@
                               <a>{{ item.hash }}</a>
                             </p>
                             <p class="b-time text-secondary text-nowrap">
-                              {{ item.created_at }}
+                              {{ item.created_at | timefilters}}
                             </p>
                           </div>
                         </div>
@@ -225,7 +225,7 @@
                             item.hash
                           }}</a>
                           <span class="b-time text-secondary text-nowrap">{{
-                            item.created_at
+                            item.created_at | timefilters
                           }}</span>
                         </div>
                       </div>
@@ -305,10 +305,66 @@ export default {
   components: {
     comfooter,comheader
   },
+  filters:{
+    timefilters(val) {
+      console.log(val)
+      if (val == null || val == "") {
+        return "暂无时间";
+      } else {
+        var offset = new Date().getTimezoneOffset()/60;
+        if(!val){
+          return '-';
+        }
+        let that = this;
+        //UTCDateString = renderTime(UTCDateString);
+        val = val.replace("-","/");
+        val = val.replace("T"," ");
+        val = replaceAll(val);
+        val = val.substring(0,19);
+
+        function formatFunc(str) {    //格式化显示
+          return str > 9 ? str : '0' + str
+        }
+        var date2 = new Date(val);//这步是关键
+        var year = date2.getFullYear();
+        var mon = formatFunc(date2.getMonth() + 1);
+        var day = formatFunc(date2.getDate());
+        var hour = date2.getHours();
+        hour = formatFunc(hour);
+        var min = formatFunc(date2.getMinutes());
+        var sec = formatFunc(date2.getSeconds());
+        var dateStr = year+'/'+mon+'/'+day+' '+hour+':'+min+':'+sec;
+        //var dateStr = "2020/9/2 23:01:01";
+        var dateStr1 = eosFormatTime2(dateStr,offset);
+        var year1 = dateStr1.getFullYear();
+        var mon1 = formatFunc(dateStr1.getMonth() + 1);
+        var day1 = formatFunc(dateStr1.getDate());
+        var hour1 = dateStr1.getHours();
+        hour1 = formatFunc(hour1);
+        var min1 = formatFunc(dateStr1.getMinutes());
+        var sec1 = formatFunc(dateStr1.getSeconds());
+        var dateStr2 = year1+'-'+mon1+'-'+day1+' '+hour1+':'+min1+':'+sec1;
+        return dateStr2;
+
+        function eosFormatTime2(oldTimes1,offset) {
+          var x = oldTimes1; // 取得时间"2017-07-08 13:00:00"
+          var time = new Date(x);
+          var timeNum = offset;//小时数
+          time.setHours(time.getHours() - timeNum);
+          return time;
+        }
+        function replaceAll(str) {
+          if(str!=null)
+            str = str.replace(/-/g,"/")
+          return str;
+        }
+      }
+    }
+  },
 
   mounted() {
     let that = this;
-   
+
     that.getBlockList();
     that.getTransactionList();
   },
@@ -325,6 +381,9 @@ export default {
         if(res.code==2000){
           let that = this;
           that.blockList = res.data.content;
+          for(var i of res.data.content){
+            i.transcationSize = i.body.length;
+          }
         }else{
           that.$toast(res.message,3000)
         }
@@ -338,62 +397,12 @@ export default {
       getTransactionList(obj).then(res=> {
         if(res.code==2000){
           let that = this;
-          res.data.content[0].created_at = that.getTime(res.data.content[0].created_at)
           that.transitionList = res.data.content;
         }else{
           that.$toast(res.message,3000)
         }
       })
-    },
-    getTime(UTCDateString) {
-      //获取当前时区
-      var offset = new Date().getTimezoneOffset()/60;
-      if(!UTCDateString){
-        return '-';
-      }
-      //UTCDateString = renderTime(UTCDateString);
-      UTCDateString = UTCDateString.replace("-","/");
-      UTCDateString = UTCDateString.replace("T"," ");
-      UTCDateString = this.replaceAll(UTCDateString);
-      UTCDateString = UTCDateString.substring(0,19);
-
-      function formatFunc(str) {    //格式化显示
-        return str > 9 ? str : '0' + str
-      }
-      var date2 = new Date(UTCDateString);//这步是关键
-      var year = date2.getFullYear();
-      var mon = formatFunc(date2.getMonth() + 1);
-      var day = formatFunc(date2.getDate());
-      var hour = date2.getHours();
-      hour = formatFunc(hour);
-      var min = formatFunc(date2.getMinutes());
-      var sec = formatFunc(date2.getSeconds());
-      var dateStr = year+'/'+mon+'/'+day+' '+hour+':'+min+':'+sec;
-      //var dateStr = "2020/9/2 23:01:01";
-      var dateStr1 = this.eosFormatTime2(dateStr,offset);
-      var year1 = dateStr1.getFullYear();
-      var mon1 = formatFunc(dateStr1.getMonth() + 1);
-      var day1 = formatFunc(dateStr1.getDate());
-      var hour1 = dateStr1.getHours();
-      hour1 = formatFunc(hour1);
-      var min1 = formatFunc(dateStr1.getMinutes());
-      var sec1 = formatFunc(dateStr1.getSeconds());
-      var dateStr2 = year1+'-'+mon1+'-'+day1+' '+hour1+':'+min1+':'+sec1;
-      return dateStr2;
-  },
-
-    eosFormatTime2(oldTimes1,offset) {
-      var x = oldTimes1; // 取得时间"2017-07-08 13:00:00"
-      var time = new Date(x);
-      var timeNum = offset;//小时数
-      time.setHours(time.getHours() - timeNum);
-      return time;
-    },
-    replaceAll(str) {
-      if(str!=null)
-        str = str.replace(/-/g,"/")
-      return str;
-    },
+    }
   }
 };
 </script>
