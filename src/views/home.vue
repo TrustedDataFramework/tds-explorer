@@ -11,13 +11,13 @@
             <div class="input-group-prepend d-none d-md-block">
               <!-- Select -->
               <select
-                name="f"
+                name="f" id="select"
                 class="custom-select custom-arrow-select input-group-text font-size-base filterby"
               >
-                <option selected="" value="0">All Filters</option>
-                <option value="1">Addresses</option>
-                <option value="2">Txn Hash</option>
-                <option value="3">Block</option>
+<!--                <option selected="" value="0">All Filters</option>-->
+<!--                <option selected="" value="1">Addresses</option>-->
+                <option selected="" value="0">Txn Hash</option>
+                <option value="1">Block</option>
               </select>
               <!-- End Select -->
             </div>
@@ -28,14 +28,14 @@
               class="form-control searchautocomplete ui-autocomplete-input list-unstyled py-3 mb-0"
               autocomplete="off"
               spellcheck="false"
-              placeholder="Search by Address / Txn Hash / Block"
+              placeholder="Search by Txn Hash / Block"
               aria-describedby="button-header-search"
               name="q"
               maxlength="68"
             />
 
             <div class="input-group-append">
-              <button class="btn btn-primary"> <i class="fa fa-search"></i> </button>
+              <button class="btn btn-primary" @click="link"> <i class="fa fa-search"></i> </button>
             </div>
           </div>
         </div>
@@ -307,7 +307,6 @@ export default {
   },
   filters:{
     timefilters(val) {
-      console.log(val)
       if (val == null || val == "") {
         return "暂无时间";
       } else {
@@ -370,7 +369,24 @@ export default {
   },
   methods:{
     linkBlock(){
+      let that = this;
       that.$router.push({path:'/blocks'})
+    },
+    link(){
+      let that = this;
+      let text = $("#txtSearchInput").val();
+      var sel=document.getElementById("select");
+      var index = sel.selectedIndex; // 选中索引
+      var val= sel.options[index].value;
+      if(val == 0){
+        that.$router.push({path:'/transactionsDetail',query: {
+            hash: text
+          }})
+      }else if(val == 1){
+        that.$router.push({path:'/blocksDetail',query: {
+            height: text
+          }})
+      }
     },
     getBlockList(){
       let that = this;

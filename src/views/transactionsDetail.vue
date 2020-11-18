@@ -176,7 +176,8 @@
          tabindex:3,
          transaction:{
             },
-             iscopyed:0//是否复制成功  1成功
+          iscopyed:0,//是否复制成功  1成功
+          hash:''
         }
 
      },
@@ -245,6 +246,12 @@
         that.$nextTick(() => {
           $('[data-toggle="tooltip"]').tooltip();
         });
+       if(this.$route.params.hash == undefined || this.$route.params.hash ==  "undefined"
+       || this.$route.params.hash == null || this.$route.params.hash == "null"){
+         that.hash = this.$route.query.hash
+       }else{
+         that.hash = this.$route.params.hash;
+       }
         that.getTransactionDetail();
      },
      methods:{
@@ -252,9 +259,9 @@
          this.iscopyed=1
         },
        getTransactionDetail(){
-         let tx_hash = this.$route.params.hash;
-         let obj = {}
-         obj.tx_hash = tx_hash
+         let that = this;
+         let obj = {};
+         obj.tx_hash = that.hash;
          getTransactionByTxHash(obj).then(res=> {
            if(res.code==2000){
              let that = this;

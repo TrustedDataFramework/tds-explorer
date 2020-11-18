@@ -176,7 +176,8 @@
               "transaction_root":'38839f248cc80ab60a8ff157fd6e96bd7337a03f6daa197d4b4aec5091828116',
               "payload":"6c8a1872900fd23fd16d4debc2e6dada2ca244a790274e226a2033f67ff96fdd9985be5c1d3d910ef263b64bd0e25fe85d77c848b8aea6656353b6abef3c5c4a"
             },
-             iscopyed:0//是否复制成功  1成功
+          iscopyed:0,//是否复制成功  1成功
+          height:''
         }
 
      },
@@ -245,6 +246,12 @@
         that.$nextTick(() => {
           $('[data-toggle="tooltip"]').tooltip();
         });
+       if(this.$route.params.height == undefined || this.$route.params.height ==  "undefined"
+         || this.$route.params.height == null || this.$route.params.height == "null"){
+         that.height = this.$route.query.height;
+       }else{
+         that.height = this.$route.params.height;
+       }
         that.getBlockByHeight();
      },
      methods:{
@@ -255,10 +262,9 @@
           //alert('复制失败')
         },
        getBlockByHeight() {
-         let height = this.$route.params.height;
          let that = this;
          let obj = {}
-         obj.height = height;
+         obj.height = that.height;
          getBlockByHeight(obj).then(res=> {
            if(res.code==2000){
              that.block = res.data;
