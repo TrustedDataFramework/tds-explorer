@@ -10,6 +10,7 @@
                 	  <table class="com-table">
                 	  	 <tr>
                 	  	 	 <th>事务hash</th>
+                         <th>事务类型</th>
                 	  	 	 <th class="tab-th">区块高度
                 	  	 	 	  <span class="caret-wrapper" :class="{'ascending':sortType==1,'descending':sortType==2}">
                 	  	 	 	  	<i class="sort-caret ascending" @click="sort(1)"></i>
@@ -31,12 +32,13 @@
                               </el-tooltip>
                             </div>
                         </td>
+                         <td><div><span class="text-pri-default"><a>{{item.type}}</a></span></div></td>
                 	  	 	<td><div><span class="text-pri-default"><a>{{item.nonce}}</a></span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
                 	  	 	<td>
                             <div class="d-hash">
                              <el-tooltip class="item" effect="dark" :content="item.from" popper-class="atooltip" placement="bottom">
-                                <a class="line1"  @click="linkAddressTransaction">{{item.from}}</a>
+                                <a class="line1"  @click="linkAddressTransactionByFrom(item.from)">{{item.from}}</a>
                               </el-tooltip>
                             </div>
                         </td>
@@ -46,7 +48,7 @@
                 	  	 	<td>
                            <div class="d-hash">
                                <el-tooltip class="item" effect="dark" :content="item.to" popper-class="atooltip" placement="top">
-                                 <a class="line1" @click="linkAddressTransaction">{{item.to}}</a>
+                                 <a class="line1" @click="linkAddressTransactionByTo(item.to)">{{item.to}}</a>
                                </el-tooltip>
                             </div>
                         </td>
@@ -93,8 +95,6 @@
          tabindex:3,
          sortType:0,//1升序，2降序
          transactionList:[
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'31049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0}
-
          ],
          defaultBlockList:[],
          totalElements:10, //总条数
@@ -164,7 +164,7 @@
      },
      mounted(){
      	let that = this;
-       
+
 
        that.getTransactionList();
      },
@@ -177,10 +177,18 @@
            }})
       },
       //跳转到地址事务
-      linkAddressTransaction(){
+      linkAddressTransactionByFrom(from){
          let that = this;
-         that.$router.push({name:'addressTransactions'})
+         that.$router.push({name:'addressTransactions',params: {
+             from:from
+           }})
       },
+       linkAddressTransactionByTo(to){
+         let that = this;
+         that.$router.push({name:'addressTransactions',params: {
+             to:to
+           }})
+       },
       //区块排序
 
       sort(num){
@@ -265,6 +273,17 @@
               let that = this;
               that.totalElements = res.data.totalElements;
               that.transactionList = res.data.content;
+              for(var i of res.data.content){
+                    if(i.type == 0){
+                        i.type = 'coin base';
+                    }else if(i.type == 1){
+                        i.type = '转账';
+                    }else if(i.type == 2){
+                      i.type = '合约部署';
+                    }else if(i.type == 3){
+                      i.type = '合约调用';
+                    }
+              }
             }else{
               that.$toast(res.message,3000)
             }
@@ -282,6 +301,17 @@
               let that = this;
               that.totalElements = res.data.totalElements;
               that.transactionList = res.data.content;
+              for(var i of res.data.content){
+                if(i.type == 0){
+                  i.type = 'coin base';
+                }else if(i.type == 1){
+                  i.type = '转账';
+                }else if(i.type == 2){
+                  i.type = '合约部署';
+                }else if(i.type == 3){
+                  i.type = '合约调用';
+                }
+              }
             }else{
               that.$toast(res.message,3000)
             }
@@ -297,6 +327,17 @@
              let that = this;
              that.totalElements = res.data.totalElements;
              that.transactionList = res.data.content;
+             for(var i of res.data.content){
+               if(i.type == 0){
+                 i.type = 'coin base';
+               }else if(i.type == 1){
+                 i.type = '转账';
+               }else if(i.type == 2){
+                 i.type = '合约部署';
+               }else if(i.type == 3){
+                 i.type = '合约调用';
+               }
+             }
              that.defaultBlockList = JSON.parse(JSON.stringify(that.transactionList))
            }else{
              that.$toast(res.message,3000)

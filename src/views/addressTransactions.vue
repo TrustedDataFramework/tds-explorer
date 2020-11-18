@@ -2,18 +2,18 @@
     <div class="wrapper">
         <comheader :tabindex="tabindex"></comheader>
         <div class="tds-block-main address-transaction-main">
-            
+
             <div class="container">
                 <div class="page-tilte pb-3 pt-3 row">
-                  
+
                   <div class="col-md-9">
-                      
+
                       地址
-                      <span class="title-address text-secondary">0xbF4E525435cfafc77fB3Db3D29e1C34621278Ae0</span>
+                      <span class="title-address text-secondary">{{address}}</span>
                       <span class="at-btn at-btn-copy" :class="{'btn-copy-suc':copySecs>0}" title="点击将地址复制到剪贴板"  data-toggle="tooltip" data-placement="top"
                         v-clipboard:copy="address"
                         v-clipboard:success="onCopy"
-                        v-clipboard:error="onError"  
+                        v-clipboard:error="onError"
                       >
 
                       </span>
@@ -22,14 +22,14 @@
                       </span>
                   </div>
 
-                  <div class="col-md-3 col-balance">
-                      余额：0
-                  </div>
-              
+<!--                  <div class="col-md-3 col-balance">-->
+<!--                      余额：0-->
+<!--                  </div>-->
+
 
                 </div>
 
-               
+
 
                 <div  class=" tab-css tab-box ">
                 	<div class="com-table-box">
@@ -44,7 +44,7 @@
                 	  	 	 </th>
                 	  	 	 <th>出块时间</th>
                 	  	 	 <th>from</th>
-                         <th></th>
+<!--                         <th></th>-->
                 	  	 	 <th>to</th>
                 	  	 	 <th>amount</th>
                 	  	 	 <th>手续费</th>
@@ -58,7 +58,7 @@
                             </div>
                         </td>
                 	  	 	<td><div><span class="text-pri-default"><a>{{item.nonce}}</a></span></div></td>
-                	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at}}</span></div></td>
+                	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
                 	  	 	<td>
                             <div class="d-hash">
                               <el-tooltip class="item" effect="dark" :content="item.from" popper-class="atooltip" placement="top">
@@ -67,25 +67,25 @@
                               </el-tooltip>
                             </div>
                         </td>
-                        <td>
-                           <span class="transType" :class="{'type-out':item.type==1,'type-in':item.type==2}">{{item.type==1?'out':'in'}}</span>
-                        </td>
+<!--                        <td>-->
+<!--                           <span class="transType" :class="{'type-out':item.type==1,'type-in':item.type==2}">{{item.type==1?'out':'in'}}</span>-->
+<!--                        </td>-->
                 	  	 	<td>
                            <div class="d-hash">
                              <el-tooltip class="item" effect="dark" :content="item.to" popper-class="atooltip" placement="top">
-                               <a class="line1"  v-if="item.to==address">{{item.to}}</a>              
+                               <a class="line1"  v-if="item.to==address">{{item.to}}</a>
                               <span class="line1 text-pri-default"  v-if="item.to!=address">{{item.to}}</span>
                              </el-tooltip>
                             </div>
                         </td>
-                      
+
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.amount}}</span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.fee}}</span></div></td>
                 	  	 </tr>
                 	  </table>
-                  </div> 
+                  </div>
                     <div class="page-block">
-                      
+
                         <el-pagination
                         @size-change="handleSizeChange"
                         @current-change="handleCurrentChange"
@@ -99,12 +99,12 @@
                 </div>
             </div>
         </div>
-        
+
 
 
         <comfooter></comfooter>
-       
-        
+
+
         <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
           <div class="modal-dialog code-modal-dialog">
             <div class="modal-content">
@@ -119,20 +119,21 @@
                   <div id="qrcode" ref="qrcode"></div>
                  </div>
               </div>
-              
+
             </div>
           </div>
         </div>
 
 
-           
+
     </div>
 
 </template>
 <script>
    import QRCode from "qrcode2";
-   import comheader from "@/components/header"; 
-   import comfooter from "@/components/footer"; 
+   import comheader from "@/components/header";
+   import comfooter from "@/components/footer";
+   import {getTransactionByFrom,getTransactionByTo} from '@/API/api';
    export default{
      inject: ['reload'],
      data(){
@@ -140,26 +141,15 @@
          tabindex:3,
          sortType:0,//1升序，2降序
          blockList:[
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'31049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:1},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'32049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:2},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:2},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:1},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'3049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:1},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:2},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:1},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:1},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:2},
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'33049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0,type:1}
-           
          ],
          defaultBlockList:[],
-         totalElements:6000, //总条数
+         totalElements:10, //总条数
          pageSize:10,//默认每页条数
          currentPage:0,//当前页
 
-         address:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',//传过来的地址赋值
+         address:'',//传过来的地址赋值
          copySecs:0,
-         
+
         }
      },
      components: {
@@ -171,17 +161,64 @@
             if (val == null || val == "") {
                 return "暂无时间";
             } else {
-                let d = new Date(val);   //val 为表格内取到的后台时间
- 
-                let month =d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth() + 1;
-                let day = d.getDate() < 10 ? "0" + d.getDate() : d.getDate();
-                let hours = d.getHours() < 10 ? "0" + d.getHours() : d.getHours();
-                let min = d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes();
-                let sec = d.getSeconds() < 10 ? "0" + d.getSeconds() : d.getSeconds();
-                let times=d.getFullYear() + '-' + month + '-' + day + ' ' + hours + ':' + min + ':' + sec;
-                
-                return times;
-               
+                // let d = new Date(val);   //val 为表格内取到的后台时间
+                //
+                // let month =d.getMonth() + 1 < 10 ? "0" + (d.getMonth() + 1) : d.getMonth() + 1;
+                // let day = d.getDate() < 10 ? "0" + d.getDate() : d.getDate();
+                // let hours = d.getHours() < 10 ? "0" + d.getHours() : d.getHours();
+                // let min = d.getMinutes() < 10 ? "0" + d.getMinutes() : d.getMinutes();
+                // let sec = d.getSeconds() < 10 ? "0" + d.getSeconds() : d.getSeconds();
+                // let times=d.getFullYear() + '-' + month + '-' + day + ' ' + hours + ':' + min + ':' + sec;
+                //
+                // return times;
+                var offset = new Date().getTimezoneOffset()/60;
+                if(!val){
+                  return '-';
+                }
+                let that = this;
+                //UTCDateString = renderTime(UTCDateString);
+                val = val.replace("-","/");
+                val = val.replace("T"," ");
+                val = replaceAll(val);
+                val = val.substring(0,19);
+
+                function formatFunc(str) {    //格式化显示
+                  return str > 9 ? str : '0' + str
+                }
+                var date2 = new Date(val);//这步是关键
+                var year = date2.getFullYear();
+                var mon = formatFunc(date2.getMonth() + 1);
+                var day = formatFunc(date2.getDate());
+                var hour = date2.getHours();
+                hour = formatFunc(hour);
+                var min = formatFunc(date2.getMinutes());
+                var sec = formatFunc(date2.getSeconds());
+                var dateStr = year+'/'+mon+'/'+day+' '+hour+':'+min+':'+sec;
+                //var dateStr = "2020/9/2 23:01:01";
+                var dateStr1 = eosFormatTime2(dateStr,offset);
+                var year1 = dateStr1.getFullYear();
+                var mon1 = formatFunc(dateStr1.getMonth() + 1);
+                var day1 = formatFunc(dateStr1.getDate());
+                var hour1 = dateStr1.getHours();
+                hour1 = formatFunc(hour1);
+                var min1 = formatFunc(dateStr1.getMinutes());
+                var sec1 = formatFunc(dateStr1.getSeconds());
+                var dateStr2 = year1+'-'+mon1+'-'+day1+' '+hour1+':'+min1+':'+sec1;
+                return dateStr2;
+
+                function eosFormatTime2(oldTimes1,offset) {
+                  var x = oldTimes1; // 取得时间"2017-07-08 13:00:00"
+                  var time = new Date(x);
+                  var timeNum = offset;//小时数
+                  time.setHours(time.getHours() - timeNum);
+                  return time;
+                }
+                function replaceAll(str) {
+                  if(str!=null)
+                    str = str.replace(/-/g,"/")
+                  return str;
+                }
+
             }
         }
      },
@@ -191,6 +228,15 @@
         that.$nextTick(() => {
           $('[data-toggle="tooltip"]').tooltip();
         });
+       var from = this.$route.params.from;
+       var to = this.$route.params.to;
+       if(from == undefined){
+         that.address = to;
+         that.getTransactionByTo();
+       } else{
+         that.address = from;
+         that.getTransactionByFrom();
+       }
      },
      methods:{
       //跳转到事务详情
@@ -202,12 +248,12 @@
       onCopy(e) {
         let that = this;
         this.copySecs=0
-       
+
         this.timer = setInterval(function(){
             that.copySecs++;
-  
+
             if(that.copySecs==5){
-         
+
               that.copySecs =0
                clearInterval(that.timer);
             }
@@ -217,9 +263,43 @@
         //alert('复制失败')
       },
 
+       getTransactionByFrom(){
+         let that = this;
+         let obj = {}
+         obj.from = that.address;
+         obj.per_page = 10;
+         obj.page = 0;
+         getTransactionByFrom(obj).then(res=> {
+           if(res.code==2000){
+             that.totalElements = res.data.totalElements;
+             that.blockList = res.data.content;
+             that.defaultBlockList = JSON.parse(JSON.stringify(that.blockList))
+           }else{
+             that.$toast(res.message,3000)
+           }
+         })
+       },
+
+       getTransactionByTo(){
+         let that = this;
+         let obj = {}
+         obj.to = that.address;
+         obj.per_page = 10;
+         obj.page = 0;
+         getTransactionByTo(obj).then(res=> {
+           if(res.code==2000){
+             that.totalElements = res.data.totalElements;
+             that.blockList = res.data.content;
+             that.defaultBlockList = JSON.parse(JSON.stringify(that.blockList))
+           }else{
+             that.$toast(res.message,3000)
+           }
+         })
+       },
+
       sort(num){
-      	
-      	
+
+
       	let sortType = 0
       	if(this.sortType==0){
       		if(num==1){
@@ -229,18 +309,18 @@
 	      	}
 	      	sortType = num;
       	}
-      	
+
       	if(this.sortType==1){
       		if(num==1){
       			sortType = 0
       			this.blockList = JSON.parse(JSON.stringify(this.defaultBlockList))
-      			
+
       		}else{
       			sortType = num;
       			this.blockList.sort(this.compare('nonce'))
       		}
       	}
-      	
+
       	if(this.sortType==2){
       		if(num==2){
       			sortType = 0
@@ -260,7 +340,7 @@
               var val2 = b[attr];
               return val2 - val1;
           }
-          
+
       },
       //升序
       compare1(attr) {
@@ -288,10 +368,40 @@
       },
 
         handleSizeChange(val) {
-            console.log(`每页 ${val} 条`);
+          console.log(`每页 ${val} 条`);
+          let that = this;
+          that.pageSize = val;
+          let obj = {};
+          obj.to = that.address;
+          obj.per_page = val;
+          obj.page = that.currentPage;
+          getTransactionByTo(obj).then(res=> {
+            if(res.code==2000){
+              that.totalElements = res.data.totalElements;
+              that.blockList = res.data.content;
+              that.defaultBlockList = JSON.parse(JSON.stringify(that.blockList))
+            }else{
+              that.$toast(res.message,3000)
+            }
+          })
         },
         handleCurrentChange(val) {
-            console.log(`当前页: ${val}`);
+          console.log(`当前页: ${val}`);
+          let that = this;
+          that.currentPage = val;
+          let obj = {};
+          obj.to = that.address;
+          obj.per_page = that.pageSize;
+          obj.page = val-1;
+          getTransactionByTo(obj).then(res=> {
+            if(res.code==2000){
+              that.totalElements = res.data.totalElements;
+              that.blockList = res.data.content;
+              that.defaultBlockList = JSON.parse(JSON.stringify(that.blockList))
+            }else{
+              that.$toast(res.message,3000)
+            }
+          })
         },
         //字符串转为二维码
         qrcodeScan() {
@@ -318,10 +428,10 @@
       }
       if(this.timer){
         clearInterval(this.timer);
-      }   
-          
+      }
+
      }
-     
+
    }
 </script>
 
