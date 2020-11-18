@@ -164,7 +164,7 @@
      },
      mounted(){
      	let that = this;
-       that.defaultBlockList = JSON.parse(JSON.stringify(that.transactionList))
+       
 
        that.getTransactionList();
      },
@@ -181,6 +181,7 @@
          let that = this;
          that.$router.push({name:'addressTransactions'})
       },
+      //区块排序
 
       sort(num){
 
@@ -188,9 +189,9 @@
       	let sortType = 0
       	if(this.sortType==0){
       		if(num==1){
-	      		this.transitionList.sort(this.compare1('nonce'))
+	      		this.transactionList.sort(this.compare1('nonce'))
 	      	}else{
-	      		this.transitionList.sort(this.compare('nonce'))
+	      		this.transactionList.sort(this.compare('nonce'))
 	      	}
 	      	sortType = num;
       	}
@@ -198,21 +199,21 @@
       	if(this.sortType==1){
       		if(num==1){
       			sortType = 0
-      			this.transitionList = JSON.parse(JSON.stringify(this.defaultBlockList))
+      			this.transactionList = JSON.parse(JSON.stringify(this.defaultBlockList))
 
       		}else{
       			sortType = num;
-      			this.transitionList.sort(this.compare('nonce'))
+      			this.transactionList.sort(this.compare('nonce'))
       		}
       	}
 
       	if(this.sortType==2){
       		if(num==2){
       			sortType = 0
-      			this.transitionList = JSON.parse(JSON.stringify(this.defaultBlockList))
+      			this.transactionList = JSON.parse(JSON.stringify(this.defaultBlockList))
       		}else{
       			sortType = num;
-      			this.transitionList.sort(this.compare1('nonce'))
+      			this.transactionList.sort(this.compare1('nonce'))
       		}
       	}
       	this.sortType = sortType
@@ -296,6 +297,7 @@
              let that = this;
              that.totalElements = res.data.totalElements;
              that.transactionList = res.data.content;
+             that.defaultBlockList = JSON.parse(JSON.stringify(that.transactionList))
            }else{
              that.$toast(res.message,3000)
            }
