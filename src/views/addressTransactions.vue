@@ -53,7 +53,7 @@
                 	  	 	<td>
                             <div class="d-hash ">
                                <el-tooltip class="item" effect="dark" :content="item.hash" popper-class="atooltip" placement="top">
-                                 <a class="line1" @click="linDetail" >{{item.hash}}</a>
+                                 <a class="line1" @click="linDetail(item.hash)" >{{item.hash}}</a>
                                </el-tooltip>
                             </div>
                         </td>
@@ -227,21 +227,33 @@
         that.$nextTick(() => {
           $('[data-toggle="tooltip"]').tooltip();
         });
-       var from = this.$route.params.from;
-       var to = this.$route.params.to;
-       if(from == undefined){
+       let from = this.$route.params.from;
+       let to = this.$route.params.to;
+       if(from == undefined && to != undefined){
+         sessionStorage.setItem('to',to)
          that.address = to;
          that.getTransactionByTo();
-       } else{
+       }else if (from == undefined && to == undefined){
+         if(sessionStorage.getItem('from') == 'undefined'){
+           that.address = sessionStorage.getItem('to');
+           that.getTransactionByTo();
+         }else {
+           that.address = sessionStorage.getItem('from');
+           that.getTransactionByFrom();
+         }
+       }else{
+         sessionStorage.setItem('from',from)
          that.address = from;
          that.getTransactionByFrom();
        }
      },
      methods:{
       //跳转到事务详情
-      linDetail(){
+      linDetail(hash){
          let that = this;
-         that.$router.push({name:'transactionsDetail'})
+         that.$router.push({name:'transactionsDetail',params: {
+             hash:hash
+           }})
       },
 
       onCopy(e) {

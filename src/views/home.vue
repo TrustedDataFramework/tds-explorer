@@ -379,9 +379,9 @@ export default {
     link(){
       let that = this;
       let text = $("#txtSearchInput").val();
-      var sel=document.getElementById("select");
-      var index = sel.selectedIndex; // 选中索引
-      var val= sel.options[index].value;
+      let sel=document.getElementById("select");
+      let index = sel.selectedIndex; // 选中索引
+      let val= sel.options[index].value;
       if(val == 0){
         that.$router.push({path:'/transactionsDetail',query: {
             hash: text

@@ -163,8 +163,6 @@
      },
      mounted(){
      	let that = this;
-
-
        that.getTransactionList();
      },
      methods:{
