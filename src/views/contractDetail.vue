@@ -249,7 +249,7 @@ import 'brace/ext/language_tools'
          transaction:{
             },
           iscopyed:0,//是否复制成功  1成功
-          content_tab:2, //1表示事务列表  2表示合约详情
+          content_tab:1, //1表示事务列表  2表示合约详情
           
           a_Screen:0,//0表示abi全屏  1表示abi半屏
           c_Screen:0,//0表示智能合约全屏  1表示智能合约半屏
