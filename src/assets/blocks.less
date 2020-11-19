@@ -129,16 +129,32 @@
   .param-col3{
     span{background: url(../assets/img/code3.jpg) left center no-repeat; padding-left: 20px;}
   }
+  .param-col4{
+    span{background:url(../assets/img/code4.png) left center no-repeat; padding-left: 20px;
+    background-size:13px;-webkit-background-size:13px;}
+  }
   
   .functionBox{
     position: absolute; right:0px; top:50%; margin-top: -15px; 
     overflow: hidden;
     .fun-btn{width:30px;height:30px;display:inline-block; vertical-align: middle;
-        border-radius:3px;-webkit-border-radius:3px; -moz-border-radius:3px;
+        border-radius:3px;-webkit-border-radius:3px; -moz-border-radius:3px; position:relative;
+        em{cursor: pointer; position: absolute;width:100%;height:100%;left:0px;top:0px;}
     }
     .fun-btn.copy{background:#77838f url(../assets/img/fuzhi.png) center no-repeat;}
-    .fun-btn.qp{background:#77838f url(../assets/img/quanping.png) center no-repeat; margin-right:10px;} 
-    .fun-btn.bp{background:#77838f url(../assets/img/banping.png) center no-repeat; margin-right:10px;} 
+    .fun-btn.qp{background:#77838f url(../assets/img/quanping.png) center no-repeat; margin-left:8px;} 
+    .fun-btn.bp{background:#77838f url(../assets/img/banping.png) center no-repeat; margin-left:8px;} 
  }
 
 }
+
+/*验证合约*/
+.contract-params-form{/*width:80%; margin:0 auto;*/}
+.din-address{width:80%; border: 1px solid #e7eaf3;
+    background-color: #f8f9fa; padding: .75rem;-webkit-border-radius:.35rem;-moz-border-radius:.35rem; border-radius:.35rem;
+   input{border:0 none;background:0 none;font-size:0.8125rem;}
+}
+.verify-title{text-align: center; width:100%;}
+.verify-title .pt{color:#4a4f55; font-size: 18px; margin-bottom: 0px; text-align: center; width:100%;}
+.verify-title .pmess{color:#8c98a4; font-size: 12px; margin-bottom: 0px;padding-top:1px;}
+.btn-vefify{float: right; padding:.5rem .75rem; color:#fff; font-size: 0.8125rem;}

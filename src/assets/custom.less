@@ -386,6 +386,12 @@ button {
     border-radius: 5px;
     outline: none;
 }
+button:focus {
+    border: 0 none !important;
+    outline: none !important;
+    box-shadow:none !important;
+    -webkit-box-shadow:none !important;
+}
 
 /*取消button点击的默认样式*/
 .input-group{
@@ -621,11 +627,38 @@ pre {
     word-wrap: break-word;
 }
 
+.ace_editor{min-height: 300px;}
 .ace-chrome{background:#f9f9f9 !important;}
 .ace-chrome .ace_marker-layer .ace_active-line {
     background: rgba(36, 99, 180, 0.12) !important;
 }
 
+.btn:focus, /*清除btn按钮点击出现的边框*/
+.btn:active:focus,
+.btn.active:focus,
+.btn.focus,
+.btn:active.focus,
+.btn.active.focus {
+outline: none !important; box-shadow:none !important; 
+}
+
+.contract-params-form{
+  .btnbox{ text-align: center; padding: 1.25rem 0;
+    .btn{color:#fff !important;}
+    .btn:focus{box-shadow:none;-webkit-box-shadow:none; outline:none;}
+    .fun-btn{margin: 0 10px;}
+
+    .btn-reset {
+        color: #77838f !important;
+        background: rgba(119,131,143,.1);
+        border-color: transparent;
+    }
+    .btn-reset:hover{
+        color: #fff !important;
+        background:#77838f;
+    }
+  }
+}
 
 
 

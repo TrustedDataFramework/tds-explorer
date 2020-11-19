@@ -4,7 +4,9 @@
         <div class="tds-block-main">
 
             <div class="container">
-                <div class="page-tilte pb-3 pt-3">事务</div>
+                <div class="page-tilte pb-3 pt-3">
+                    <button class="btn-vefify" @click="linkVerifyContract">验证合约</button>合约
+                </div>
                 <div  class=" tab-css tab-box ">
                 	<div class="com-table-box">
                 	  <table class="com-table">
@@ -107,7 +109,7 @@
      },
      filters:{
         timefilters(val) {
-            console.log(val)
+            //console.log(val)
             if (val == null || val == "") {
                 return "暂无时间";
             } else {
@@ -169,12 +171,17 @@
        that.getTransactionList();
      },
      methods:{
+       //跳转到验证合约页面
+      linkVerifyContract(){
+         let that = this;
+         that.$router.push({name:'verifyContract'})
+      },
       //跳转到合约详情
       linDetail(hash){
          let that = this;
          that.$router.push({name:'contractDetail',params: {
              hash: hash
-           }})
+        }})
       },
       //跳转到地址事务
       linkAddressTransaction(){

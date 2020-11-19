@@ -57,7 +57,7 @@ export default new Router({
     },
     
     {
-      path: '/transactionsDetail',
+      path: '/transactionsDetail/:hash',
       name: 'transactionsDetail',
       component: () =>import('@/views/transactionsDetail'),
       meta:{
@@ -80,6 +80,14 @@ export default new Router({
       meta:{
       	title:'合约详情'
       }
-    }
+    },
+    {
+      path: '/verifyContract',
+      name: 'verifyContract',
+      component: () =>import('@/views/verifyContract'),
+      meta:{
+      	title:'验证合约'
+      }
+    },
   ]
 })
