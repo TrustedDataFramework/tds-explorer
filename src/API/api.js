@@ -31,8 +31,24 @@ var getBlockByHeight = function(data){
   return axios.get('/get_block_by_height?height='+data.height)
 }
 
+//获取合约事务列表
+var getContractList = function(data){
+  return axios.get('/get_contract_list?per_page='+data.per_page+'&page='+data.page)
+}
+
+//获取合约事务详情
+var getContractByHash = function(data){
+  return axios.get('/get_contract_by_hash?hash='+data.hash)
+}
+
+//地址获取合约事务列表
+var getCallContractList = function(data){
+  return axios.get('/get_call_contract_list?address='+data.address+'&per_page='+data.per_page+'&page='+data.page)
+}
+
 export{
-  getBlockList,getTransactionList,getTransactionByTxHash,getTransactionByFrom,getTransactionByTo,getBlockByHeight
+  getBlockList,getTransactionList,getTransactionByTxHash,getTransactionByFrom,getTransactionByTo,getBlockByHeight,getContractList,
+  getContractByHash,getCallContractList
 }
 
 function getJson (data) {

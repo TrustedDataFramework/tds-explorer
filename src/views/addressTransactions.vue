@@ -229,25 +229,25 @@
         });
        let from = this.$route.params.from;
        let to = this.$route.params.to;
-       console.log('from'+from)
-       console.log('to'+to)
-       console.log('type'+this.$route.params.type)
-       if(from == undefined && to != undefined){
-         sessionStorage.setItem('to',to)
-         that.address = to;
-         that.getTransactionByTo();
-       }else if (from == undefined && to == undefined){
-         if(sessionStorage.getItem('from') == 'undefined'){
-           that.address = sessionStorage.getItem('to');
-           that.getTransactionByTo();
-         }else {
-           that.address = sessionStorage.getItem('from');
+       // console.log('from'+from)
+       // console.log('to'+to)
+       // console.log('type'+this.$route.params.type)
+       if(this.$route.params.type == 1){
+         if(from == undefined && to != undefined){
+           that.address = to;
+           that.getTransactionByFrom();
+         }else{
+           that.address = from;
            that.getTransactionByFrom();
          }
-       }else{
-         sessionStorage.setItem('from',from)
-         that.address = from;
-         that.getTransactionByFrom();
+       }else if(this.$route.params.type == 2){
+         if(from == undefined && to != undefined){
+           that.address = to;
+           that.getTransactionByTo();
+         }else{
+           that.address = from;
+           that.getTransactionByTo();
+         }
        }
      },
      methods:{

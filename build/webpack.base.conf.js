@@ -11,6 +11,10 @@ function resolve (dir) {
 
 
 module.exports = {
+  externals: {
+    '@salaku/js-sdk': 'tdsSDK',
+    'assemblyscript/cli/asc': 'asc'
+  },
   context: path.resolve(__dirname, '../'),
   entry: {
     //app: './src/main.js'
@@ -88,6 +92,6 @@ module.exports = {
        "windows.jQuery": "jquery"
      })
  ]
-    
+
 
 }

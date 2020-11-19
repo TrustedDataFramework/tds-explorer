@@ -25,15 +25,15 @@
                 	  	 	 <th>amount</th>
                 	  	 	 <th>手续费</th>
                 	  	 </tr>
-                	  	 <tr v-for="(item,index) in transactionList" :key="index">
+                	  	 <tr v-for="(item,index) in contractList" :key="index">
                 	  	 	<td>
                             <div class="d-hash ">
-                              <el-tooltip class="item" effect="dark" :content="item.hash" popper-class="atooltip" placement="bottom">
-                                <a class="line1" @click="linDetail(item.hash)" >{{item.hash}}</a>
+                              <el-tooltip class="item" effect="dark" :content="item.tx_hash" popper-class="atooltip" placement="bottom">
+                                <a class="line1" @click="linDetail(item.tx_hash)" >{{item.tx_hash}}</a>
                               </el-tooltip>
                             </div>
                         </td>
-                	  	 	<td><div><span class="text-pri-default"><a>{{item.nonce}}</a></span></div></td>
+                	  	 	<td><div><span class="text-pri-default"><a>{{item.height}}</a></span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
                 	  	 	<td>
                             <div class="d-hash">
@@ -87,14 +87,14 @@
 <script>
    import comheader from "@/components/header";
    import comfooter from "@/components/footer";
-   import {getTransactionList} from '@/API/api';
+   import {getContractList} from '@/API/api';
    export default{
      inject: ['reload'],
      data(){
         return {
          tabindex:4,
          sortType:0,//1升序，2降序
-         transactionList:[
+          contractList:[
            {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'31049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0}
 
          ],
@@ -166,9 +166,7 @@
      },
      mounted(){
      	let that = this;
-       
-
-       that.getTransactionList();
+       that.getContractList();
      },
      methods:{
        //跳转到验证合约页面
@@ -196,9 +194,9 @@
       	let sortType = 0
       	if(this.sortType==0){
       		if(num==1){
-	      		this.transactionList.sort(this.compare1('nonce'))
+	      		this.contractList.sort(this.compare1('nonce'))
 	      	}else{
-	      		this.transactionList.sort(this.compare('nonce'))
+	      		this.contractList.sort(this.compare('nonce'))
 	      	}
 	      	sortType = num;
       	}
@@ -206,21 +204,21 @@
       	if(this.sortType==1){
       		if(num==1){
       			sortType = 0
-      			this.transactionList = JSON.parse(JSON.stringify(this.defaultBlockList))
+      			this.contractList = JSON.parse(JSON.stringify(this.defaultBlockList))
 
       		}else{
       			sortType = num;
-      			this.transactionList.sort(this.compare('nonce'))
+      			this.contractList.sort(this.compare('nonce'))
       		}
       	}
 
       	if(this.sortType==2){
       		if(num==2){
       			sortType = 0
-      			this.transactionList = JSON.parse(JSON.stringify(this.defaultBlockList))
+      			this.contractList = JSON.parse(JSON.stringify(this.defaultBlockList))
       		}else{
       			sortType = num;
-      			this.transactionList.sort(this.compare1('nonce'))
+      			this.contractList.sort(this.compare1('nonce'))
       		}
       	}
       	this.sortType = sortType
@@ -267,11 +265,11 @@
           let obj = {};
           obj.per_page = val;
           obj.page = that.currentPage;
-          getTransactionList(obj).then(res=> {
+          getContractList(obj).then(res=> {
             if(res.code==2000){
               let that = this;
               that.totalElements = res.data.totalElements;
-              that.transactionList = res.data.content;
+              that.contractList = res.data.content;
             }else{
               that.$toast(res.message,3000)
             }
@@ -284,27 +282,27 @@
           let obj = {};
           obj.per_page = that.pageSize;
           obj.page = val-1;
-          getTransactionList(obj).then(res=> {
+          getContractList(obj).then(res=> {
             if(res.code==2000){
               let that = this;
               that.totalElements = res.data.totalElements;
-              that.transactionList = res.data.content;
+              that.contractList = res.data.content;
             }else{
               that.$toast(res.message,3000)
             }
           })
         },
-       getTransactionList(){
+       getContractList(){
          let that = this;
          let obj = {};
          obj.per_page = 10
          obj.page = 0
-         getTransactionList(obj).then(res=> {
+         getContractList(obj).then(res=> {
            if(res.code==2000){
              let that = this;
              that.totalElements = res.data.totalElements;
-             that.transactionList = res.data.content;
-             that.defaultBlockList = JSON.parse(JSON.stringify(that.transactionList))
+             that.contractList = res.data.content;
+             that.defaultBlockList = JSON.parse(JSON.stringify(that.contractList))
            }else{
              that.$toast(res.message,3000)
            }

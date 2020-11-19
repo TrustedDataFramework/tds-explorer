@@ -6,61 +6,61 @@
             <div class="container">
                 <div class="page-tilte pb-3 pt-3 row">
 
-                  <div class="col-md-12">  
+                  <div class="col-md-12">
                       地址
-                      <span class="title-address text-secondary">0xbF4E525435cfafc77fB3Db3D29e1C34621278Ae0</span>
-                    
+                      <span class="title-address text-secondary">{{address}}</span>
+
                   </div>
-  
+
                 </div>
 
                 <div class="contract-hash-detail">
-                   <div class="row row-detail"> 
+                   <div class="row row-detail">
                       <div class="col-md-6 ">
                           <div class="tab-css">
                             <div class="row">
-                              <div class="col-md-4"><div class="lab">余额：</div></div><div class="col-md-8">0</div>
+                              <div class="col-md-4"><div class="lab">余额：</div></div><div class="col-md-8">{{amount}}</div>
                             </div>
                             <hr class="hr-space"/>
                             <div class="row">
-                              <div class="col-md-4"><div class="lab">区块高度：</div></div><div class="col-md-8">33699</div>
+                              <div class="col-md-4"><div class="lab">区块高度：</div></div><div class="col-md-8">{{height}}</div>
                             </div>
                             <hr class="hr-space"/>
                            <div class="row">
-                              <div class="col-md-4"><div class="lab">区块时间：</div></div><div class="col-md-8">2020-11-18 17:25:36</div>
+                              <div class="col-md-4"><div class="lab">区块时间：</div></div><div class="col-md-8">{{created_at | timefilters}}</div>
                             </div>
                           </div>
                       </div>
-                      
+
                       <div class="col-md-6">
                           <div class="tab-css">
                             <div class="row">
                               <div class="col-md-3"><div class="lab">事务哈希：</div></div>
-                              <div class="col-md-9"><div class="line1">0xbF4E525435cfafc77fB3Db3D29e1C34621278Ae0</div></div>
+                              <div class="col-md-9"><div class="line1">{{tx_hash}}</div></div>
                             </div>
                             <hr class="hr-space"/>
                             <div class="row">
                               <div class="col-md-3"><div class="lab">from：</div></div>
-                              <div class="col-md-9"><div class="line1">0xbF4E525435cfafc77fB3Db3D29e1C34621278Ae0</div></div>
+                              <div class="col-md-9"><div class="line1">{{from}}</div></div>
                             </div>
                             <hr class="hr-space"/>
                            <div class="row">
                               <div class="col-md-3"><div class="lab">to：</div></div>
-                              <div class="col-md-9"><div class="line1">0xbF4E525435cfafc77fB3Db3D29e1C34621278Ae0</div></div>
+                              <div class="col-md-9"><div class="line1">{{to}}</div></div>
                             </div>
                           </div>
                       </div>
 
                    </div>
                 </div>
-                
+
 
                 <div class="contract-tab-box tab-css">
                   <div class="tab-nav">
                      <div class="navbox">
                         <a :class="{'active':content_tab==1}" @click="content_tab=1">事务列表</a>
                         <a :class="{'active':content_tab==2}" @click="content_tab=2">合约详情
-                          <!--合约验证显示--> 
+                          <!--合约验证显示-->
                           <span class="s-verified"></span>
                         </a>
                      </div>
@@ -85,7 +85,7 @@
                             <th>amount</th>
                             <th>手续费</th>
                           </tr>
-                          <tr v-for="(item,index) in transactionList" :key="index">
+                          <tr v-for="(item,index) in CallContractList" :key="index">
                             <td>
                                 <div class="d-hash ">
                                   <el-tooltip class="item" effect="dark" :content="item.hash" popper-class="atooltip" placement="bottom">
@@ -137,23 +137,23 @@
                          <div class="param-title">
                               <span>智能合约源代码</span>
                               <div class="functionBox">
-                                 
+
                                 <a class="fun-btn copy" >
                                   <el-tooltip class="item" effect="dark" content="复制合约源码到剪贴板" popper-class="top" placement="top">
                                     <em></em>
                                     </el-tooltip>
                                 </a>
-                          
-                          
+
+
                                 <a class="fun-btn qp" :class="{'bp':c_Screen==1}" @click.stop="contractScreen">
                                   <el-tooltip class="item" effect="dark" content="切换全屏" popper-class="top" placement="top">
                                     <em></em>
                                   </el-tooltip>
                                 </a>
-                                 
+
                               </div>
                          </div>
-               
+
                           <editor
                             v-model="contract_content"
                             @init="editorInit"
@@ -170,25 +170,25 @@
                          <div class="param-title">
                               <span>合约ABI</span>
                               <div class="functionBox">
-                                
+
                                 <a class="fun-btn copy">
                                     <el-tooltip class="item" effect="dark" content="复制合约ABI" popper-class="top" placement="top">
                                       <em></em>
                                     </el-tooltip>
                                 </a>
-                            
-                          
+
+
                                 <a class="fun-btn qp" :class="{'bp':a_Screen==1}" @click.stop="abiScreen">
                                     <el-tooltip class="item" effect="dark" content="切换全屏" popper-class="top" placement="top">
                                       <em></em>
                                     </el-tooltip>
                                 </a>
-                                 
+
                               </div>
                          </div>
                          <pre class="wordwrap js-copytextarea2" id="js-copytextarea2" :style="{'height':a_Screen==0?'200px':'400px','max-height': '400px','margin-top': '5px'}">[{"constant":true,"inputs":[{"name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"niftyType","type":"uint256"},{"name":"ipfs_hash","type":"string"}],"name":"setNiftyIPFSHash","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"owner","type":"address"},{"name":"index","type":"uint256"}],"name":"tokenOfOwnerByIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"tokenByIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"masterBuilderContract","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"baseURI","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"_numNiftyPermitted","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"contractId","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"nameOfCreator","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"niftyType","type":"uint256"}],"name":"isNiftySoldOut","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"tokenId","type":"uint256"},{"name":"_data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"niftyRegistryContract","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"_IPFSHashHasBeenSet","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenId","type":"uint256"}],"name":"tokenIPFSHash","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"_niftyIPFSHashes","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"collector_address","type":"address"},{"name":"listOfNiftyTypes","type":"uint256[]"}],"name":"createNifties","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"_numNiftyMinted","outputs":[{"name":"_value","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"owner","type":"address"},{"name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"numNiftiesCurrentlyInContract","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_name","type":"string"},{"name":"_symbol","type":"string"},{"name":"contract_id","type":"uint256"},{"name":"num_nifties","type":"uint256"},{"name":"nifty_quantities","type":"uint256[]"},{"name":"base_uri","type":"string"},{"name":"name_of_creator","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_buyer","type":"address"},{"indexed":false,"name":"_amount","type":"uint256"},{"indexed":false,"name":"_tokenId","type":"uint256"}],"name":"NiftyPurchased","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"new_owner","type":"address"},{"indexed":false,"name":"_niftyType","type":"uint256"},{"indexed":false,"name":"_tokenId","type":"uint256"}],"name":"NiftyCreated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":true,"name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"approved","type":"address"},{"indexed":true,"name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"operator","type":"address"},{"indexed":false,"name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"}]</pre>
                      </div>
-                     
+
                      <div class="param-col param-col3">
                          <div class="param-title">
                               <span>payload</span>
@@ -201,7 +201,7 @@
 
                 </div>
 
-             
+
             </div>
         </div>
 
@@ -213,26 +213,27 @@
     </div>
 
 </template>
+
 <script>
    import comheader from "@/components/header";
    import comfooter from "@/components/footer";
    import editor from 'vue2-ace-editor'
-   
-import 'brace/ext/language_tools'
-   import {getTransactionByTxHash} from '@/API/api';
+   const tdsSDK = require("@salaku/js-sdk");
+    import 'brace/ext/language_tools'
+   import {getContractByHash,getCallContractList} from '@/API/api';
    export default{
      inject: ['reload'],
      data(){
         return {
          tabindex:4,
-         
+
          sortType:0,//1升序，2降序
-         transactionList:[
+          CallContractList:[
            {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'31049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0}
 
          ],
          contract_content:'',
-         
+
          options: {
             enableBasicAutocompletion: true,
             enableSnippets: true,
@@ -242,7 +243,7 @@ import 'brace/ext/language_tools'
           },
 
          defaultBlockList:[],
-         totalElements:20, //总条数
+         totalElements:10, //总条数
          pageSize:10,//默认每页条数
          currentPage:0,//当前页
 
@@ -250,10 +251,18 @@ import 'brace/ext/language_tools'
             },
           iscopyed:0,//是否复制成功  1成功
           content_tab:1, //1表示事务列表  2表示合约详情
-          
+
           a_Screen:0,//0表示abi全屏  1表示abi半屏
           c_Screen:0,//0表示智能合约全屏  1表示智能合约半屏
-          
+
+          amount:'',
+          tx_hash:'',
+          height:'',
+          from:'',
+          to:'',
+          created_at:'',
+          address:''
+
         }
      },
      components: {
@@ -318,8 +327,9 @@ import 'brace/ext/language_tools'
      },
      mounted(){
        let that = this;
-        that.defaultBlockList = JSON.parse(JSON.stringify(that.transactionList))
-        //that.getTransactionDetail();
+        that.defaultBlockList = JSON.parse(JSON.stringify(that.CallContractList))
+        that.getContractByHash();
+        that.getCallContractList();
      },
      methods:{
        //智能合约源代码
@@ -346,14 +356,14 @@ import 'brace/ext/language_tools'
           require("brace/mode/less");
           require("brace/mode/java");
           require('brace/theme/chrome')
-        
+
           require("brace/mode/json");
-          require('brace/snippets/javascript') 
-          require('brace/snippets/java') 
+          require('brace/snippets/javascript')
+          require('brace/snippets/java')
           let _this = this;
         //_this.$refs.aaa.editor.setShowFoldWidgets(true);折叠属性
 
-      
+
 
         },
        //跳转到事务详情
@@ -372,14 +382,37 @@ import 'brace/ext/language_tools'
         onCopy(e) {
          this.iscopyed=1
         },
-       getTransactionDetail(){
-         let tx_hash = this.$route.params.hash;
-         let obj = {}
-         obj.tx_hash = tx_hash
-         getTransactionByTxHash(obj).then(res=> {
+       getContractByHash(){
+         let hash = this.$route.params.hash;
+         let obj = {};
+         obj.hash = hash;
+         getContractByHash(obj).then(res=> {
            if(res.code==2000){
              let that = this;
-             that.transaction = res.data;
+             that.$root.address = res.data.address;
+             that.amount = res.data.amount;
+             that.address = res.data.address;
+             that.height = res.data.height;
+             that.from = res.data.from;
+             that.to = res.data.to;
+             that.tx_hash = res.data.tx_hash;
+             that.created_at = res.data.created_at;
+           }else{
+             that.$toast(res.message,3000)
+           }
+         })
+       },
+       getCallContractList(){
+         let that = this;
+         let obj = {}
+         obj.address = that.$root.address;
+         obj.per_page = that.pageSize;
+         obj.page = that.currentPage;
+         getCallContractList(obj).then(res=> {
+           if(res.code==2000){
+             let that = this;
+             that.totalElements = res.data.totalElements;
+             that.CallContractList = res.data.content;
            }else{
              that.$toast(res.message,3000)
            }
@@ -397,9 +430,9 @@ import 'brace/ext/language_tools'
       	let sortType = 0
       	if(this.sortType==0){
       		if(num==1){
-	      		this.transactionList.sort(this.compare1('nonce'))
+	      		this.CallContractList.sort(this.compare1('nonce'))
 	      	}else{
-	      		this.transactionList.sort(this.compare('nonce'))
+	      		this.CallContractList.sort(this.compare('nonce'))
 	      	}
 	      	sortType = num;
       	}
@@ -407,21 +440,21 @@ import 'brace/ext/language_tools'
       	if(this.sortType==1){
       		if(num==1){
       			sortType = 0
-      			this.transactionList = JSON.parse(JSON.stringify(this.defaultBlockList))
+      			this.CallContractList = JSON.parse(JSON.stringify(this.defaultBlockList))
 
       		}else{
       			sortType = num;
-      			this.transactionList.sort(this.compare('nonce'))
+      			this.CallContractList.sort(this.compare('nonce'))
       		}
       	}
 
       	if(this.sortType==2){
       		if(num==2){
       			sortType = 0
-      			this.transactionList = JSON.parse(JSON.stringify(this.defaultBlockList))
+      			this.CallContractList = JSON.parse(JSON.stringify(this.defaultBlockList))
       		}else{
       			sortType = num;
-      			this.transactionList.sort(this.compare1('nonce'))
+      			this.CallContractList.sort(this.compare1('nonce'))
       		}
       	}
       	this.sortType = sortType
