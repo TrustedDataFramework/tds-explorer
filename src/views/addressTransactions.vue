@@ -229,6 +229,8 @@
         });
        let from = this.$route.params.from;
        let to = this.$route.params.to;
+       console.log('from'+from)
+       console.log('to'+to)
        if(from == undefined && to != undefined){
          sessionStorage.setItem('to',to)
          that.address = to;

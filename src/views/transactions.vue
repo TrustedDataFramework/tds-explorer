@@ -176,6 +176,7 @@
       //跳转到地址事务
       linkAddressTransactionByFrom(from){
          let that = this;
+        console.log(123456)
          that.$router.push({name:'addressTransactions',params: {
              from:from
            }})
@@ -183,7 +184,7 @@
        linkAddressTransactionByTo(to){
          let that = this;
          that.$router.push({name:'addressTransactions',params: {
-             to:to
+            to:to
            }})
        },
       //区块排序
