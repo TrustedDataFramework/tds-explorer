@@ -48,7 +48,7 @@ export default new Router({
       }
     },
     {
-      path: '/addressTransactions/:from?/:to?',
+      path: '/addressTransactions/:from?/:to?/:type',
       name: 'addressTransactions',
       component: () =>import('@/views/addressTransactions'),
       meta:{

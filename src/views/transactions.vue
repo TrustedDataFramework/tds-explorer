@@ -178,13 +178,13 @@
          let that = this;
         console.log(123456)
          that.$router.push({name:'addressTransactions',params: {
-             from:from
+             from:from,type:1
            }})
       },
        linkAddressTransactionByTo(to){
          let that = this;
          that.$router.push({name:'addressTransactions',params: {
-            to:to
+            to:to,type:2
            }})
        },
       //区块排序
