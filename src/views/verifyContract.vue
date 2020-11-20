@@ -184,18 +184,18 @@ import 'brace/ext/language_tools'
          getABIByAddress(obj).then(res=> {
            if(res.code==2000){
              that.aaa = res.data.abi;
-             console.log(that.aaa)
+             console.log('aaa'+that.aaa)
            }else{
              that.$toast(res.message,3000)
            }
          })
-         console.log(that.aaa)
+         console.log('aaaa1'+that.aaa)
          //获取js.sdk ABI
          const contract = new tdsSDK.Contract();
          // 编译合约得到字节码
          contract.abi = tdsSDK.compileABI(code);
          let ABIByContract = contract.abi;
-         console.log(ABIByContract)
+         //console.log(ABIByContract)
          //校验两个ABI是否相同
          var jsonLength1 = 0;
          var jsonLength2 = 0;
