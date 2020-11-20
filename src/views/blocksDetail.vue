@@ -159,24 +159,15 @@
 <script>
    import comheader from "@/components/header";
    import comfooter from "@/components/footer";
-   import {getBlockByHeight} from '@/API/api';
+   import {getBlockByHeight,getBlockByHash} from '@/API/api';
    export default{
      inject: ['reload'],
      data(){
         return {
          tabindex:2,
-         block:{
-              "height": 330255,
-              "hash":'9a6cf33c394dd023e33daef0e52989d99796832e6f40cdbce5a914e033feefba',
-              "created_at": "2020-11-16T05:35:39.000+0000",
-              "size":28,
-              "miner_address":"3a50616c0d91d9d8954c315fa5f11bb796e972d3e9015",
-              "all_fee":258,
-              "state_root":'64678f5b4c05e3468e4d9d42324050b6af29432cd76cf1c95f2acb522bbfbb00',
-              "transaction_root":'38839f248cc80ab60a8ff157fd6e96bd7337a03f6daa197d4b4aec5091828116',
-              "payload":"6c8a1872900fd23fd16d4debc2e6dada2ca244a790274e226a2033f67ff96fdd9985be5c1d3d910ef263b64bd0e25fe85d77c848b8aea6656353b6abef3c5c4a"
-            },
+         block:{},
           iscopyed:0,//是否复制成功  1成功
+          blockHash:'',
           height:''
         }
 
@@ -247,11 +238,20 @@
         });
        if(this.$route.params.height == undefined || this.$route.params.height ==  "undefined"
          || this.$route.params.height == null || this.$route.params.height == "null"){
-         that.height = this.$route.query.height;
+         if(this.$route.query.blockHash != undefined){
+           that.getBlockByHash();
+         }else {
+           that.height = this.$route.query.height;
+           that.getBlockByHeight();
+         }
        }else{
-         that.height = this.$route.params.height;
+         if(this.$route.query.blockHash != undefined){
+           that.getBlockByHash();
+         }else {
+           that.height = this.$route.params.height;
+           that.getBlockByHeight();
+         }
        }
-        that.getBlockByHeight();
      },
      methods:{
         onCopy(e) {
@@ -265,6 +265,18 @@
          let obj = {}
          obj.height = that.height;
          getBlockByHeight(obj).then(res=> {
+           if(res.code==2000){
+             that.block = res.data;
+           }else{
+             that.$toast(res.message,3000)
+           }
+         })
+       },
+       getBlockByHash() {
+         let that = this;
+         let obj = {}
+         obj.blockHash = this.$route.query.blockHash;
+         getBlockByHash(obj).then(res=> {
            if(res.code==2000){
              that.block = res.data;
            }else{

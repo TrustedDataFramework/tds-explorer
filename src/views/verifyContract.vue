@@ -6,22 +6,22 @@
             <div class="container">
                 <div class="page-tilte pb-3 pt-3 row">
 
-                  <div class="verify-title">  
+                  <div class="verify-title">
                        <p class="pt">验证并发布合约源代码</p>
                        <p class="pmess">输入合约地址和合约源代码</p>
                   </div>
-  
+
                 </div>
 
                 <div class="contract-tab-box tab-css">
-                
+
                   <!--合约详情-->
                   <div  class="contract-params contract-params-form">
 
                      <div class="param-col param-col4">
                         <div class="param-title"><span>合约地址</span></div>
                         <div class="din din-address">
-                            <input placeholder="请输入合约地址"/>
+                            <input placeholder="请输入合约地址" v-model="address"/>
                         </div>
 
                      </div>
@@ -29,9 +29,9 @@
                      <div class="param-col param-col1">
                          <div class="param-title">
                               <span>智能合约源代码</span>
-                            
+
                          </div>
-               
+
                           <editor
                             v-model="contract_content"
                             @init="editorInit"
@@ -47,11 +47,11 @@
                      <div class="param-col param-col2">
                          <div class="param-title">
                               <span>合约ABI</span>
-                            
+
                          </div>
                          <pre class="wordwrap js-copytextarea2" id="js-copytextarea2" :style="{'height':a_Screen==0?'200px':'400px','max-height': '400px','margin-top': '5px'}">[{"constant":true,"inputs":[{"name":"interfaceId","type":"bytes4"}],"name":"supportsInterface","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenId","type":"uint256"}],"name":"getApproved","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"tokenId","type":"uint256"}],"name":"approve","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"tokenId","type":"uint256"}],"name":"transferFrom","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"niftyType","type":"uint256"},{"name":"ipfs_hash","type":"string"}],"name":"setNiftyIPFSHash","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"owner","type":"address"},{"name":"index","type":"uint256"}],"name":"tokenOfOwnerByIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"tokenId","type":"uint256"}],"name":"safeTransferFrom","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"index","type":"uint256"}],"name":"tokenByIndex","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenId","type":"uint256"}],"name":"ownerOf","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"masterBuilderContract","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"baseURI","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"_numNiftyPermitted","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"contractId","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"nameOfCreator","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"niftyType","type":"uint256"}],"name":"isNiftySoldOut","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"to","type":"address"},{"name":"approved","type":"bool"}],"name":"setApprovalForAll","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"from","type":"address"},{"name":"to","type":"address"},{"name":"tokenId","type":"uint256"},{"name":"_data","type":"bytes"}],"name":"safeTransferFrom","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"niftyRegistryContract","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenId","type":"uint256"}],"name":"tokenURI","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"_IPFSHashHasBeenSet","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"tokenId","type":"uint256"}],"name":"tokenIPFSHash","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"_niftyIPFSHashes","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"collector_address","type":"address"},{"name":"listOfNiftyTypes","type":"uint256[]"}],"name":"createNifties","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"","type":"uint256"}],"name":"_numNiftyMinted","outputs":[{"name":"_value","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"owner","type":"address"},{"name":"operator","type":"address"}],"name":"isApprovedForAll","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"numNiftiesCurrentlyInContract","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"inputs":[{"name":"_name","type":"string"},{"name":"_symbol","type":"string"},{"name":"contract_id","type":"uint256"},{"name":"num_nifties","type":"uint256"},{"name":"nifty_quantities","type":"uint256[]"},{"name":"base_uri","type":"string"},{"name":"name_of_creator","type":"string"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_buyer","type":"address"},{"indexed":false,"name":"_amount","type":"uint256"},{"indexed":false,"name":"_tokenId","type":"uint256"}],"name":"NiftyPurchased","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"new_owner","type":"address"},{"indexed":false,"name":"_niftyType","type":"uint256"},{"indexed":false,"name":"_tokenId","type":"uint256"}],"name":"NiftyCreated","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":true,"name":"tokenId","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"approved","type":"address"},{"indexed":true,"name":"tokenId","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"operator","type":"address"},{"indexed":false,"name":"approved","type":"bool"}],"name":"ApprovalForAll","type":"event"}]</pre>
                      </div>
-                     
+
                      <div class="param-col param-col3">
                          <div class="param-title">
                               <span>构造函数字节码</span>
@@ -60,17 +60,17 @@
                      </div>
 
                      <div class="btnbox">
-                        <input type="button" class="btn btn-primary fun-btn" value="验证并发布"/>
+                        <input type="button" class="btn btn-primary fun-btn" value="验证并发布" @click="verifyContract"/>
                         <input type="button" class="btn btn-reset fun-btn" value="重置"/>
-                    
+
                      </div>
 
                   </div>
-          
+
 
                 </div>
 
-             
+
             </div>
         </div>
 
@@ -86,7 +86,8 @@
    import comheader from "@/components/header";
    import comfooter from "@/components/footer";
    import editor from 'vue2-ace-editor'
-   
+   import {getABIByAddress} from '@/API/api';
+
 import 'brace/ext/language_tools'
 
    export default{
@@ -94,14 +95,14 @@ import 'brace/ext/language_tools'
      data(){
         return {
          tabindex:4,
-         
-       
+
+
          transactionList:[
            {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'31049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0}
 
          ],
          contract_content:'',
-         
+
          options: {
             enableBasicAutocompletion: true,
             enableSnippets: true,
@@ -119,16 +120,19 @@ import 'brace/ext/language_tools'
             },
           iscopyed:0,//是否复制成功  1成功
           content_tab:2, //1表示事务列表  2表示合约详情
-          
+
           a_Screen:0,//0表示abi全屏  1表示abi半屏
           c_Screen:0,//0表示智能合约全屏  1表示智能合约半屏
-          
+
+          address:'',
+          aaa:''
+
         }
      },
      components: {
         comfooter,comheader,editor
      },
-    
+
 
      mounted(){
        let that = this;
@@ -160,22 +164,102 @@ import 'brace/ext/language_tools'
           require("brace/mode/less");
           require("brace/mode/java");
           require('brace/theme/chrome')
-        
+
           require("brace/mode/json");
-          require('brace/snippets/javascript') 
-          require('brace/snippets/java') 
+          require('brace/snippets/javascript')
+          require('brace/snippets/java')
           let _this = this;
         //_this.$refs.aaa.editor.setShowFoldWidgets(true);折叠属性
 
-      
+
 
         },
-     
+
+       verifyContract(){
+         let that = this;
+         let code = that.contract_content;
+         //获取后端ABI
+         let obj = {}
+         obj.address = that.address;
+         getABIByAddress(obj).then(res=> {
+           if(res.code==2000){
+             that.aaa = res.data.abi;
+             console.log(that.aaa)
+           }else{
+             that.$toast(res.message,3000)
+           }
+         })
+         console.log(that.aaa)
+         //获取js.sdk ABI
+         const contract = new tdsSDK.Contract();
+         // 编译合约得到字节码
+         contract.abi = tdsSDK.compileABI(code);
+         let ABIByContract = contract.abi;
+         console.log(ABIByContract)
+         //校验两个ABI是否相同
+         var jsonLength1 = 0;
+         var jsonLength2 = 0;
+         for(var item1 in that.ABIByBack){
+           console.log("haha")
+         }
+         for(var item2 in ABIByContract){
+           jsonLength2++;
+         }
+         console.log(jsonLength1)
+         console.log(jsonLength2)
+         if(jsonLength1 == jsonLength2) {
+           console.log("11")
+           for (var list1 in ABIByBack) {
+             for (var list2 in ABIByContract) {
+               if (list1.name == list2.name && list1.type == list2.type) {
+                 console.log("22")
+                 var inputsLength1 = 0;
+                 var inputsLength2 = 0;
+                 for (var inputs1 in list1) {
+                   inputsLength1++;
+                 }
+                 for (var inputs2 in list2) {
+                   inputsLength2++;
+                 }
+                 if (inputsLength1 == inputsLength2) {
+                   console.log("33")
+                    for(var input1 in list1.inputs){
+                      for(var input2 in list2.inputs){
+                          if(input1.name == input2.name && input1.type == input2.type){
+                            console.log("44")
+                            var outputsLength1 = 0;
+                            var outputsLength2 = 0;
+                            for (var outputs1 in list1.outputs) {
+                              outputsLength1++;
+                            }
+                            for (var outputs2 in outputs) {
+                              outputsLength2++;
+                            }
+                            if (outputsLength1 == outputsLength2) {
+                              console.log("55")
+                              for(var output1 in list1.outputs){
+                                for(var output2 in list2.outputs){
+                                  if(output1.name == output2.name && output1.type == output2.type){
+                                    console.log("校验成功")
+                                  }
+                                }
+                              }
+                            }
+                          }
+                      }
+                    }
+                 }
+               }
+             }
+           }
+         }
+       },
+
 
         onCopy(e) {
          this.iscopyed=1
         },
-       
+
         onError(e) {
           //alert('复制失败')
         },

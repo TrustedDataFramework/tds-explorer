@@ -19,6 +19,13 @@ import router from './router'
 Vue.config.productionTip = false
 
 
+
+const contract = new tdsSDK.Contract()
+const fs = require('fs')
+// 编译合约得到字节码
+contract.abi = tdsSDK.compileABI('')
+console.log(contract.abi)
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

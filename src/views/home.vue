@@ -388,7 +388,7 @@ export default {
           }})
       }else if(val == 1){
         that.$router.push({path:'/blocksDetail',query: {
-            height: text
+            blockHash: text
           }})
       }
     },
