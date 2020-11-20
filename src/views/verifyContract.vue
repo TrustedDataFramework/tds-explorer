@@ -177,20 +177,27 @@ import 'brace/ext/language_tools'
 
        verifyContract(){
          let that = this;
-         let code = that.contract_content;
+         
          //获取后端ABI
          let obj = {}
          obj.address = that.address;
          getABIByAddress(obj).then(res=> {
            if(res.code==2000){
              that.aaa = res.data.abi;
-             console.log('aaa'+that.aaa)
+             that.ABIByBack=res.data.abi;
+             that.getSdk();
            }else{
              that.$toast(res.message,3000)
            }
          })
-         console.log('aaaa1'+that.aaa)
+        
+         
+       },
+
+       getSdk(){
+         let that = this;
          //获取js.sdk ABI
+         let code = that.contract_content;
          const contract = new tdsSDK.Contract();
          // 编译合约得到字节码
          contract.abi = tdsSDK.compileABI(code);
@@ -200,7 +207,7 @@ import 'brace/ext/language_tools'
          var jsonLength1 = 0;
          var jsonLength2 = 0;
          for(var item1 in that.ABIByBack){
-           console.log("haha")
+           jsonLength1++;
          }
          for(var item2 in ABIByContract){
            jsonLength2++;
