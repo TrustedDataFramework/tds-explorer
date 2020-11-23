@@ -265,7 +265,7 @@
          let obj = {}
          obj.height = that.height;
          getBlockByHeight(obj).then(res=> {
-           if(res.code==2000){
+           if(res.code==200){
              that.block = res.data;
            }else{
              that.$toast(res.message,3000)
@@ -277,7 +277,7 @@
          let obj = {}
          obj.blockHash = this.$route.query.blockHash;
          getBlockByHash(obj).then(res=> {
-           if(res.code==2000){
+           if(res.code==200){
              that.block = res.data;
            }else{
              that.$toast(res.message,3000)

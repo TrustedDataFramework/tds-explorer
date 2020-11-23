@@ -267,7 +267,7 @@
           obj.per_page = val;
           obj.page = that.currentPage;
           getTransactionList(obj).then(res=> {
-            if(res.code==2000){
+            if(res.code==200){
               let that = this;
               that.totalElements = res.data.totalElements;
               that.transactionList = res.data.content;
@@ -295,7 +295,7 @@
           obj.per_page = that.pageSize;
           obj.page = val-1;
           getTransactionList(obj).then(res=> {
-            if(res.code==2000){
+            if(res.code==200){
               let that = this;
               that.totalElements = res.data.totalElements;
               that.transactionList = res.data.content;
@@ -321,7 +321,7 @@
          obj.per_page = 10
          obj.page = 0
          getTransactionList(obj).then(res=> {
-           if(res.code==2000){
+           if(res.code==200){
              let that = this;
              that.totalElements = res.data.totalElements;
              that.transactionList = res.data.content;

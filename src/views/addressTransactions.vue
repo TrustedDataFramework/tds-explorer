@@ -284,7 +284,7 @@
          obj.per_page = 10;
          obj.page = 0;
          getTransactionByFrom(obj).then(res=> {
-           if(res.code==2000){
+           if(res.code==200){
              that.totalElements = res.data.totalElements;
              that.blockList = res.data.content;
              that.defaultBlockList = JSON.parse(JSON.stringify(that.blockList))
@@ -301,7 +301,7 @@
          obj.per_page = 10;
          obj.page = 0;
          getTransactionByTo(obj).then(res=> {
-           if(res.code==2000){
+           if(res.code==200){
              that.totalElements = res.data.totalElements;
              that.blockList = res.data.content;
              that.defaultBlockList = JSON.parse(JSON.stringify(that.blockList))
@@ -390,7 +390,7 @@
           obj.per_page = val;
           obj.page = that.currentPage;
           getTransactionByTo(obj).then(res=> {
-            if(res.code==2000){
+            if(res.code==200){
               that.totalElements = res.data.totalElements;
               that.blockList = res.data.content;
               that.defaultBlockList = JSON.parse(JSON.stringify(that.blockList))
@@ -408,7 +408,7 @@
           obj.per_page = that.pageSize;
           obj.page = val-1;
           getTransactionByTo(obj).then(res=> {
-            if(res.code==2000){
+            if(res.code==200){
               that.totalElements = res.data.totalElements;
               that.blockList = res.data.content;
               that.defaultBlockList = JSON.parse(JSON.stringify(that.blockList))

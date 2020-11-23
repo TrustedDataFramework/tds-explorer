@@ -163,7 +163,7 @@
          obj.per_page = 10
          obj.page = 0
          getBlockList(obj).then(res=> {
-           if(res.code==2000){
+           if(res.code==200){
              let that = this;
              for(var i = 0;i<res.data.content.length;i++) {
                res.data.content[i].transcationSize = res.data.content[i].body.length;
@@ -240,7 +240,7 @@
             obj.per_page = val;
             obj.page = that.currentPage;
             getBlockList(obj).then(res=> {
-              if(res.code==2000){
+              if(res.code==200){
                 let that = this;
                 for(var i = 0;i<res.data.content.length;i++) {
                   res.data.content[i].transcationSize = res.data.content[i].body.length;
@@ -260,7 +260,7 @@
           obj.per_page = that.pageSize;
           obj.page = val-1;
           getBlockList(obj).then(res=> {
-            if(res.code==2000){
+            if(res.code==200){
               let that = this;
               for(var i = 0;i<res.data.content.length;i++) {
                 res.data.content[i].transcationSize = res.data.content[i].body.length;

@@ -1,6 +1,7 @@
 import axios from './http'
 import qs from 'qs'
 
+
 //获取区块列表
 var getBlockList = function(data){
   return axios.get('/get_block_list?per_page='+data.per_page+'&page='+data.page)
@@ -57,8 +58,8 @@ var getABIByAddress = function(data){
 }
 
 //地址获取binary
-var getBinaryByAddress = function(data){
-  return axios.get('/get_binary_by_address?address='+data.address)
+var getPayloadByAddress = function(data){
+  return axios.get('/get_payload_by_address?address='+data.address)
 }
 
 //地址获取智能合约源代码
@@ -66,10 +67,21 @@ var getCodeByAddress = function(data){
   return axios.get('/get_code_by_address?address='+data.address)
 }
 
+//获取节点参数
+var getRpcStat = function(data){
+  return axios.get('/stat')
+}
+
+//上传合约
+var uploadContractCode = function(data) {
+  return axios.post('/upload_contract_code?code=' + data.code + '&address=' + data.address)
+}
+
+
 
 export{
   getBlockList,getTransactionList,getTransactionByTxHash,getTransactionByFrom,getTransactionByTo,getBlockByHeight,getContractList,
-  getContractByHash,getCallContractList,getABIByAddress,getBinaryByAddress,getCodeByAddress,getBlockByHash
+  getContractByHash,getCallContractList,getABIByAddress,getPayloadByAddress,getCodeByAddress,getBlockByHash,getRpcStat,uploadContractCode
 }
 
 function getJson (data) {

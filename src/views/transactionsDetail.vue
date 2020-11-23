@@ -262,7 +262,7 @@
          let obj = {};
          obj.tx_hash = that.hash;
          getTransactionByTxHash(obj).then(res=> {
-           if(res.code==2000){
+           if(res.code==200){
              let that = this;
              that.transaction = res.data;
            }else{

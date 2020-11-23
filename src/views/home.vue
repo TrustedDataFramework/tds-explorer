@@ -51,24 +51,24 @@
                 <div class="tran-left box-flex flex-middle">
                   <div class="icon"><img src="../assets/img/icon-2-1.svg"/></div>
                   <div class="tran-params">
-                     <h2 class="font-size-1 text-secondary">TRANSACTIONS</h2>
+                     <h2 class="font-size-1 text-secondary">每天出块数量</h2>
                      <div>
                         <el-tooltip class="item" effect="dark" content="Total Transactions Counter (Update every 5 mins)" popper-class="atooltip" placement="left">
-                       <a class="text-size-1 text-link">900.49M</a>
+                       <a class="text-size-1 text-link">{{blocksPerDay}}</a>
                         </el-tooltip>
-                       <span class="small text-secondary" title="Transactions per Second" data-toggle="tooltip" data-placement="bottom">(13.7TPs)</span>
+                       <span class="small text-secondary" title="Transactions per Second" data-toggle="tooltip" data-placement="bottom"></span>
                      </div>
                   </div >
                 </div>
 
                 <div class="tran-right box-flex">
                     <div>
-                        <h2 class="font-size-1 text-secondary">MED GAS PRICE</h2>
+                        <h2 class="font-size-1 text-secondary">平均手续费</h2>
                         <div>
                           <a class="text-size-1 text-link" >
-                              25 Gwei
+                            {{averageGasPrice}}
                             </a>
-                          <span class="small text-secondary">($0.24)</span>
+                          <span class="small text-secondary"></span>
                         </div>
                     </div>
                 </div>
@@ -80,15 +80,15 @@
                 <div class="tran-left box-flex flex-middle">
                   <div class="icon"><img src="../assets/img/icon-51.svg"/></div>
                   <div class="tran-params">
-                     <h2 class="font-size-1 text-secondary">Difficulty</h2>
+                     <h2 class="font-size-1 text-secondary">当前难度值</h2>
                      <div>
                        <el-tooltip class="item" effect="dark" content="Total Transactions Counter (Update every 5 mins)" popper-class="atooltip" placement="left">
                        <a class="text-size-1 text-link">
-                         3,375.11 TH
+                         {{currentDifficulty}}
                          </a>
                        </el-tooltip>
                         <el-tooltip class="item" effect="dark" content="Transactions per Second" popper-class="atooltip" placement="bottom">
-                          <span class="small text-secondary" >(13.7TPs)</span>
+                          <span class="small text-secondary" ></span>
                         </el-tooltip>
                      </div>
                   </div >
@@ -96,11 +96,11 @@
 
                 <div class="tran-right box-flex">
                     <div>
-                        <h2 class="font-size-1 text-secondary">Hash Rate</h2>
+                        <h2 class="font-size-1 text-secondary">共识</h2>
                         <div>
                           <el-tooltip class="item" effect="dark" content="Average Hash Rate (The last 12 hours)" popper-class="atooltip" placement="bottom">
                           <a class="text-size-1 text-link" >
-                          272,817.15 (GH/s)
+                          {{consensus}}
                             </a>
                           </el-tooltip>
                         </div>
@@ -280,7 +280,8 @@
 <script>
 import comfooter from "@/components/footer";
 import comheader from "@/components/header";
-import {getBlockList,getTransactionList} from '@/API/api';
+import {getBlockList,getTransactionList,getRpcStat} from '@/API/api';
+import axios from 'axios'
 export default {
 
   data() {
@@ -300,6 +301,10 @@ export default {
           time: "27 secs ago",
         },
       ],
+      blocksPerDay:'',
+      averageGasPrice:'',
+      currentDifficulty:'',
+      consensus:''
     };
   },
   components: {
@@ -363,7 +368,7 @@ export default {
 
   mounted() {
     let that = this;
-
+    that.getRpcStat();
     that.getBlockList();
     that.getTransactionList();
   },
@@ -398,7 +403,7 @@ export default {
       obj.per_page = 10
       obj.page = 0
       getBlockList(obj).then(res=> {
-        if(res.code==2000){
+        if(res.code==200){
           let that = this;
           that.blockList = res.data.content;
           for(var i of res.data.content){
@@ -412,14 +417,31 @@ export default {
     getTransactionList(){
       let that = this;
       let obj = {};
-      obj.per_page = 1
+      obj.per_page = 10
       obj.page = 0
       getTransactionList(obj).then(res=> {
-        if(res.code==2000){
+        if(res.code==200){
           let that = this;
           that.transitionList = res.data.content;
         }else{
           that.$toast(res.message,3000)
+        }
+      })
+    },
+    getRpcStat() {
+      let that = this;
+      getRpcStat().then(res=> {
+        if (res.code == 200) {
+          that.blocksPerDay = res.data.blocksPerDay;
+          that.averageGasPrice = res.data.averageGasPrice;
+          if(res.data.currentDifficulty == ""){
+            that.currentDifficulty = 0 ;
+          }else{
+            that.currentDifficulty = res.data.currentDifficulty;
+          }
+          that.consensus = res.data.consensus;
+        } else {
+          that.$toast(res.message, 3000)
         }
       })
     }

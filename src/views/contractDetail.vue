@@ -140,7 +140,7 @@
 
                                 <a class="fun-btn copy" >
                                   <el-tooltip class="item" effect="dark" content="复制合约源码到剪贴板" popper-class="top" placement="top">
-                                    <em></em>
+                                    <em>{{code}}</em>
                                     </el-tooltip>
                                 </a>
 
@@ -220,7 +220,7 @@
    import editor from 'vue2-ace-editor'
    const tdsSDK = require("@salaku/js-sdk");
     import 'brace/ext/language_tools'
-   import {getContractByHash,getCallContractList,getABIByAddress,getBinaryByAddress} from '@/API/api';
+   import {getContractByHash,getCallContractList,getABIByAddress,getPayloadByAddress,getCodeByAddress} from '@/API/api';
    export default{
      inject: ['reload'],
      data(){
@@ -229,8 +229,6 @@
 
          sortType:0,//1升序，2降序
           CallContractList:[
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'31049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0}
-
          ],
          contract_content:'',
 
@@ -264,7 +262,8 @@
           address:'',
 
           abi:'',
-          binary:''
+          binary:'',
+          code:''
 
         }
      },
@@ -332,9 +331,9 @@
        let that = this;
         that.defaultBlockList = JSON.parse(JSON.stringify(that.CallContractList))
         that.getContractByHash();
-        that.getCallContractList();
-        that.getABIByAddress();
-        that.getBinaryByAddress();
+        //that.getCallContractList();
+        //that.getABIByAddress();
+        //that.getBinaryByAddress();
      },
      methods:{
        //智能合约源代码
@@ -392,7 +391,7 @@
          let obj = {};
          obj.hash = hash;
          getContractByHash(obj).then(res=> {
-           if(res.code==2000){
+           if(res.code==200){
              let that = this;
              that.$root.address = res.data.address;
              that.amount = res.data.amount;
@@ -402,19 +401,23 @@
              that.to = res.data.to;
              that.tx_hash = res.data.tx_hash;
              that.created_at = res.data.created_at;
+             that.getCallContractList(that.address);
+             that.getABIByAddress(that.address);
+             that.getPayloadByAddress(that.address);
+             that.getCodeByAddress(that.address);
            }else{
              that.$toast(res.message,3000)
            }
          })
        },
-       getCallContractList(){
+       getCallContractList(address){
          let that = this;
          let obj = {}
-         obj.address = that.$root.address;
+         obj.address = address;
          obj.per_page = that.pageSize;
          obj.page = that.currentPage;
          getCallContractList(obj).then(res=> {
-           if(res.code==2000){
+           if(res.code==200){
              let that = this;
              that.totalElements = res.data.totalElements;
              that.CallContractList = res.data.content;
@@ -423,13 +426,12 @@
            }
          })
        },
-       getABIByAddress(){
+       getABIByAddress(address){
          let that = this;
          let obj = {}
-         obj.address = that.$root.address;
+         obj.address = address;
          getABIByAddress(obj).then(res=> {
-           if(res.code==2000){
-             let that = this;
+           if(res.code==200){
              res.data.abi = JSON.stringify(res.data.abi);
              that.abi = res.data.abi;
            }else{
@@ -437,14 +439,25 @@
            }
          })
        },
-       getBinaryByAddress(){
+       getPayloadByAddress(address){
          let that = this;
          let obj = {}
-         obj.address = that.$root.address;
-         getBinaryByAddress(obj).then(res=> {
-           if(res.code==2000){
-             let that = this;
+         obj.address = address;
+         getPayloadByAddress(obj).then(res=> {
+           if(res.code==200){
              that.binary = res.data;
+           }else{
+             that.$toast(res.message,3000)
+           }
+         })
+       },
+       getCodeByAddress(address){
+         let that = this;
+         let obj = {}
+         obj.address = address;
+         getCodeByAddress(obj).then(res=> {
+           if(res.code==200){
+             that.code = res.data;
            }else{
              that.$toast(res.message,3000)
            }
