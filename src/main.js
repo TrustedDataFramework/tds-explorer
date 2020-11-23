@@ -10,6 +10,9 @@ import 'bootstrap/dist/js/bootstrap.min'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import VueClipboard from 'vue-clipboard2'
+
+import toastRegistry from './components/toast/index'
+Vue.use(toastRegistry)
 Vue.use(VueClipboard)
 Vue.use(ElementUI);
 
