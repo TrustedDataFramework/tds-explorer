@@ -37,7 +37,7 @@
                          <td>
                            <div class="d-hash">
                              <el-tooltip class="item" effect="dark" :content="item.address" popper-class="atooltip" placement="bottom">
-                               <a class="line1" >{{item.address}}</a>
+                               <span class="line1" >{{item.address}}</span>
                              </el-tooltip>
                            </div>
                          </td>
