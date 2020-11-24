@@ -95,8 +95,6 @@
          tabindex:4,
          sortType:0,//1升序，2降序
           contractList:[
-           {hash:'179b8ddf22d2c7f3a86b6f33ffef0cc05b6958d03299f599ffb54b9e1c6f0157',nonce:'31049',created_at:'2020-11-16T05:36:29.000+0000',from:'0xb2de23a3d3ae9fc31af7267a046f1f2bb396dc5b',to:'0x35269977f0a9f687b3368a04ae61d735a91ffd5f',amount:'20',fee:0}
-
          ],
          defaultBlockList:[],
          totalElements:10, //总条数

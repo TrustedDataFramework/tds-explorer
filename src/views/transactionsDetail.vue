@@ -245,11 +245,11 @@
         that.$nextTick(() => {
           $('[data-toggle="tooltip"]').tooltip();
         });
-       if(this.$route.params.hash == undefined || this.$route.params.hash ==  "undefined"
-       || this.$route.params.hash == null || this.$route.params.hash == "null"){
-         that.hash = this.$route.query.hash
+       if(that.$route.params.hash == undefined || that.$route.params.hash ==  "undefined"
+       || that.$route.params.hash == null || that.$route.params.hash == "null"){
+         that.hash = that.$route.query.hash
        }else{
-         that.hash = this.$route.params.hash;
+         that.hash = that.$route.params.hash;
        }
         that.getTransactionDetail();
      },
@@ -260,7 +260,7 @@
        getTransactionDetail(){
          let that = this;
          let obj = {};
-         obj.tx_hash = that.hash;
+         obj.hash = that.hash;
          getTransactionByTxHash(obj).then(res=> {
            if(res.code==200){
              let that = this;

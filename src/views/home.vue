@@ -18,6 +18,7 @@
 <!--                <option selected="" value="1">Addresses</option>-->
                 <option selected="" value="0">Txn Hash</option>
                 <option value="1">Block</option>
+                <option value="2">Addresses</option>
               </select>
               <!-- End Select -->
             </div>
@@ -54,7 +55,7 @@
                      <h2 class="font-size-1 text-secondary">每天出块数量</h2>
                      <div>
                         <el-tooltip class="item" effect="dark" content="Total Transactions Counter (Update every 5 mins)" popper-class="atooltip" placement="left">
-                       <a class="text-size-1 text-link">{{blocksPerDay}}</a>
+                       <span class="text-size-1 text-link">{{blocksPerDay}}</span>
                         </el-tooltip>
                        <span class="small text-secondary" title="Transactions per Second" data-toggle="tooltip" data-placement="bottom"></span>
                      </div>
@@ -65,9 +66,9 @@
                     <div>
                         <h2 class="font-size-1 text-secondary">平均手续费</h2>
                         <div>
-                          <a class="text-size-1 text-link" >
+                          <span class="text-size-1 text-link" >
                             {{averageGasPrice}}
-                            </a>
+                            </span>
                           <span class="small text-secondary"></span>
                         </div>
                     </div>
@@ -83,9 +84,9 @@
                      <h2 class="font-size-1 text-secondary">当前难度值</h2>
                      <div>
                        <el-tooltip class="item" effect="dark" content="Total Transactions Counter (Update every 5 mins)" popper-class="atooltip" placement="left">
-                       <a class="text-size-1 text-link">
+                       <span class="text-size-1 text-link">
                          {{currentDifficulty}}
-                         </a>
+                         </span>
                        </el-tooltip>
                         <el-tooltip class="item" effect="dark" content="Transactions per Second" popper-class="atooltip" placement="bottom">
                           <span class="small text-secondary" ></span>
@@ -99,9 +100,9 @@
                         <h2 class="font-size-1 text-secondary">共识</h2>
                         <div>
                           <el-tooltip class="item" effect="dark" content="Average Hash Rate (The last 12 hours)" popper-class="atooltip" placement="bottom">
-                          <a class="text-size-1 text-link" >
+                          <span class="text-size-1 text-link" >
                           {{consensus}}
-                            </a>
+                            </span>
                           </el-tooltip>
                         </div>
                     </div>
@@ -133,7 +134,7 @@
                           <div class="btn-icon btn-soft-secondary">Bk</div>
                           <div class="blockInfo">
                             <p class="b-color-active">
-                              <a>{{ item.height }}</a>
+                              <span>{{ item.height }}</span>
                             </p>
                             <p class="b-time text-secondary text-nowrap">
                               {{ item.time }}
@@ -143,7 +144,7 @@
                         <!--手机端显示的样式-->
                         <div class="media-body">
                           <span class="d-inline-block d-sm-none">Block</span>
-                          <a class="b-color-active">{{ item.height }}</a>
+                          <span class="b-color-active">{{ item.height }}</span>
                           <span class="b-time text-secondary text-nowrap">{{ item.time }}</span>
                         </div>
                       </div>
@@ -151,31 +152,31 @@
                         <div class="blockInfo blockInfo-1">
                           <div class="b-address">
                             <span class="color-default b-miner" ><!--Miner--></span >
-                            <span class="b-color-active b-height p-hash line1" >{{ item.hash }}</span >
+                            <span class="b-color-active p-hash line1" >{{ item.hash }}</span >
                           </div>
                           <div class="b-txns">
                             <!--事务数为0的时候显示下面的span-->
-                            <a
+                            <span
                               class="b-color-active txns color-default"
                               data-toggle="tooltip"
                               data-placement="top"
                               title="Transactions in this Block"
-                              >{{ item.transcationSize }} txns</a
+                              >{{ item.transcationSize }} txns</span
                             >
                             <!--<span class="color-default no-txn">0 txn</span>-->
                             <span class="b-time text-secondary text-nowrap">{{ item.created_at | timefilters}}</span>
                           </div>
                         </div>
-                        <div class="fr b-num text-secondary">
-                          <span
-                            class="s-amount"
-                            data-toggle="tooltip"
-                            title=""
-                            data-original-title="Block Reward"
-                          >
-                            {{ item.amount }}WDC
-                          </span>
-                        </div>
+<!--                        <div class="fr b-num text-secondary">-->
+<!--                          <span-->
+<!--                            class="s-amount"-->
+<!--                            data-toggle="tooltip"-->
+<!--                            title=""-->
+<!--                            data-original-title="Block Reward"-->
+<!--                          >-->
+<!--                            {{ item.amount }}WDC-->
+<!--                          </span>-->
+<!--                        </div>-->
                       </div>
                     </div>
                     <hr class="hr-space" v-if="index != blockList.length - 1" />
@@ -211,7 +212,7 @@
                           <div class="btn-icon btn-soft-secondary">Tx</div>
                           <div class="blockInfo">
                             <p class="b-color-active line1 t-hash">
-                              <a>{{ item.hash }}</a>
+                              <span>{{ item.hash }}</span>
                             </p>
                             <p class="b-time text-secondary text-nowrap">
                               {{ item.created_at | timefilters}}
@@ -221,9 +222,9 @@
                         <!--手机端显示的样式-->
                         <div class="media-body">
                           <span class="d-inline-block d-sm-none">Tx#</span>
-                          <a class="b-color-active t-hash line1">{{
+                          <span class="b-color-active t-hash line1">{{
                             item.hash
-                          }}</a>
+                          }}</span>
                           <span class="b-time text-secondary text-nowrap">{{
                             item.created_at | timefilters
                           }}</span>
@@ -234,14 +235,14 @@
                           <div class="b-address">
                             <span class="color-default b-miner">From</span>
                             <span
-                              class="b-color-active b-height p-hash line1"
+                              class="b-color-active p-hash line1"
                               >{{ item.from }}</span
                             >
                           </div>
                           <div class="b-txns">
                             <span class="color-default b-miner">To</span>
                             <span
-                              class="b-color-active b-height p-hash p-hash2 line1"
+                              class="b-color-active p-hash p-hash2 line1"
                               >{{ item.to }}</span
                             >
                           </div>
@@ -292,14 +293,6 @@ export default {
       blockList: [
       ],
       transitionList: [
-        {
-          hash:
-            "0x42de1d9da24bd878fa80cd9b2233966ed31568eb24ae1946f04ff5945e4454ee",
-          From: "0x35bf994c0cc6d786079a513707b88db0825184cd",
-          To: "0x644d1d0a766cb32cc9b2d29906727ca17462fe41",
-          amount: 0,
-          time: "27 secs ago",
-        },
       ],
       blocksPerDay:'',
       averageGasPrice:'',
@@ -394,6 +387,10 @@ export default {
       }else if(val == 1){
         that.$router.push({path:'/blocksDetail',query: {
             blockHash: text
+          }})
+      }else if(val == 2){
+        that.$router.push({path:'/addressTransactions',query: {
+            hash: text
           }})
       }
     },

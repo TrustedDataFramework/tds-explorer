@@ -332,7 +332,7 @@ import 'brace/ext/language_tools'
        uploadContractCode(){
          let that = this;
          let obj = {}
-         obj.code = that.exportRaw('template.txt',that.contract_content.toString());
+         obj.code = that.contract_content;
          obj.address = that.address;
          console.log(obj.code)
          uploadContractCode(obj).then(res=> {
@@ -342,15 +342,6 @@ import 'brace/ext/language_tools'
            }
          })
        },
-
-
-       exportRaw(name, data) {
-         var export_blob = new Blob([data]);
-
-         console.log(export_blob)
-         return export_blob;
-       },
-
 
         onCopy(e) {
          this.iscopyed=1

@@ -32,6 +32,14 @@ export default new Router({
       }
     },
     {
+      path: '/blockTransaction',
+      name: 'blocksTransaction',
+      component: () =>import('@/views/blockTransaction'),
+      meta:{
+        title:'区块事务列表'
+      }
+    },
+    {
       path: '/blocksDetail',
       name: 'blocksDetail',
       component: () =>import('@/views/blocksDetail'),
@@ -55,7 +63,7 @@ export default new Router({
       	title:'事务'
       }
     },
-    
+
     {
       path: '/transactionsDetail/:hash',
       name: 'transactionsDetail',

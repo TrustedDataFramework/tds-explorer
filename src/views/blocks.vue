@@ -24,13 +24,13 @@
                 	  	 <tr v-for="(item,index) in blockList" :key="index">
                 	  	 	<td><div><span class="text-pri-default"><a @click="linbkDetail(item.height)">{{item.height}}</a></span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
-                	  	 	<td><div class="d-hash"><a class="line1">{{item.transcationSize}}</a></div></td>
+                	  	 	<td><div class="d-hash"><a class="line1"  @click="linkTransactionDetail(item.height)">{{item.transcationSize}}</a></div></td>
                 	  	 	<td>
                                 <div class="d-hash">
                                      <el-tooltip class="item" effect="dark" :content="item.miner_address" popper-class="atooltip" placement="top">
 
 
-                                   <a class="line1"  >{{item.miner_address}}</a>
+                                   <span class="line1"  >{{item.miner_address}}</span>
                                    </el-tooltip>
                                 </div>
                              </td>
@@ -75,9 +75,8 @@
          tabindex:2,
          sortType:0,//1升序，2降序
          blockList:[
-           {height:'33049',size:'258',created_at:'2020-11-16T05:36:29.000+0000',miner_address:'0a4a47008077f8f5c8d18b673ff2243735b2fad48f1af32bffe662382f73c741',all_fee:'333'}
          ],
-         totalElements:6000, //总条数
+         totalElements:10, //总条数
          pageSize:10,//默认每页条数
          currentPage:0,//当前页
          defaultBlockList:[]
@@ -155,6 +154,14 @@
             height: height
           }})
         },
+
+       //区块的事务
+       linkTransactionDetail(height){
+         let that = this;
+         that.$router.push({name:'blocksTransaction',params: {
+             height: height
+           }})
+       },
 
 
        getBlockList(){
