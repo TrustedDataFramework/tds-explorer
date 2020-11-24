@@ -32,8 +32,8 @@
                     </el-tooltip>
                   </div>
                 </td>
-                <td><div><span class="text-pri-default"><a>{{item.type}}</a></span></div></td>
-                <td><div><span class="text-pri-default"><a>{{item.nonce}}</a></span></div></td>
+                <td><div><span class="text-pri-default"><span>{{item.type}}</span></span></div></td>
+                <td><div><span class="text-pri-default"><span>{{item.nonce}}</span></span></div></td>
                 <td><div class=""><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
                 <td>
                   <div class="d-hash">
@@ -267,11 +267,11 @@
         let obj = {};
         obj.per_page = val;
         obj.page = that.currentPage;
-        getTransactionList(obj).then(res=> {
+        getBlockByHeight(obj).then(res=> {
           if(res.code==200){
             let that = this;
-            that.totalElements = res.data.totalElements;
-            that.transactionList = res.data.content;
+            that.totalElements = res.data.body.length;
+            that.transactionList = res.data.body;
             for(var i of res.data.content){
               if(i.type == 0){
                 i.type = 'coin base';
@@ -295,11 +295,11 @@
         let obj = {};
         obj.per_page = that.pageSize;
         obj.page = val-1;
-        getTransactionList(obj).then(res=> {
+        getBlockByHeight(obj).then(res=> {
           if(res.code==200){
             let that = this;
-            that.totalElements = res.data.totalElements;
-            that.transactionList = res.data.content;
+            that.totalElements = res.data.body.length;
+            that.transactionList = res.data.body;
             for(var i of res.data.content){
               if(i.type == 0){
                 i.type = 'coin base';
@@ -323,7 +323,7 @@
         getBlockByHeight(obj).then(res=> {
           if(res.code==200){
             let that = this;
-            that.totalElements = res.data.totalElements;
+            that.totalElements = res.data.body.length;
             that.transactionList = res.data.body;
             for(var i of res.data.body){
               if(i.type == 0){

@@ -19,7 +19,7 @@
                 	  	 	 <th>出块时间</th>
                 	  	 	 <th class="b-tran-num">事务数量</th>
                 	  	 	 <th>矿工地址</th>
-                	  	 	 <th>总收益</th>
+<!--                	  	 	 <th>总收益</th>-->
                 	  	 </tr>
                 	  	 <tr v-for="(item,index) in blockList" :key="index">
                 	  	 	<td><div><span class="text-pri-default"><a @click="linbkDetail(item.height)">{{item.height}}</a></span></div></td>
@@ -34,7 +34,7 @@
                                    </el-tooltip>
                                 </div>
                              </td>
-                	  	 	<td><div class=""><span class="text-pri-default">{{item.all_fee}}</span></div></td>
+<!--                	  	 	<td><div class=""><span class="text-pri-default">{{item.all_fee}}</span></div></td>-->
                 	  	 </tr>
                 	  </table>
                   </div>

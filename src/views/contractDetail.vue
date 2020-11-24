@@ -140,7 +140,7 @@
 
                                 <a class="fun-btn copy" >
                                   <el-tooltip class="item" effect="dark" content="复制合约源码到剪贴板" popper-class="top" placement="top">
-                                    <em>{{code}}</em>
+                                    <em></em>
                                     </el-tooltip>
                                 </a>
 
@@ -262,8 +262,7 @@
           address:'',
 
           abi:'',
-          binary:'',
-          code:''
+          binary:''
 
         }
      },
@@ -457,7 +456,7 @@
          obj.address = address;
          getCodeByAddress(obj).then(res=> {
            if(res.code==200){
-             that.code = res.data;
+             that.contract_content = res.data;
            }else{
              that.$toast(res.message,3000)
            }

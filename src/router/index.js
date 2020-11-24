@@ -56,7 +56,7 @@ export default new Router({
       }
     },
     {
-      path: '/addressTransactions/:from?/:to?/:type',
+      path: '/addressTransactions/:from?/:to?/:type?',
       name: 'addressTransactions',
       component: () =>import('@/views/addressTransactions'),
       meta:{
@@ -65,7 +65,7 @@ export default new Router({
     },
 
     {
-      path: '/transactionsDetail/:hash',
+      path: '/transactionsDetail/:hash?',
       name: 'transactionsDetail',
       component: () =>import('@/views/transactionsDetail'),
       meta:{

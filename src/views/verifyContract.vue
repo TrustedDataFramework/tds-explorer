@@ -235,6 +235,8 @@ import 'brace/ext/language_tools'
          // 编译合约得到字节码
          contract.abi = tdsSDK.compileABI(code);
          that.ABIByContract = contract.abi;
+         console.log(that.ABIByContract)
+         console.log(that.ABIByBack)
          //校验两个ABI是否相同
          var jsonLength1 = 0;
          var jsonLength2 = 0;
@@ -333,10 +335,10 @@ import 'brace/ext/language_tools'
          let that = this;
          let obj = {}
          obj.code = that.contract_content;
-         obj.address = that.address;
-         console.log(obj.code)
-         uploadContractCode(obj).then(res=> {
+         obj.address = that.address
+         uploadContractCode(JSON.stringify(obj)).then(res=> {
            if(res.code==200){
+             return '200'
            }else{
              that.$toast(res.message,3000)
            }

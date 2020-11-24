@@ -12,6 +12,7 @@
                 	  <table class="com-table">
                 	  	 <tr>
                 	  	 	 <th>事务hash</th>
+                         <th>合约地址</th>
                 	  	 	 <th class="tab-th">区块高度
                 	  	 	 	  <span class="caret-wrapper" :class="{'ascending':sortType==1,'descending':sortType==2}">
                 	  	 	 	  	<i class="sort-caret ascending" @click="sort(1)"></i>
@@ -33,12 +34,19 @@
                               </el-tooltip>
                             </div>
                         </td>
-                	  	 	<td><div><span class="text-pri-default"><a>{{item.height}}</a></span></div></td>
+                         <td>
+                           <div class="d-hash">
+                             <el-tooltip class="item" effect="dark" :content="item.address" popper-class="atooltip" placement="bottom">
+                               <a class="line1" >{{item.address}}</a>
+                             </el-tooltip>
+                           </div>
+                         </td>
+                	  	 	<td><div><span class="text-pri-default"><span>{{item.height}}</span></span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
                 	  	 	<td>
                             <div class="d-hash">
                              <el-tooltip class="item" effect="dark" :content="item.from" popper-class="atooltip" placement="bottom">
-                                <a class="line1"  @click="linkAddressTransaction">{{item.from}}</a>
+                                <a class="line1" >{{item.from}}</a>
                               </el-tooltip>
                             </div>
                         </td>

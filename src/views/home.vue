@@ -5,7 +5,7 @@
       <div class="container">
 
         <div class="home-banner">
-          <h1 class="h4 text-white mb-3">The TDS Blockchain Explorer</h1>
+          <h1 class="h4 text-white mb-3">TDS 浏览器</h1>
 
           <div class="input-group input-group-shadow">
             <div class="input-group-prepend d-none d-md-block">
@@ -16,9 +16,9 @@
               >
 <!--                <option selected="" value="0">All Filters</option>-->
 <!--                <option selected="" value="1">Addresses</option>-->
-                <option selected="" value="0">Txn Hash</option>
-                <option value="1">Block</option>
-                <option value="2">Addresses</option>
+                <option selected="" value="0">事务哈希</option>
+                <option value="1">区块哈希</option>
+                <option value="2">地址</option>
               </select>
               <!-- End Select -->
             </div>
@@ -29,7 +29,7 @@
               class="form-control searchautocomplete ui-autocomplete-input list-unstyled py-3 mb-0"
               autocomplete="off"
               spellcheck="false"
-              placeholder="Search by Txn Hash / Block"
+              placeholder="事务哈希/区块哈希/地址"
               aria-describedby="button-header-search"
               name="q"
               maxlength="68"
@@ -62,12 +62,24 @@
                   </div >
                 </div>
 
+              <div class="tran-right box-flex">
+                <div>
+                  <h2 class="font-size-1 text-secondary">事务总数</h2>
+                  <div>
+                          <span class="text-size-1 text-link" >
+                            {{totalTransaction}}
+                            </span>
+                    <span class="small text-secondary"></span>
+                  </div>
+                </div>
+              </div>
+
                 <div class="tran-right box-flex">
                     <div>
-                        <h2 class="font-size-1 text-secondary">平均手续费</h2>
+                        <h2 class="font-size-1 text-secondary">平均出块时间</h2>
                         <div>
                           <span class="text-size-1 text-link" >
-                            {{averageGasPrice}}
+                            {{averageBlockInterval}}s
                             </span>
                           <span class="small text-secondary"></span>
                         </div>
@@ -95,9 +107,22 @@
                   </div >
                 </div>
 
+              <div class="tran-right box-flex">
+                <div>
+                  <h2 class="font-size-1 text-secondary">事务池大小</h2>
+                  <div>
+                    <el-tooltip class="item" effect="dark" content="Average Hash Rate (The last 12 hours)" popper-class="atooltip" placement="bottom">
+                          <span class="text-size-1 text-link" >
+                          {{transactionSize}}
+                            </span>
+                    </el-tooltip>
+                  </div>
+                </div>
+              </div>
+
                 <div class="tran-right box-flex">
                     <div>
-                        <h2 class="font-size-1 text-secondary">共识</h2>
+                        <h2 class="font-size-1 text-secondary">共识机制</h2>
                         <div>
                           <el-tooltip class="item" effect="dark" content="Average Hash Rate (The last 12 hours)" popper-class="atooltip" placement="bottom">
                           <span class="text-size-1 text-link" >
@@ -281,7 +306,7 @@
 <script>
 import comfooter from "@/components/footer";
 import comheader from "@/components/header";
-import {getBlockList,getTransactionList,getRpcStat} from '@/API/api';
+import {getBlockList,getTransactionList,getRpcStat,getTransactionSize} from '@/API/api';
 import axios from 'axios'
 export default {
 
@@ -295,9 +320,11 @@ export default {
       transitionList: [
       ],
       blocksPerDay:'',
-      averageGasPrice:'',
+      averageBlockInterval:'',
       currentDifficulty:'',
-      consensus:''
+      consensus:'',
+      totalTransaction:'',
+      transactionSize:''
     };
   },
   components: {
@@ -364,6 +391,7 @@ export default {
     that.getRpcStat();
     that.getBlockList();
     that.getTransactionList();
+    that.getTransactionSize();
   },
   methods:{
     linkBlock(){
@@ -420,6 +448,7 @@ export default {
         if(res.code==200){
           let that = this;
           that.transitionList = res.data.content;
+          that.totalTransaction = res.data.totalElements;
         }else{
           that.$toast(res.message,3000)
         }
@@ -430,7 +459,7 @@ export default {
       getRpcStat().then(res=> {
         if (res.code == 200) {
           that.blocksPerDay = res.data.blocksPerDay;
-          that.averageGasPrice = res.data.averageGasPrice;
+          that.averageBlockInterval = res.data.averageBlockInterval;
           if(res.data.currentDifficulty == ""){
             that.currentDifficulty = 0 ;
           }else{
@@ -441,7 +470,17 @@ export default {
           that.$toast(res.message, 3000)
         }
       })
-    }
+    },
+    getTransactionSize() {
+      let that = this;
+      getTransactionSize().then(res=> {
+        if (res.code == 200) {
+          that.transactionSize = res.data.total;
+        } else {
+          that.$toast(res.message, 3000)
+        }
+      })
+    },
   }
 };
 </script>

@@ -44,8 +44,9 @@
 						>
 <!--						<option selected="" value="0">All Filters</option>-->
 <!--						<option value="1">Addresses</option>-->
-						<option value="0">Txn Hash</option>
-						<option value="1">Block</option>
+						<option selected="" value="0">事务哈希</option>
+						<option value="1">区块哈希</option>
+              <option value="2">地址</option>
 						</select>
 						<!-- End Select -->
 					</div>
@@ -56,7 +57,7 @@
 						class="form-control searchautocomplete ui-autocomplete-input list-unstyled py-3 mb-0"
 						autocomplete="off"
 						spellcheck="false"
-						placeholder="Search by Txn Hash / Block"
+						placeholder="事务哈希/区块哈希/地址"
 						aria-describedby="button-header-search"
 						name="q"
 						maxlength="68"
@@ -120,6 +121,10 @@ export default {
       }else if(val == 1){
         that.$router.push({path:'/blocksDetail',query: {
             blockHash: text
+          }})
+      }else if(val == 2){
+        that.$router.push({path:'/addressTransactions',query: {
+            hash: text
           }})
       }
     }

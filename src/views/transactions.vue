@@ -32,13 +32,13 @@
                               </el-tooltip>
                             </div>
                         </td>
-                         <td><div><span class="text-pri-default"><a>{{item.type}}</a></span></div></td>
-                	  	 	<td><div><span class="text-pri-default"><a>{{item.nonce}}</a></span></div></td>
+                         <td><div><span class="text-pri-default"><span>{{item.type}}</span></span></div></td>
+                	  	 	<td><div><span class="text-pri-default"><span>{{item.nonce}}</span></span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
                 	  	 	<td>
                             <div class="d-hash">
                              <el-tooltip class="item" effect="dark" :content="item.from" popper-class="atooltip" placement="bottom">
-                                <a class="line1"  @click="linkAddressTransactionByFrom(item.from)">{{item.from}}</a>
+                                <a class="line1"  @click="linkAddressTransactionByAddress(item.from)">{{item.from}}</a>
                               </el-tooltip>
                             </div>
                         </td>
@@ -48,7 +48,7 @@
                 	  	 	<td>
                            <div class="d-hash">
                                <el-tooltip class="item" effect="dark" :content="item.to" popper-class="atooltip" placement="top">
-                                 <a class="line1" @click="linkAddressTransactionByTo(item.to)">{{item.to}}</a>
+                                 <a class="line1" @click="linkAddressTransactionByAddress(item.to)">{{item.to}}</a>
                                </el-tooltip>
                             </div>
                         </td>
@@ -174,19 +174,12 @@
            }})
       },
       //跳转到地址事务
-      linkAddressTransactionByFrom(from){
+      linkAddressTransactionByAddress(address){
          let that = this;
-        console.log(123456)
          that.$router.push({name:'addressTransactions',params: {
-             from:from,type:1
+             address:address
            }})
       },
-       linkAddressTransactionByTo(to){
-         let that = this;
-         that.$router.push({name:'addressTransactions',params: {
-            to:to,type:2
-           }})
-       },
       //区块排序
 
       sort(num){

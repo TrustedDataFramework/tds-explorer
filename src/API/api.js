@@ -7,7 +7,7 @@ var getBlockList = function(data){
   return axios.get('/get_block_list?per_page='+data.per_page+'&page='+data.page)
 }
 
-//获取交易列表
+//获取事务列表
 var getTransactionList = function(data){
   return axios.get('/get_transaction_list?per_page='+data.per_page+'&page='+data.page)
 }
@@ -74,7 +74,7 @@ var getRpcStat = function(data){
 
 //上传合约
 var uploadContractCode = function(data) {
-  return axios.post('/upload_contract_code',{address:data.address,code:data.code})
+  return axios.post('/upload_contract_code',data,{headers: {'Content-Type': 'application/json'}})
 }
 
 //根据地址获取事务列表
@@ -82,13 +82,16 @@ var getTransactionListByAddress= function(data) {
   return axios.get('/get_transaction_list_by_address?address='+data.address+'&per_page='+data.per_page+'&page='+data.page)
 }
 
-
+//根据事务池大小
+var getTransactionSize= function() {
+  return axios.get('/pool')
+}
 
 
 export{
   getBlockList,getTransactionList,getTransactionByTxHash,getTransactionByFrom,getTransactionByTo,getBlockByHeight,getContractList,
   getContractByHash,getCallContractList,getABIByAddress,getPayloadByAddress,getCodeByAddress,getBlockByHash,getRpcStat,uploadContractCode,
-  getTransactionListByAddress
+  getTransactionListByAddress,getTransactionSize
 }
 
 function getJson (data) {

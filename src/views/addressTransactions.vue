@@ -133,7 +133,7 @@
    import QRCode from "qrcode2";
    import comheader from "@/components/header";
    import comfooter from "@/components/footer";
-   import {getTransactionByFrom,getTransactionByTo,getTransactionListByAddress} from '@/API/api';
+   import {getTransactionListByAddress} from '@/API/api';
    export default{
      inject: ['reload'],
      data(){
@@ -227,33 +227,16 @@
         that.$nextTick(() => {
           $('[data-toggle="tooltip"]').tooltip();
         });
-       let from = this.$route.params.from;
-       let to = this.$route.params.to;
        let hash = this.$route.query.hash;
        if(hash != undefined){
          that.address = hash;
          that.getTransactionListByAddress();
        }else {
-         // console.log('from'+from)
-         // console.log('to'+to)
-         // console.log('type'+this.$route.params.type)
-         if (this.$route.params.type == 1) {
-           if (from == undefined && to != undefined) {
-             that.address = to;
-             that.getTransactionByFrom();
-           } else {
-             that.address = from;
-             that.getTransactionByFrom();
-           }
-         } else if (this.$route.params.type == 2) {
-           if (from == undefined && to != undefined) {
-             that.address = to;
-             that.getTransactionByTo();
-           } else {
-             that.address = from;
-             that.getTransactionByTo();
-           }
+         let address = this.$route.params.address;
+         if(address != undefined){
+           that.address = address;
          }
+         that.getTransactionListByAddress();
        }
      },
      methods:{
@@ -288,7 +271,7 @@
          obj.address = that.address;
          obj.per_page = 10;
          obj.page = 0;
-         getTransactionByFrom(obj).then(res=> {
+         getTransactionListByAddress(obj).then(res=> {
            if(res.code==200){
              that.totalElements = res.data.totalElements;
              that.blockList = res.data.content;
@@ -299,39 +282,39 @@
          })
        },
 
-       getTransactionByFrom(){
-         let that = this;
-         let obj = {}
-         obj.from = that.address;
-         obj.per_page = 10;
-         obj.page = 0;
-         getTransactionByFrom(obj).then(res=> {
-           if(res.code==200){
-             that.totalElements = res.data.totalElements;
-             that.blockList = res.data.content;
-             that.defaultBlockList = JSON.parse(JSON.stringify(that.blockList))
-           }else{
-             that.$toast(res.message,3000)
-           }
-         })
-       },
-
-       getTransactionByTo(){
-         let that = this;
-         let obj = {}
-         obj.to = that.address;
-         obj.per_page = 10;
-         obj.page = 0;
-         getTransactionByTo(obj).then(res=> {
-           if(res.code==200){
-             that.totalElements = res.data.totalElements;
-             that.blockList = res.data.content;
-             that.defaultBlockList = JSON.parse(JSON.stringify(that.blockList))
-           }else{
-             that.$toast(res.message,3000)
-           }
-         })
-       },
+       // getTransactionByFrom(){
+       //   let that = this;
+       //   let obj = {}
+       //   obj.from = that.address;
+       //   obj.per_page = 10;
+       //   obj.page = 0;
+       //   getTransactionByFrom(obj).then(res=> {
+       //     if(res.code==200){
+       //       that.totalElements = res.data.totalElements;
+       //       that.blockList = res.data.content;
+       //       that.defaultBlockList = JSON.parse(JSON.stringify(that.blockList))
+       //     }else{
+       //       that.$toast(res.message,3000)
+       //     }
+       //   })
+       // },
+       //
+       // getTransactionByTo(){
+       //   let that = this;
+       //   let obj = {}
+       //   obj.to = that.address;
+       //   obj.per_page = 10;
+       //   obj.page = 0;
+       //   getTransactionByTo(obj).then(res=> {
+       //     if(res.code==200){
+       //       that.totalElements = res.data.totalElements;
+       //       that.blockList = res.data.content;
+       //       that.defaultBlockList = JSON.parse(JSON.stringify(that.blockList))
+       //     }else{
+       //       that.$toast(res.message,3000)
+       //     }
+       //   })
+       // },
 
       sort(num){
 
@@ -411,7 +394,7 @@
           obj.to = that.address;
           obj.per_page = val;
           obj.page = that.currentPage;
-          getTransactionByTo(obj).then(res=> {
+          getTransactionListByAddress(obj).then(res=> {
             if(res.code==200){
               that.totalElements = res.data.totalElements;
               that.blockList = res.data.content;
@@ -429,7 +412,7 @@
           obj.to = that.address;
           obj.per_page = that.pageSize;
           obj.page = val-1;
-          getTransactionByTo(obj).then(res=> {
+          getTransactionListByAddress(obj).then(res=> {
             if(res.code==200){
               that.totalElements = res.data.totalElements;
               that.blockList = res.data.content;
