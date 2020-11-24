@@ -46,7 +46,7 @@
                 	  	 	<td>
                             <div class="d-hash">
                              <el-tooltip class="item" effect="dark" :content="item.from" popper-class="atooltip" placement="bottom">
-                                <a class="line1" >{{item.from}}</a>
+                                <a class="line1" @click="linkAddressTransaction(item.from)">{{item.from}}</a>
                               </el-tooltip>
                             </div>
                         </td>
@@ -56,7 +56,7 @@
                 	  	 	<td>
                            <div class="d-hash">
                                <el-tooltip class="item" effect="dark" :content="item.to" popper-class="atooltip" placement="top">
-                                 <a class="line1" @click="linkAddressTransaction">{{item.to}}</a>
+                                 <a class="line1" @click="linkAddressTransaction(item.to)">{{item.to}}</a>
                                </el-tooltip>
                             </div>
                         </td>
@@ -188,9 +188,11 @@
         }})
       },
       //跳转到地址事务
-      linkAddressTransaction(){
+      linkAddressTransaction(address){
          let that = this;
-         that.$router.push({name:'addressTransactions'})
+         that.$router.push({name:'addressTransactions',params: {
+             address: address
+           }})
       },
       //区块排序
 

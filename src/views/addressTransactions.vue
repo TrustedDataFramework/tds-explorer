@@ -22,10 +22,9 @@
                       </span>
                   </div>
 
-<!--                  <div class="col-md-3 col-balance">-->
-<!--                      余额：0-->
-<!--                  </div>-->
-
+                  <div class="col-md-3 col-balance">
+                    余额：<span>{{amount}}</span>
+                  </div>
 
                 </div>
 
@@ -133,7 +132,7 @@
    import QRCode from "qrcode2";
    import comheader from "@/components/header";
    import comfooter from "@/components/footer";
-   import {getTransactionListByAddress} from '@/API/api';
+   import {getTransactionListByAddress,getNonceAndBalance} from '@/API/api';
    export default{
      inject: ['reload'],
      data(){
@@ -149,7 +148,7 @@
 
          address:'',//传过来的地址赋值
          copySecs:0,
-
+          amount:''
         }
      },
      components: {
@@ -238,6 +237,7 @@
          }
          that.getTransactionListByAddress();
        }
+       that.getNonceAndBalance();
      },
      methods:{
       //跳转到事务详情
@@ -282,22 +282,16 @@
          })
        },
 
-       // getTransactionByFrom(){
-       //   let that = this;
-       //   let obj = {}
-       //   obj.from = that.address;
-       //   obj.per_page = 10;
-       //   obj.page = 0;
-       //   getTransactionByFrom(obj).then(res=> {
-       //     if(res.code==200){
-       //       that.totalElements = res.data.totalElements;
-       //       that.blockList = res.data.content;
-       //       that.defaultBlockList = JSON.parse(JSON.stringify(that.blockList))
-       //     }else{
-       //       that.$toast(res.message,3000)
-       //     }
-       //   })
-       // },
+       getNonceAndBalance(){
+         let that = this;
+         getNonceAndBalance(that.address).then(res=> {
+           if(res.code==200){
+             that.amount = res.data.balance
+           }else{
+             that.$toast(res.message,3000)
+           }
+         })
+       },
        //
        // getTransactionByTo(){
        //   let that = this;

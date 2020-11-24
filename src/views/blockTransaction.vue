@@ -38,7 +38,7 @@
                 <td>
                   <div class="d-hash">
                     <el-tooltip class="item" effect="dark" :content="item.from" popper-class="atooltip" placement="bottom">
-                      <a class="line1"  @click="linkAddressTransactionByFrom(item.from)">{{item.from}}</a>
+                      <a class="line1"  @click="linkAddressTransactionByAddress(item.from)">{{item.from}}</a>
                     </el-tooltip>
                   </div>
                 </td>
@@ -48,7 +48,7 @@
                 <td>
                   <div class="d-hash">
                     <el-tooltip class="item" effect="dark" :content="item.to" popper-class="atooltip" placement="top">
-                      <a class="line1" @click="linkAddressTransactionByTo(item.to)">{{item.to}}</a>
+                      <a class="line1" @click="linkAddressTransactionByAddress(item.to)">{{item.to}}</a>
                     </el-tooltip>
                   </div>
                 </td>
@@ -175,17 +175,10 @@
           }})
       },
       //跳转到地址事务
-      linkAddressTransactionByFrom(from){
-        let that = this;
-        console.log(123456)
-        that.$router.push({name:'addressTransactions',params: {
-            from:from,type:1
-          }})
-      },
-      linkAddressTransactionByTo(to){
+      linkAddressTransactionByAddress(address){
         let that = this;
         that.$router.push({name:'addressTransactions',params: {
-            to:to,type:2
+            address:address
           }})
       },
       //区块排序

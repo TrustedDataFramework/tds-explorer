@@ -20,7 +20,7 @@
                              v-clipboard:copy="transaction.hash"
                              v-clipboard:success="onCopy"
                              v-clipboard:error="onError"
-                             title="将Txn哈希复制到剪贴板"
+                             title="将事务哈希复制到剪贴板"
                              data-toggle="tooltip" data-placement="top">已复制</a>
                            </div>
                        </div>

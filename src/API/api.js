@@ -87,11 +87,17 @@ var getTransactionSize= function() {
   return axios.get('/pool')
 }
 
+//地址获取nonce和余额
+var getNonceAndBalance= function(address) {
+  return axios.get('/account/'+address)
+}
+
+
 
 export{
   getBlockList,getTransactionList,getTransactionByTxHash,getTransactionByFrom,getTransactionByTo,getBlockByHeight,getContractList,
   getContractByHash,getCallContractList,getABIByAddress,getPayloadByAddress,getCodeByAddress,getBlockByHash,getRpcStat,uploadContractCode,
-  getTransactionListByAddress,getTransactionSize
+  getTransactionListByAddress,getTransactionSize,getNonceAndBalance
 }
 
 function getJson (data) {

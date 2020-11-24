@@ -37,7 +37,7 @@
                              v-clipboard:copy="block.hash"
                              v-clipboard:success="onCopy"
                              v-clipboard:error="onError"
-                             title="区块hash复制到剪贴板"
+                             title="区块哈希复制到剪贴板"
                              data-toggle="tooltip" data-placement="top">已复制</a>
                            </div>
                        </div>
@@ -84,7 +84,7 @@
                        </div>
                        <div class="col-md-9 detail-col">
                            <div class="key-value">
-                             <a>{{block.miner_address}}</a>
+                             <a @click="linkAddress(block.miner_address)">{{block.miner_address}}</a>
                            </div>
                        </div>
                    </div>
@@ -260,6 +260,13 @@
         onError(e) {
           //alert('复制失败')
         },
+       //区块详情
+       linkAddress(address){
+         let that = this;
+         that.$router.push({name:'addressTransactions',params: {
+             address: address
+           }})
+       },
        getBlockByHeight() {
          let that = this;
          let obj = {}

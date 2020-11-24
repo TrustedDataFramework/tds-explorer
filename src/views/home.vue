@@ -279,7 +279,7 @@
                             title=""
                             data-original-title="amount"
                           >
-                            {{ item.amount }}WDC
+                            {{ item.amount }}
                           </span>
                         </div>
                       </div>
