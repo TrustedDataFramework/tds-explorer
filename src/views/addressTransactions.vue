@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="page-tilte pb-3 pt-3 row">
 
-                  <div class="col-md-9">
+                  <div class="col-md-6">
 
                       地址
                       <span class="title-address text-secondary">{{address}}</span>
@@ -21,7 +21,9 @@
                         <em data-target="#myModal" data-toggle="modal"  @click="qrcodeScan();"></em>
                       </span>
                   </div>
-
+                  <div class="col-md-3 col-balance">
+                      nonce：<span>{{amount}}</span>
+                  </div>
                   <div class="col-md-3 col-balance">
                     余额：<span>{{amount}}</span>
                   </div>
