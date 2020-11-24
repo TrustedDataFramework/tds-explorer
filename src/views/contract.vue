@@ -9,7 +9,7 @@
                 </div>
                 <div  class=" tab-css tab-box ">
                 	<div class="com-table-box">
-                	  <table class="com-table">
+                	  <table class="com-table contract-table">
                 	  	 <tr>
                 	  	 	 <th>事务hash</th>
                          <th>合约地址</th>
@@ -42,7 +42,7 @@
                            </div>
                          </td>
                 	  	 	<td><div><span class="text-pri-default"><span>{{item.height}}</span></span></div></td>
-                	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
+                	  	 	<td><div class=""><span class="text-pri-default text-nowrap">{{item.created_at | timefilters}}</span></div></td>
                 	  	 	<td>
                             <div class="d-hash">
                              <el-tooltip class="item" effect="dark" :content="item.from" popper-class="atooltip" placement="bottom">
