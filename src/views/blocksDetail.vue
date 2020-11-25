@@ -143,6 +143,32 @@
                            </div>
                        </div>
                    </div>
+                  <hr class="hr-space">
+                  <div class="row">
+                    <div class="col-md-3 detail-col">
+                      <div class="lab">
+                        <span class="mess-icon"></span><span>version:</span>
+                      </div>
+                    </div>
+                    <div class="col-md-9 detail-col">
+                      <div class="key-value key-value-line1 line1">
+                        <span :title="block.payload" data-toggle="tooltip" data-placement="top">{{block.version}}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <hr class="hr-space">
+                  <div class="row">
+                    <div class="col-md-3 detail-col">
+                      <div class="lab">
+                        <span class="mess-icon"></span><span>hash_prev:</span>
+                      </div>
+                    </div>
+                    <div class="col-md-9 detail-col">
+                      <div class="key-value key-value-line1 line1">
+                        <span :title="block.payload" data-toggle="tooltip" data-placement="top">{{block.hash_prev}}</span>
+                      </div>
+                    </div>
+                  </div>
 
                 </div>
             </div>

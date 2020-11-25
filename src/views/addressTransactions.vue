@@ -58,12 +58,12 @@
                                </el-tooltip>
                             </div>
                         </td>
-                	  	 	<td><div><span class="text-pri-default"><a>{{item.nonce}}</a></span></div></td>
+                	  	 	<td><div><span class="text-pri-default"><span>{{item.nonce}}</span></span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
                 	  	 	<td>
                             <div class="d-hash">
                               <el-tooltip class="item" effect="dark" :content="item.from" popper-class="atooltip" placement="top">
-                              <a class="line1" v-if="item.from==address">{{item.from}}</a>
+                              <span class="line1" v-if="item.from==address">{{item.from}}</span>
                               <span class="line1"  v-if="item.from!=address">{{item.from}}</span>
                               </el-tooltip>
                             </div>
@@ -74,7 +74,7 @@
                 	  	 	<td>
                            <div class="d-hash">
                              <el-tooltip class="item" effect="dark" :content="item.to" popper-class="atooltip" placement="top">
-                               <a class="line1"  v-if="item.to==address">{{item.to}}</a>
+                               <span class="line1"  v-if="item.to==address">{{item.to}}</span>
                               <span class="line1 text-pri-default"  v-if="item.to!=address">{{item.to}}</span>
                              </el-tooltip>
                             </div>
@@ -392,7 +392,7 @@
           let that = this;
           that.pageSize = val;
           let obj = {};
-          obj.to = that.address;
+          obj.address = that.address;
           obj.per_page = val;
           obj.page = that.currentPage;
           getTransactionListByAddress(obj).then(res=> {
@@ -410,7 +410,7 @@
           let that = this;
           that.currentPage = val;
           let obj = {};
-          obj.to = that.address;
+          obj.address = that.address;
           obj.per_page = that.pageSize;
           obj.page = val-1;
           getTransactionListByAddress(obj).then(res=> {

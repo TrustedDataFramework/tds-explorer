@@ -61,7 +61,7 @@
 
                      <div class="btnbox">
                         <input type="button" class="btn btn-primary fun-btn" value="验证并发布" @click="verifyContract"/>
-                        <input type="button" class="btn btn-reset fun-btn" value="重置"/>
+                        <input type="button" class="btn btn-reset fun-btn" value="重置" @click="reset"/>
 
                      </div>
 
@@ -145,7 +145,6 @@ import 'brace/ext/language_tools'
        changeAddress(){
          let that = this;
          let address = that.address
-         alert(address)
          that.getABIByAddress(address);
          that.getPayloadByAddress(address);
        },
@@ -229,18 +228,25 @@ import 'brace/ext/language_tools'
 
        getSdk(){
          let that = this;
+         let num = 0;
          //获取js.sdk ABI
          let code = that.contract_content;
          const contract = new tdsSDK.Contract();
-         // 编译合约得到字节码
-         contract.abi = tdsSDK.compileABI(code);
+         try {
+           // 编译合约得到字节码
+           contract.abi = tdsSDK.compileABI(code);
+         }catch(err){
+           that.$toast("请检查代码",3000)
+           return;
+         }
          that.ABIByContract = contract.abi;
          console.log(that.ABIByContract)
          console.log(that.ABIByBack)
+         console.log(JSON.stringify(that.ABIByContract))
+         console.log(JSON.stringify(that.ABIByBack))
          //校验两个ABI是否相同
          var jsonLength1 = 0;
          var jsonLength2 = 0;
-         var num = 0;
          for (var item1 in that.ABIByBack) {
            jsonLength1++;
          }
@@ -248,13 +254,10 @@ import 'brace/ext/language_tools'
            jsonLength2++;
          }
          if(jsonLength1 != jsonLength2) {
-           that.$toast("校验失败",3000)
+           that.$toast("校验失败",3000);
+           return;
          }else{
-           for(var i = 0;i<that.ABIByBack.length;i++){
-             let input11;
-             let input12;
-             let output11;
-             let output12;
+           for(let i = 0;i<that.ABIByBack.length;i++){
              let inputsLength1 = 0;
              let inputsLength2 = 0;
              let outputsLength1 = 0;
@@ -268,29 +271,37 @@ import 'brace/ext/language_tools'
                let type2 = that.ABIByContract[j].type;
                let inputs2 = that.ABIByContract[j].inputs;
                let outputs2 = that.ABIByContract[j].outputs;
-               if(name1 == name2 && type1 == type2){
-                 for (var input1 in inputs1) {
-                   input11 = input1.inputs;
+               if(type1 == type2 && name1 == name2){
+                 for (let j = 0;j< inputs1.length;j++) {
                    inputsLength1++;
                  }
-                 for (var input2 in inputs2) {
-                   input12 = input2.inputs;
+                 for (let j = 0;j< inputs2.length;j++) {
                    inputsLength2++;
                  }
-                 for (var output1 in outputs1) {
-                   output11 = input2.outputs;
+                 for (let j = 0;j< outputs1.length;j++) {
                    outputsLength1++;
                  }
-                 for (var output2 in outputs2) {
-                   output12 = input2.outputs;
+                 for (let j = 0;j< outputs2.length;j++) {
                    outputsLength2++;
                  }
                  if(inputsLength1 == inputsLength2) {
                     if(inputsLength1 > 0){
-                      if(input1.type == input2.type){
+                      let typeNum = 0;
+                      for(let k = 0;k<inputs1.length;k++){
+                        if(inputs1[k].type == inputs2[k].type){
+                          typeNum++;
+                        }
+                      }
+                      if(typeNum == inputsLength1){
                           if(outputsLength1 == outputsLength2){
                             if(outputsLength1 > 0){
-                              if(output1.type == output2.type){
+                              let outNum = 0;
+                              for(let l = 0;l<outputs1.length;l++){
+                                if(outputs1[l].type == outputs2[l].type){
+                                  outNum++;
+                                }
+                              }
+                              if(outNum == outputsLength1){
                                 num++;
                                 break;
                               }
@@ -305,44 +316,45 @@ import 'brace/ext/language_tools'
                       break;
                     }
                  }
-
-
                }
-               num++;
-               break;
              }
            }
-
-         }
-          if(num == jsonLength1){
-            this.$confirm('验证成功，是否上传代码?', '确认', {
-              confirmButtonText: '确定',
-              cancelButtonText: '取消',
-              type: 'warning'
-            }).then(() => {
-              that.uploadContractCode();
-            }).catch(() => {
-              /*
-              this.$message({
-                type: 'info',
-                message: '已取消删除'
-              });
-              */
-            });
-          }
-       },
-       uploadContractCode(){
-         let that = this;
-         let obj = {}
-         obj.code = that.contract_content;
-         obj.address = that.address
-         uploadContractCode(JSON.stringify(obj)).then(res=> {
-           if(res.code==200){
-             return '200'
+           if(num == jsonLength1){
+             this.$confirm('验证成功，是否上传代码?', '确认', {
+               confirmButtonText: '确定',
+               cancelButtonText: '取消',
+               type: 'warning'
+             }).then(() => {
+               let obj = {}
+               obj.code = that.contract_content;
+               obj.address = that.address
+               uploadContractCode(JSON.stringify(obj)).then(res=> {
+                 if(res.code==200){
+                   this.$message({
+                     type: 'success',
+                     message: '上传成功'
+                   });
+                 }else{
+                   that.$toast(res.message,3000)
+                 }
+               })
+             }).catch(() => {
+               this.$message({
+                 type: 'info',
+                 message: '已取消上传'
+               });
+             });
            }else{
-             that.$toast(res.message,3000)
+             this.$confirm('校验失败,请检查代码或地址')
            }
-         })
+         }
+       },
+       reset(){
+         let that = this;
+         that.contract_content = ''
+         that.address = ''
+         that.binary = ''
+         that.ABI = ''
        },
 
         onCopy(e) {

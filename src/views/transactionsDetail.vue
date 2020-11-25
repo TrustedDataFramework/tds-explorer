@@ -116,26 +116,12 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                                <span class="mess-icon"></span><span>fee:</span>
+                                <span class="mess-icon"></span><span>type:</span>
                             </div>
                        </div>
                        <div class="col-md-9 detail-col">
                            <div class="key-value">
-                             {{transaction.fee}}
-                           </div>
-                       </div>
-                   </div>
-
-                  <hr class="hr-space">
-                   <div class="row">
-                       <div class="col-md-3 detail-col">
-                            <div class="lab">
-                                <span class="mess-icon"></span><span>gas_limit:</span>
-                            </div>
-                       </div>
-                       <div class="col-md-9 detail-col">
-                           <div class="key-value">
-                              {{transaction.gas_limit}}
+                              {{transaction.type}}
                            </div>
                        </div>
                    </div>
@@ -143,15 +129,41 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                                <span class="mess-icon"></span><span>gas_price:</span>
+                                <span class="mess-icon"></span><span>version:</span>
                             </div>
                        </div>
                        <div class="col-md-9 detail-col">
                            <div class="key-value">
-                             {{transaction.gas_price}}
+                             {{transaction.version}}
                            </div>
                        </div>
                    </div>
+                  <hr class="hr-space">
+                  <div class="row">
+                    <div class="col-md-3 detail-col">
+                      <div class="lab">
+                        <span class="mess-icon"></span><span>signature:</span>
+                      </div>
+                    </div>
+                    <div class="col-md-9 detail-col">
+                      <div class="key-value">
+                        {{transaction.signature}}
+                      </div>
+                    </div>
+                  </div>
+                  <hr class="hr-space">
+                  <div class="row">
+                    <div class="col-md-3 detail-col">
+                      <div class="lab">
+                        <span class="mess-icon"></span><span>size:</span>
+                      </div>
+                    </div>
+                    <div class="col-md-9 detail-col">
+                      <div class="key-value">
+                        {{transaction.size}}
+                      </div>
+                    </div>
+                  </div>
 
                 </div>
             </div>
@@ -271,6 +283,15 @@
          getTransactionByTxHash(obj).then(res=> {
            if(res.code==200){
              let that = this;
+             if(res.data.type == 0){
+               res.data.type = 'coin base';
+             }else if(res.data.type == 1){
+               res.data.type = '转账';
+             }else if(res.data.type == 2){
+               res.data.type = '合约部署';
+             }else if(res.data.type == 3){
+               res.data.type = '合约调用';
+             }
              that.transaction = res.data;
            }else{
              that.$toast(res.message,3000)
