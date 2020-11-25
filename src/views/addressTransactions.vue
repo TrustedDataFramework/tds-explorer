@@ -22,7 +22,7 @@
                       </span>
                   </div>
                   <div class="col-md-3 col-balance">
-                      nonce：<span>{{amount}}</span>
+                      nonce：<span>{{nonce}}</span>
                   </div>
                   <div class="col-md-3 col-balance">
                     余额：<span>{{amount}}</span>
@@ -150,7 +150,8 @@
 
          address:'',//传过来的地址赋值
          copySecs:0,
-          amount:''
+          amount:'',
+          nonce:''
         }
      },
      components: {
@@ -236,7 +237,10 @@
          let address = this.$route.params.address;
          if(address != undefined){
            that.address = address;
+         }else{
+           that.address = sessionStorage.getItem('address');
          }
+         sessionStorage.setItem('address',that.address);
          that.getTransactionListByAddress();
        }
        that.getNonceAndBalance();
@@ -289,6 +293,7 @@
          getNonceAndBalance(that.address).then(res=> {
            if(res.code==200){
              that.amount = res.data.balance
+             that.nonce = res.data.nonce
            }else{
              that.$toast(res.message,3000)
            }

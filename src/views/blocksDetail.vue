@@ -241,7 +241,11 @@
          if(this.$route.query.blockHash != undefined){
            that.getBlockByHash();
          }else {
-           that.height = this.$route.query.height;
+           if(this.$route.query.height == undefined ){
+             that.height = sessionStorage.getItem('height');
+           }else {
+             that.height = this.$route.query.height;
+           }
            that.getBlockByHeight();
          }
        }else{
@@ -252,6 +256,7 @@
            that.getBlockByHeight();
          }
        }
+       sessionStorage.setItem('height',that.height);
      },
      methods:{
         onCopy(e) {

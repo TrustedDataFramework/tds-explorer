@@ -7,7 +7,7 @@
                 <div class="page-tilte pb-3 pt-3 row">
 
                   <div class="col-md-12">
-                      地址
+                      合约地址
                       <span class="title-address text-secondary">{{address}}</span>
 
                   </div>

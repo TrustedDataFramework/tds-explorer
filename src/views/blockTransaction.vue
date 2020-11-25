@@ -163,7 +163,13 @@
     },
     mounted(){
       let that = this;
-      let height = this.$route.params.height;
+      let height;
+      if(this.$route.params.height == undefined){
+         height = sessionStorage.getItem('height');
+      }else{
+        height = this.$route.params.height;
+      }
+      sessionStorage.setItem('height',height)
       that.getBlockByHeight(height);
     },
     methods:{

@@ -65,7 +65,7 @@
                        </div>
                        <div class="col-md-9 detail-col">
                            <div class="key-value">
-                             <a>{{transaction.from}}</a>
+                             <a @click="linkAddress(transaction.from)">{{transaction.from}}</a>
                            </div>
                        </div>
                    </div>
@@ -93,7 +93,7 @@
                        </div>
                        <div class="col-md-9 detail-col">
                            <div class="key-value">
-                             <a>{{transaction.to}}</a>
+                             <a @click="linkAddress(transaction.to)">{{transaction.to}}</a>
                            </div>
                        </div>
                    </div>
@@ -257,6 +257,13 @@
         onCopy(e) {
          this.iscopyed=1
         },
+       //区块详情
+       linkAddress(address){
+         let that = this;
+         that.$router.push({name:'addressTransactions',params: {
+             address: address
+           }})
+       },
        getTransactionDetail(){
          let that = this;
          let obj = {};
