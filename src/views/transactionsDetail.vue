@@ -113,6 +113,20 @@
                    </div>
 
                   <hr class="hr-space">
+                  <div class="row">
+                    <div class="col-md-3 detail-col">
+                      <div class="lab">
+                        <span class="mess-icon"></span><span>gas_price:</span>
+                      </div>
+                    </div>
+                    <div class="col-md-9 detail-col">
+                      <div class="key-value">
+                        {{transaction.gas_price}}
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr class="hr-space">
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
