@@ -22,10 +22,10 @@
                       </span>
                   </div>
                   <div class="col-md-3 col-balance">
-                      nonce：<span>{{nonce}}</span>
+                      当前nonce：<span>{{nonce}}</span>
                   </div>
                   <div class="col-md-3 col-balance">
-                    余额：<span>{{amount}}</span>
+                    当前余额：<span>{{amount}}</span>
                   </div>
 
                 </div>
