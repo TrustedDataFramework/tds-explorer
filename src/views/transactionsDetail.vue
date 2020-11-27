@@ -105,7 +105,7 @@
                                 <span class="mess-icon"></span><span>payload:</span>
                             </div>
                        </div>
-                       <div class="col-md-9 detail-col">
+                       <div class="col-md-9 detail-col"  >
                            <div class="key-value">
                              {{transaction.payload}}
                            </div>
@@ -174,7 +174,7 @@
                     </div>
                     <div class="col-md-9 detail-col">
                       <div class="key-value">
-                        {{transaction.size}}
+                        {{transaction.size}} bytes
                       </div>
                     </div>
                   </div>

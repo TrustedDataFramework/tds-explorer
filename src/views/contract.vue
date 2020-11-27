@@ -21,8 +21,8 @@
                 	  	 	 </th>
                 	  	 	 <th>出块时间</th>
                 	  	 	 <th>from</th>
-                         <th></th>
-                	  	 	 <th>to</th>
+<!--                         <th></th>-->
+<!--                	  	 	 <th>to</th>-->
                 	  	 	 <th>amount</th>
                 	  	 	 <th>手续费</th>
                 	  	 </tr>
@@ -50,16 +50,16 @@
                               </el-tooltip>
                             </div>
                         </td>
-                        <td>
-                          <span class="btn btn-xs btn-icon btn-soft-success rounded-circle"><i class="arrow-right"></i></span>
-                        </td>
-                	  	 	<td>
-                           <div class="d-hash">
-                               <el-tooltip class="item" effect="dark" :content="item.to" popper-class="atooltip" placement="top">
-                                 <a class="line1" @click="linkAddressTransaction(item.to)">{{item.to}}</a>
-                               </el-tooltip>
-                            </div>
-                        </td>
+<!--                        <td>-->
+<!--                          <span class="btn btn-xs btn-icon btn-soft-success rounded-circle"><i class="arrow-right"></i></span>-->
+<!--                        </td>-->
+<!--                	  	 	<td>-->
+<!--                           <div class="d-hash">-->
+<!--                               <el-tooltip class="item" effect="dark" :content="item.to" popper-class="atooltip" placement="top">-->
+<!--                                 <a class="line1" @click="linkAddressTransaction(item.to)">{{item.to}}</a>-->
+<!--                               </el-tooltip>-->
+<!--                            </div>-->
+<!--                        </td>-->
 
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.amount}}</span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.fee}}</span></div></td>

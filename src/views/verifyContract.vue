@@ -236,7 +236,7 @@ import 'brace/ext/language_tools'
            // 编译合约得到字节码
            contract.abi = tdsSDK.compileABI(code);
          }catch(err){
-           that.$toast("请检查代码",3000)
+           that.$toast("校验失败,请检查代码或地址",3000)
            return;
          }
          that.ABIByContract = contract.abi;
@@ -254,7 +254,7 @@ import 'brace/ext/language_tools'
            jsonLength2++;
          }
          if(jsonLength1 != jsonLength2) {
-           that.$toast("校验失败",3000);
+           that.$toast("校验失败,请检查代码或地址",3000);
            return;
          }else{
            for(let i = 0;i<that.ABIByBack.length;i++){

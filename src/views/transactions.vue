@@ -263,18 +263,17 @@
             if(res.code==200){
               let that = this;
               that.totalElements = res.data.totalElements;
-              that.transactionList = res.data.content;
-              for(var i of res.data.content){
-                    if(i.type == 0){
-                        i.type = 'coin base';
-                    }else if(i.type == 1){
-                        i.type = '转账';
-                    }else if(i.type == 2){
-                      i.type = '合约部署';
-                    }else if(i.type == 3){
-                      i.type = '合约调用';
-                    }
+              for(let i = 0;i<res.data.content.length;i++){
+                if(res.data.content[i].type == 1){
+                  res.data.content[i].type = '转账';
+                }else if(res.data.content[i].type == 2){
+                  res.data.content[i].type = '合约部署';
+                }else if(res.data.content[i].type == 3){
+                  res.data.content[i].type = '合约调用';
+                }
               }
+              that.transactionList = res.data.content;
+              that.defaultBlockList = JSON.parse(JSON.stringify(res.data.content))
             }else{
               that.$toast(res.message,3000)
             }
@@ -291,18 +290,17 @@
             if(res.code==200){
               let that = this;
               that.totalElements = res.data.totalElements;
-              that.transactionList = res.data.content;
-              for(var i of res.data.content){
-                if(i.type == 0){
-                  i.type = 'coin base';
-                }else if(i.type == 1){
-                  i.type = '转账';
-                }else if(i.type == 2){
-                  i.type = '合约部署';
-                }else if(i.type == 3){
-                  i.type = '合约调用';
+              for(let i = 0;i<res.data.content.length;i++){
+                if(res.data.content[i].type == 1){
+                  res.data.content[i].type = '转账';
+                }else if(res.data.content[i].type == 2){
+                  res.data.content[i].type = '合约部署';
+                }else if(res.data.content[i].type == 3){
+                  res.data.content[i].type = '合约调用';
                 }
               }
+              that.transactionList = res.data.content;
+              that.defaultBlockList = JSON.parse(JSON.stringify(res.data.content))
             }else{
               that.$toast(res.message,3000)
             }
@@ -317,19 +315,17 @@
            if(res.code==200){
              let that = this;
              that.totalElements = res.data.totalElements;
-             that.transactionList = res.data.content;
-             for(var i of res.data.content){
-               if(i.type == 0){
-                 i.type = 'coin base';
-               }else if(i.type == 1){
-                 i.type = '转账';
-               }else if(i.type == 2){
-                 i.type = '合约部署';
-               }else if(i.type == 3){
-                 i.type = '合约调用';
+             for(let i = 0;i<res.data.content.length;i++){
+               if(res.data.content[i].type == 1){
+                 res.data.content[i].type = '转账';
+               }else if(res.data.content[i].type == 2){
+                 res.data.content[i].type = '合约部署';
+               }else if(res.data.content[i].type == 3){
+                 res.data.content[i].type = '合约调用';
                }
              }
-             that.defaultBlockList = JSON.parse(JSON.stringify(that.transactionList))
+             that.transactionList = res.data.content;
+             that.defaultBlockList = JSON.parse(JSON.stringify(res.data.content))
            }else{
              that.$toast(res.message,3000)
            }

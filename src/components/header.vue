@@ -9,7 +9,7 @@
 				<img
 				id="logo-header"
 				width="160"
-				src="../assets/img/logo-ether.png"
+				src="src/assets/img/tdsLogo.png"
 				alt="TDS Logo"
 				/>
 			</a>

@@ -72,12 +72,12 @@
                         <table class="com-table">
                           <tr>
                             <th>事务hash</th>
-                            <th class="tab-th">区块高度
-                                <span class="caret-wrapper" :class="{'ascending':sortType==1,'descending':sortType==2}">
-                                  <i class="sort-caret ascending" @click="sort(1)"></i>
-                                  <i class="sort-caret descending" @click="sort(2)"></i>
-                                </span>
-                            </th>
+<!--                            <th class="tab-th">区块高度-->
+<!--                                <span class="caret-wrapper" :class="{'ascending':sortType==1,'descending':sortType==2}">-->
+<!--                                  <i class="sort-caret ascending" @click="sort(1)"></i>-->
+<!--                                  <i class="sort-caret descending" @click="sort(2)"></i>-->
+<!--                                </span>-->
+<!--                            </th>-->
                             <th>出块时间</th>
                             <th>from</th>
                             <th></th>
@@ -93,7 +93,7 @@
                                   </el-tooltip>
                                 </div>
                             </td>
-                            <td><div><span class="text-pri-default"><a>{{item.nonce}}</a></span></div></td>
+<!--                            <td><div><span class="text-pri-default"><a>{{item.nonce}}</a></span></div></td>-->
                             <td><div class="no_wrap"><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
                             <td>
                                 <div class="d-hash">
@@ -329,7 +329,13 @@
      mounted(){
        let that = this;
         that.defaultBlockList = JSON.parse(JSON.stringify(that.CallContractList))
-        that.getContractByHash();
+        let hash = this.$route.params.hash;
+        if(hash != undefined){
+          that.getContractByHash(hash);
+        }else{
+          that.getContractByHash(sessionStorage.getItem("hash"));
+        }
+        sessionStorage.setItem('hash',hash);
         //that.getCallContractList();
         //that.getABIByAddress();
         //that.getBinaryByAddress();
@@ -385,8 +391,7 @@
         onCopy(e) {
          this.iscopyed=1
         },
-       getContractByHash(){
-         let hash = this.$route.params.hash;
+       getContractByHash(hash){
          let obj = {};
          obj.hash = hash;
          getContractByHash(obj).then(res=> {

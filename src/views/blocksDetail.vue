@@ -69,7 +69,7 @@
                        </div>
                        <div class="col-md-9 detail-col">
                            <div class="key-value">
-                             {{block.size}}
+                             {{block.size}} bytes
                            </div>
                        </div>
                    </div>
