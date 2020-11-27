@@ -98,20 +98,6 @@
                        </div>
                    </div>
 
-                   <hr class="hr-space">
-                   <div class="row">
-                       <div class="col-md-3 detail-col">
-                            <div class="lab">
-                                <span class="mess-icon"></span><span>payload:</span>
-                            </div>
-                       </div>
-                       <div class="col-md-9 detail-col"  >
-                           <div class="key-value">
-                             {{transaction.payload}}
-                           </div>
-                       </div>
-                   </div>
-
                   <hr class="hr-space">
                   <div class="row">
                     <div class="col-md-3 detail-col">
@@ -175,6 +161,20 @@
                     <div class="col-md-9 detail-col">
                       <div class="key-value">
                         {{transaction.size}} bytes
+                      </div>
+                    </div>
+                  </div>
+
+                  <hr class="hr-space">
+                  <div class="row">
+                    <div class="col-md-3 detail-col">
+                      <div class="lab">
+                        <span class="mess-icon"></span><span>payload:</span>
+                      </div>
+                    </div>
+                    <div class="col-md-9 detail-col"  >
+                      <div class="key-value">
+                        {{transaction.payload}}
                       </div>
                     </div>
                   </div>
@@ -300,11 +300,11 @@
              if(res.data.type == 0){
                res.data.type = 'coin base';
              }else if(res.data.type == 1){
-               res.data.type = '转账';
+               res.data.type = 'transfer';
              }else if(res.data.type == 2){
-               res.data.type = '合约部署';
+               res.data.type = 'deploy contract';
              }else if(res.data.type == 3){
-               res.data.type = '合约调用';
+               res.data.type = 'call contract';
              }
              that.transaction = res.data;
            }else{

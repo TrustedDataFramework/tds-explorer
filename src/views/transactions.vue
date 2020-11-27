@@ -9,7 +9,7 @@
                 	<div class="com-table-box">
                 	  <table class="com-table">
                 	  	 <tr>
-                	  	 	 <th>事务hash</th>
+                	  	 	 <th>事务哈希</th>
                          <th>事务类型</th>
                 	  	 	 <th class="tab-th">区块高度
                 	  	 	 	  <span class="caret-wrapper" :class="{'ascending':sortType==1,'descending':sortType==2}">
@@ -18,10 +18,10 @@
                 	  	 	 	  </span>
                 	  	 	 </th>
                 	  	 	 <th>出块时间</th>
-                	  	 	 <th>from</th>
+                	  	 	 <th>发送者地址</th>
                          <th></th>
-                	  	 	 <th>to</th>
-                	  	 	 <th>amount</th>
+                	  	 	 <th>接收者地址</th>
+                	  	 	 <th>金额</th>
                 	  	 	 <th>手续费</th>
                 	  	 </tr>
                 	  	 <tr v-for="(item,index) in transactionList" :key="index">
@@ -33,7 +33,7 @@
                             </div>
                         </td>
                          <td><div><span class="text-pri-default"><span>{{item.type}}</span></span></div></td>
-                	  	 	<td><div><span class="text-pri-default"><span>{{item.nonce}}</span></span></div></td>
+                	  	 	<td><div><span class="text-pri-default"><span>{{item.block_height}}</span></span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
                 	  	 	<td>
                             <div class="d-hash">
@@ -265,11 +265,11 @@
               that.totalElements = res.data.totalElements;
               for(let i = 0;i<res.data.content.length;i++){
                 if(res.data.content[i].type == 1){
-                  res.data.content[i].type = '转账';
+                  res.data.content[i].type = 'transfer';
                 }else if(res.data.content[i].type == 2){
-                  res.data.content[i].type = '合约部署';
+                  res.data.content[i].type = 'deploy contract';
                 }else if(res.data.content[i].type == 3){
-                  res.data.content[i].type = '合约调用';
+                  res.data.content[i].type = 'call contract';
                 }
               }
               that.transactionList = res.data.content;

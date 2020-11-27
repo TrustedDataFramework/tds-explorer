@@ -9,7 +9,7 @@
 				<img
 				id="logo-header"
 				width="160"
-				src="src/assets/img/tdsLogo.png"
+				src="../assets/img/tdslogo.png"
 				alt="TDS Logo"
 				/>
 			</a>

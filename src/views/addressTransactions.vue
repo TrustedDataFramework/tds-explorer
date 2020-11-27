@@ -58,7 +58,7 @@
                                </el-tooltip>
                             </div>
                         </td>
-                	  	 	<td><div><span class="text-pri-default"><span>{{item.nonce}}</span></span></div></td>
+                	  	 	<td><div><span class="text-pri-default"><span>{{item.block_height}}</span></span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
                 	  	 	<td>
                             <div class="d-hash">
