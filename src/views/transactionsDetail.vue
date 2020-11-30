@@ -9,7 +9,10 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                                <span class="mess-icon"></span><span>hash:</span>
+                              <el-tooltip class="item" effect="dark" content="A TxHash or transaction hash is a unique 66 characters identifier that is generated whenever a transaction is executed." popper-class="atooltip" placement="bottom">
+                                <span class="mess-icon"></span>
+                              </el-tooltip>
+                              <span>hash:</span>
 
                             </div>
                        </div>

@@ -11,7 +11,10 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                                <span class="mess-icon"></span><span>height:</span>
+                              <el-tooltip class="item" effect="dark" content="Also known as Block Number. The block height, which indicates the length of the blockchain, increases after the addition of the new block." popper-class="atooltip" placement="bottom">
+                                  <span class="mess-icon"></span>
+                              </el-tooltip>
+                              <span>height:</span>
                             </div>
                        </div>
                        <div class="col-md-9 detail-col">
@@ -26,7 +29,10 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                                <span class="mess-icon"></span><span>hash:</span>
+                              <el-tooltip class="item" effect="dark" content="The hash of the block header of the current block." popper-class="atooltip" placement="bottom">
+                                <span class="mess-icon"></span>
+                              </el-tooltip>
+                              <span>hash:</span>
 
                             </div>
                        </div>
@@ -49,7 +55,10 @@
                   <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                                <span class="mess-icon"></span><span>created_at:</span>
+                              <el-tooltip class="item" effect="dark" content="The date and time at which a block is mined." popper-class="atooltip" placement="bottom">
+                                <span class="mess-icon"></span>
+                              </el-tooltip>
+                              <span>created_at:</span>
                             </div>
                        </div>
                        <div class="col-md-9 detail-col">
@@ -64,7 +73,10 @@
                   <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                                <span class="mess-icon"></span><span>size:</span>
+                              <el-tooltip class="item" effect="dark" content="The block size is actually determined by the block's gas limit." popper-class="atooltip" placement="bottom">
+                                <span class="mess-icon"></span>
+                              </el-tooltip>
+                              <span>size:</span>
                             </div>
                        </div>
                        <div class="col-md-9 detail-col">
@@ -79,7 +91,10 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                                <span class="mess-icon"></span><span>miner_address:</span>
+                              <el-tooltip class="item" effect="dark" content="Miner who successfully include the block onto the blockchain." popper-class="atooltip" placement="bottom">
+                                <span class="mess-icon"></span>
+                              </el-tooltip>
+                              <span>miner_address:</span>
                             </div>
                        </div>
                        <div class="col-md-9 detail-col">
@@ -93,7 +108,10 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                                <span class="mess-icon"></span><span>all_fee:</span>
+                              <el-tooltip class="item" effect="dark" content="Miner who successfully include the block onto the blockchain." popper-class="atooltip" placement="bottom">
+                                <span class="mess-icon"></span>
+                              </el-tooltip>
+                              <span>all_fee:</span>
                             </div>
                        </div>
                        <div class="col-md-9 detail-col">
@@ -107,7 +125,10 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                                <span class="mess-icon"></span><span>state_root:</span>
+                              <el-tooltip class="item" effect="dark" content="The root of the state trie" popper-class="atooltip" placement="bottom">
+                                <span class="mess-icon"></span>
+                              </el-tooltip>
+                              <span>state_root:</span>
                             </div>
                        </div>
                        <div class="col-md-9 detail-col">
@@ -121,7 +142,10 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                                <span class="mess-icon"></span><span>transaction_root:</span>
+                              <el-tooltip class="item" effect="dark" content="Miner who successfully include the block onto the blockchain." popper-class="atooltip" placement="bottom">
+                                <span class="mess-icon"></span>
+                              </el-tooltip>
+                              <span>transaction_root:</span>
                             </div>
                        </div>
                        <div class="col-md-9 detail-col">
@@ -134,7 +158,10 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                                <span class="mess-icon"></span><span>payload:</span>
+                              <el-tooltip class="item" effect="dark" content="Miner who successfully include the block onto the blockchain." popper-class="atooltip" placement="bottom">
+                                <span class="mess-icon"></span>
+                              </el-tooltip>
+                              <span>payload:</span>
                             </div>
                        </div>
                        <div class="col-md-9 detail-col">
@@ -147,7 +174,10 @@
                   <div class="row">
                     <div class="col-md-3 detail-col">
                       <div class="lab">
-                        <span class="mess-icon"></span><span>version:</span>
+                        <el-tooltip class="item" effect="dark" content="Miner who successfully include the block onto the blockchain." popper-class="atooltip" placement="bottom">
+                          <span class="mess-icon"></span>
+                        </el-tooltip>
+                        <span>version:</span>
                       </div>
                     </div>
                     <div class="col-md-9 detail-col">
@@ -160,7 +190,10 @@
                   <div class="row">
                     <div class="col-md-3 detail-col">
                       <div class="lab">
-                        <span class="mess-icon"></span><span>hash_prev:</span>
+                        <el-tooltip class="item" effect="dark" content="The hash of the block from which this block was generated, also known as its parent block." popper-class="atooltip" placement="bottom">
+                          <span class="mess-icon"></span>
+                        </el-tooltip>
+                        <span>hash_prev:</span>
                       </div>
                     </div>
                     <div class="col-md-9 detail-col">
