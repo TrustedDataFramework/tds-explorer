@@ -9,7 +9,7 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                              <el-tooltip class="item" effect="dark" content="A TxHash or transaction hash is a unique 66 characters identifier that is generated whenever a transaction is executed." popper-class="atooltip" placement="bottom">
+                              <el-tooltip class="item" effect="dark" content="是把任意长度的输入通过散列算法变换成固定长度的输出,该输出就是哈希值." popper-class="atooltip" placement="bottom">
                                 <span class="mess-icon"></span>
                               </el-tooltip>
                               <span>hash:</span>
@@ -34,7 +34,10 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                                <span class="mess-icon"></span><span>nonce:</span>
+                              <el-tooltip class="item" effect="dark" content="一个只被使用一次的任意或非重复的随机数值." popper-class="atooltip" placement="bottom">
+                                <span class="mess-icon"></span>
+                              </el-tooltip>
+                              <span>nonce:</span>
                             </div>
                        </div>
                        <div class="col-md-9 detail-col">
@@ -49,7 +52,10 @@
                   <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                                <span class="mess-icon"></span><span>created_at:</span>
+                              <el-tooltip class="item" effect="dark" content="事务创建的时间." popper-class="atooltip" placement="bottom">
+                                <span class="mess-icon"></span>
+                              </el-tooltip>
+                              <span>created_at:</span>
                             </div>
                        </div>
                        <div class="col-md-9 detail-col">
@@ -63,7 +69,10 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                                <span class="mess-icon"></span><span>from:</span>
+                              <el-tooltip class="item" effect="dark" content="事务的发送方." popper-class="atooltip" placement="bottom">
+                                <span class="mess-icon"></span>
+                              </el-tooltip>
+                              <span>from:</span>
                             </div>
                        </div>
                        <div class="col-md-9 detail-col">
@@ -77,7 +86,10 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                                <span class="mess-icon"></span><span>amount:</span>
+                              <el-tooltip class="item" effect="dark" content="单笔事务的金额." popper-class="atooltip" placement="bottom">
+                                <span class="mess-icon"></span>
+                              </el-tooltip>
+                              <span>amount:</span>
                             </div>
                        </div>
                        <div class="col-md-9 detail-col">
@@ -91,7 +103,10 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                                <span class="mess-icon"></span><span>to:</span>
+                              <el-tooltip class="item" effect="dark" content="事务的接收方." popper-class="atooltip" placement="bottom">
+                                <span class="mess-icon"></span>
+                              </el-tooltip>
+                              <span>to:</span>
                             </div>
                        </div>
                        <div class="col-md-9 detail-col">
@@ -105,7 +120,10 @@
                   <div class="row">
                     <div class="col-md-3 detail-col">
                       <div class="lab">
-                        <span class="mess-icon"></span><span>gas_price:</span>
+                        <el-tooltip class="item" effect="dark" content="单笔交易需要的资金.GasPrice越高,提交的交易将越快被接纳." popper-class="atooltip" placement="bottom">
+                          <span class="mess-icon"></span>
+                        </el-tooltip>
+                        <span>gas_price:</span>
                       </div>
                     </div>
                     <div class="col-md-9 detail-col">
@@ -119,7 +137,10 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                                <span class="mess-icon"></span><span>type:</span>
+                              <el-tooltip class="item" effect="dark" content="事务类型." popper-class="atooltip" placement="bottom">
+                                <span class="mess-icon"></span>
+                              </el-tooltip>
+                              <span>type:</span>
                             </div>
                        </div>
                        <div class="col-md-9 detail-col">
@@ -132,7 +153,10 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                                <span class="mess-icon"></span><span>version:</span>
+                              <el-tooltip class="item" effect="dark" content="事务的版本号." popper-class="atooltip" placement="bottom">
+                                <span class="mess-icon"></span>
+                              </el-tooltip>
+                              <span>version:</span>
                             </div>
                        </div>
                        <div class="col-md-9 detail-col">
@@ -145,7 +169,10 @@
                   <div class="row">
                     <div class="col-md-3 detail-col">
                       <div class="lab">
-                        <span class="mess-icon"></span><span>signature:</span>
+                        <el-tooltip class="item" effect="dark" content="数字签名是使用了公钥加密的技术实现,只有信息的发送者才能产生的别人无法伪造的一段数字串." popper-class="atooltip" placement="bottom">
+                          <span class="mess-icon"></span>
+                        </el-tooltip>
+                        <span>signature:</span>
                       </div>
                     </div>
                     <div class="col-md-9 detail-col">
@@ -158,7 +185,10 @@
                   <div class="row">
                     <div class="col-md-3 detail-col">
                       <div class="lab">
-                        <span class="mess-icon"></span><span>size:</span>
+                        <el-tooltip class="item" effect="dark" content="事务占据的存储容量." popper-class="atooltip" placement="bottom">
+                          <span class="mess-icon"></span>
+                        </el-tooltip>
+                        <span>size:</span>
                       </div>
                     </div>
                     <div class="col-md-9 detail-col">
@@ -172,7 +202,10 @@
                   <div class="row">
                     <div class="col-md-3 detail-col">
                       <div class="lab">
-                        <span class="mess-icon"></span><span>payload:</span>
+                        <el-tooltip class="item" effect="dark" content="数据传输中对于接收者有用的实际交易信息." popper-class="atooltip" placement="bottom">
+                          <span class="mess-icon"></span>
+                        </el-tooltip>
+                        <span>payload:</span>
                       </div>
                     </div>
                     <div class="col-md-9 detail-col"  >

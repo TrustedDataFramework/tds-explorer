@@ -2,16 +2,18 @@
   <div class="footer">
   	 <div class="container">
   	   <div class="intro font-size-1">
-  	      <p class="text-white">TDS is a Block Explorer and Analytics Platform for TDS, a decentralized smart contracts platform.</p>
+  	      <p class="text-white">TDOS is a Block Explorer and Analytics Platform for TDOS, a decentralized smart contracts platform.</p>
   	   </div>
   	   <div class="footer-link">
-  	   	  <a href="mailto:service@wdc852.com">联系我们：service@wdc852.com</a>
-  	   	  <a href="https://www.wisdchain.com">友情链接：Wisdom Public Chain官网</a>
+  	   	  <a href="mailto:hermosatdos@qq.com">联系我们：hermosatdos@qq.com</a>
+  	   	  <a href="https://www.tdos.net">友情链接：TDOS官网</a>
+          <a href="https://www.wisdchain.com">DAPP官网</a>
+         <a href="https://www.wisdchain.com">运维工具官网</a>
   	   </div>
   	   <hr class="opacity-md">
   	   <div class="copyright font-size-1">
   	   	 <p class="text-white">
-  	   	 	2018-2019 Wisdom Public Chain Foundation. All rights reserved
+           Copyright©  Changzhou yongyang Information Technology Co., Ltd . 2020 All rights reserved
   	   	 </p>
   	   </div>
   	 </div>

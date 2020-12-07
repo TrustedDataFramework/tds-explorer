@@ -5,7 +5,7 @@
       <div class="container">
 
         <div class="home-banner">
-          <h1 class="h4 text-white mb-3">TDS 浏览器</h1>
+          <h1 class="h4 text-white mb-3">TDOS 浏览器</h1>
 
           <div class="input-group input-group-shadow">
             <div class="input-group-prepend d-none d-md-block">
