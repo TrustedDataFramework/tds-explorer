@@ -64,6 +64,18 @@
 
               <div class="tran-right box-flex">
                 <div>
+                  <h2 class="font-size-1 text-secondary">网络ID</h2>
+                  <div>
+                          <span class="text-size-1 text-link" >
+                            {{p2pAddress}}
+                            </span>
+                    <span class="small text-secondary"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="tran-right box-flex">
+                <div>
                   <h2 class="font-size-1 text-secondary">事务总数</h2>
                   <div>
                           <span class="text-size-1 text-link" >
@@ -325,7 +337,8 @@ export default {
       currentDifficulty:'',
       consensus:'',
       totalTransaction:'',
-      transactionSize:''
+      transactionSize:'',
+      p2pAddress:''
     };
   },
   components: {
@@ -491,6 +504,7 @@ export default {
         if (res.code == 200) {
           that.blocksPerDay = res.data.blocksPerDay;
           that.averageBlockInterval = res.data.averageBlockInterval;
+          that.p2pAddress = res.data.p2pAddress.split(":")[0];
           if(res.data.currentDifficulty == ""){
             that.currentDifficulty = 0 ;
           }else{
