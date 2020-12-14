@@ -6,9 +6,8 @@
   	   </div>
   	   <div class="footer-link">
   	   	  <a href="mailto:hermosatdos@qq.com">联系我们：hermosatdos@qq.com</a>
-  	   	  <a href="https://www.tdos.net">友情链接：TDOS官网</a>
-          <a href="https://www.wisdchain.com">DAPP官网</a>
-         <a href="https://www.wisdchain.com">运维工具官网</a>
+  	   	  <a href="http://www.tdos.net">友情链接：TDOS官网</a>
+          <a href="http://120.76.101.153:8282">DAPP官网</a>
   	   </div>
   	   <hr class="opacity-md">
   	   <div class="copyright font-size-1">
