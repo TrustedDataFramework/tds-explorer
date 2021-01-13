@@ -4,25 +4,25 @@
         <div class="tds-block-main">
 
             <div class="container">
-                <div class="page-tilte pb-3 pt-3">事务</div>
+                <div class="page-tilte pb-3 pt-3">{{$t('menu.transaction')}}</div>
                 <div  class=" tab-css tab-box ">
                 	<div class="com-table-box">
                 	  <table class="com-table">
                 	  	 <tr>
-                	  	 	 <th>事务哈希</th>
-                         <th>事务类型</th>
-                	  	 	 <th class="tab-th">区块高度
+                	  	 	 <th>{{$t('transaction_hash')}}</th>
+                         <th>{{$t('Transaction_type')}}</th>
+                	  	 	 <th class="tab-th">{{$t('block.block_height')}}
                 	  	 	 	  <span class="caret-wrapper" :class="{'ascending':sortType==1,'descending':sortType==2}">
                 	  	 	 	  	<i class="sort-caret ascending" @click="sort(1)"></i>
                 	  	 	 	  	<i class="sort-caret descending" @click="sort(2)"></i>
                 	  	 	 	  </span>
                 	  	 	 </th>
-                	  	 	 <th>出块时间</th>
-                	  	 	 <th>发送者地址</th>
+                	  	 	 <th>{{$t('block.Block_time')}}</th>
+                	  	 	 <th>{{$t('sender_address')}}</th>
                          <th></th>
-                	  	 	 <th>接收者地址</th>
-                	  	 	 <th>金额</th>
-                	  	 	 <th>手续费</th>
+                	  	 	 <th>{{$t('receiver_address')}}</th>
+                	  	 	 <th>{{$t('amount')}}</th>
+                	  	 	 <th>{{$t('fee')}}</th>
                 	  	 </tr>
                 	  	 <tr v-for="(item,index) in transactionList" :key="index">
                 	  	 	<td>
@@ -60,7 +60,7 @@
                   </div>
                     <div class="page-block">
 
-                        <el-pagination
+                        <el-pagination :class="{'el-pagination_en':$i18n.locale=='en'}"
                         @size-change="handleSizeChange"
                         @current-change="handleCurrentChange"
                         :current-page="currentPage"
@@ -85,6 +85,7 @@
 
 </template>
 <script>
+let _this = this;
    import comheader from "@/components/header";
    import comfooter from "@/components/footer";
    import {getTransactionList} from '@/API/api';
@@ -102,13 +103,16 @@
          currentPage:0,//当前页
         }
      },
+      beforeCreate () {
+	    _this = this
+    },
      components: {
         comfooter,comheader
      },
      filters:{
         timefilters(val) {
             if (val == null || val == "") {
-                return "暂无时间";
+                return _this.$i18n.t('No_time');
             } else {
               var offset = new Date().getTimezoneOffset()/60;
               if(!val){
@@ -292,11 +296,11 @@
               that.totalElements = res.data.totalElements;
               for(let i = 0;i<res.data.content.length;i++){
                 if(res.data.content[i].type == 1){
-                  res.data.content[i].type = '转账';
+                  res.data.content[i].type = this.$i18n.t('transfer');
                 }else if(res.data.content[i].type == 2){
-                  res.data.content[i].type = '合约部署';
+                  res.data.content[i].type = this.$i18n.t('deploy_contract');
                 }else if(res.data.content[i].type == 3){
-                  res.data.content[i].type = '合约调用';
+                  res.data.content[i].type = this.$i18n.t('call_contract');
                 }
               }
               that.transactionList = res.data.content;
@@ -317,11 +321,11 @@
              that.totalElements = res.data.totalElements;
              for(let i = 0;i<res.data.content.length;i++){
                if(res.data.content[i].type == 1){
-                 res.data.content[i].type = '转账';
+                 res.data.content[i].type = this.$i18n.t('transfer');;
                }else if(res.data.content[i].type == 2){
-                 res.data.content[i].type = '合约部署';
+                 res.data.content[i].type = this.$i18n.t('deploy_contract');;
                }else if(res.data.content[i].type == 3){
-                 res.data.content[i].type = '合约调用';
+                 res.data.content[i].type = this.$i18n.t('call_contract');
                }
              }
              that.transactionList = res.data.content;

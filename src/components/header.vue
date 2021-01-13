@@ -26,10 +26,15 @@
 				<!-- 把菜单包含在容器内 -->
 				<div class="collapse navbar-collapse justify-content-end" id="nav-menu">
 					<ul class="navbar-nav">
-					<li class="nav-item" :class="{'active':tabindex==1}"><a @click="linkRouter(1)" class="nav-link">主页</a></li>
-					<li class="nav-item" :class="{'active':tabindex==2}"><a @click="linkRouter(2)"  class="nav-link">区块</a></li>
-					<li class="nav-item" :class="{'active':tabindex==3}"><a @click="linkRouter(3)" class="nav-link ">事务</a></li>
-					<li class="nav-item" :class="{'active':tabindex==4}"><a @click="linkRouter(4)" class="nav-link ">合约</a></li>
+					<li class="nav-item" :class="{'active':tabindex==1}"><a @click="linkRouter(1)" class="nav-link">{{$t("menu.home")}}</a></li>
+					<li class="nav-item" :class="{'active':tabindex==2}"><a @click="linkRouter(2)"  class="nav-link">{{$t("menu.block")}}</a></li>
+					<li class="nav-item" :class="{'active':tabindex==3}"><a @click="linkRouter(3)" class="nav-link ">{{$t("menu.transaction")}}</a></li>
+					<li class="nav-item" :class="{'active':tabindex==4}"><a @click="linkRouter(4)" class="nav-link ">{{$t("menu.contract")}}</a></li>
+           <li class="change">
+            <a @click="switchLanguage('zh')" :class="{'active':$i18n.locale=='zh'}">CN</a>
+            <span class="line">/</span>
+            <a @click="switchLanguage('en')" :class="{'active':$i18n.locale=='en'}">EN</a>
+          </li>
 					</ul>
 				</div>
 
@@ -44,9 +49,9 @@
 						>
 <!--						<option selected="" value="0">All Filters</option>-->
 <!--						<option value="1">Addresses</option>-->
-						<option selected="" value="0">事务哈希</option>
-						<option value="1">区块哈希</option>
-              <option value="2">地址</option>
+						<option selected="" value="0">{{$t('Transaction_hash')}}</option>
+						<option value="1">{{$t('Block_hash')}}</option>
+              <option value="2">{{$t('address')}}</option>
 						</select>
 						<!-- End Select -->
 					</div>
@@ -57,7 +62,7 @@
 						class="form-control searchautocomplete ui-autocomplete-input list-unstyled py-3 mb-0"
 						autocomplete="off"
 						spellcheck="false"
-						placeholder="事务哈希/区块哈希/地址"
+						:placeholder="$t('search_placeholder')"
 						aria-describedby="button-header-search"
 						name="q"
 						maxlength="68"
@@ -92,6 +97,12 @@ export default {
 	  }
   },
   methods:{
+    //语言切换
+    switchLanguage(val){
+      let that = this;
+      that.$i18n.locale = val
+      localStorage.setItem('lang',val)
+    },
     linkRouter(num){
       let that = this
       this.reload();

@@ -5,7 +5,7 @@
       <div class="container">
 
         <div class="home-banner">
-          <h1 class="h4 text-white mb-3">TDOS 浏览器</h1>
+          <h1 class="h4 text-white mb-3">{{$t("index.TDOS_Browser")}}</h1>
 
           <div class="input-group input-group-shadow">
             <div class="input-group-prepend d-none d-md-block">
@@ -16,9 +16,9 @@
               >
 <!--                <option selected="" value="0">All Filters</option>-->
 <!--                <option selected="" value="1">Addresses</option>-->
-                <option selected="" value="0">事务哈希</option>
-                <option value="1">区块哈希</option>
-                <option value="2">地址</option>
+                <option selected="" value="0">{{$t("index.Transaction_hash")}}</option>
+                <option value="1">{{$t("index.Block_hash")}}</option>
+                <option value="2">{{$t("index.address")}}</option>
               </select>
               <!-- End Select -->
             </div>
@@ -29,7 +29,7 @@
               class="form-control searchautocomplete ui-autocomplete-input list-unstyled py-3 mb-0"
               autocomplete="off"
               spellcheck="false"
-              placeholder="事务哈希/区块哈希/地址"
+               :placeholder="$t('index.search_placeholder')"
               aria-describedby="button-header-search"
               name="q"
               maxlength="68"
@@ -52,7 +52,7 @@
                 <div class="tran-left box-flex flex-middle">
                   <div class="icon"><img src="../assets/img/icon-2-1.svg"/></div>
                   <div class="tran-params">
-                     <h2 class="font-size-1 text-secondary">每天出块数量</h2>
+                     <h2 class="font-size-1 text-secondary">{{$t('index.Blocks_per_day')}}</h2>
                      <div>
 <!--                        <el-tooltip class="item" effect="dark" popper-class="atooltip" placement="left">-->
                        <span class="text-size-1 text-link">{{blocksPerDay}}</span>
@@ -64,7 +64,7 @@
 
               <div class="tran-right box-flex">
                 <div>
-                  <h2 class="font-size-1 text-secondary">网络ID</h2>
+                  <h2 class="font-size-1 text-secondary">{{$t('index.Network_ID')}}</h2>
                   <div>
                           <span class="text-size-1 text-link" >
                             {{p2pAddress}}
@@ -76,7 +76,7 @@
 
               <div class="tran-right box-flex">
                 <div>
-                  <h2 class="font-size-1 text-secondary">事务总数</h2>
+                  <h2 class="font-size-1 text-secondary">{{$t('index.Total_transactions')}}</h2>
                   <div>
                           <span class="text-size-1 text-link" >
                             {{totalTransaction}}
@@ -88,7 +88,7 @@
 
                 <div class="tran-right box-flex">
                     <div>
-                        <h2 class="font-size-1 text-secondary">平均出块时间</h2>
+                        <h2 class="font-size-1 text-secondary">{{$t('index.Average_block_time')}}</h2>
                         <div>
                           <span class="text-size-1 text-link" >
                             {{averageBlockInterval}}s
@@ -105,7 +105,7 @@
                 <div class="tran-left box-flex flex-middle">
                   <div class="icon"><img src="../assets/img/icon-51.svg"/></div>
                   <div class="tran-params">
-                     <h2 class="font-size-1 text-secondary">当前难度值</h2>
+                     <h2 class="font-size-1 text-secondary">{{$t('index.Current_difficulty_value')}}</h2>
                      <div>
 <!--                       <el-tooltip class="item" effect="dark"  popper-class="atooltip" placement="left">-->
                        <span class="text-size-1 text-link">
@@ -121,7 +121,7 @@
 
               <div class="tran-right box-flex">
                 <div>
-                  <h2 class="font-size-1 text-secondary">事务池大小</h2>
+                  <h2 class="font-size-1 text-secondary">{{$t('index.Transaction_pool_size')}}</h2>
                   <div>
 <!--                    <el-tooltip class="item" effect="dark" content="Average Hash Rate (The last 12 hours)" popper-class="atooltip" placement="bottom">-->
                           <span class="text-size-1 text-link" >
@@ -134,7 +134,7 @@
 
                 <div class="tran-right box-flex">
                     <div>
-                        <h2 class="font-size-1 text-secondary">共识机制</h2>
+                        <h2 class="font-size-1 text-secondary">{{$t('index.Consensus_mechanism')}}</h2>
                         <div>
 <!--                          <el-tooltip class="item" effect="dark" content="Average Hash Rate (The last 12 hours)" popper-class="atooltip" placement="bottom">-->
                           <span class="text-size-1 text-link" >
@@ -154,7 +154,7 @@
           <div class="col-lg-6 mb-4 mb-lg-0">
             <div class="card">
               <div class="card-header">
-                <h2 class="card-header-title"><!--Latest Blocks-->最新区块</h2>
+                <h2 class="card-header-title"><!--Latest Blocks-->{{$t('index.Latest_block')}}</h2>
               </div>
               <div class="list-box block-list">
                 <el-scrollbar class="block-tab">
@@ -223,7 +223,7 @@
               </div>
               <div class="card-footer">
                 <a class="btn btn-xs btn-block btn-soft-primary" @click="linkBlock"
-                  ><!--View all blocks-->查看所有区块</a
+                  ><!--View all blocks-->{{$t('index.View_all_blocks')}}</a
                 >
               </div>
             </div>
@@ -232,7 +232,7 @@
             <div class="card">
               <div class="card-header">
                 <h2 class="card-header-title">
-                  <!--Latest Transactions-->最新交易
+                  <!--Latest Transactions-->{{$t('index.Latest_transaction')}}
                 </h2>
               </div>
               <div class="list-box block-list transactions-list">
@@ -303,7 +303,7 @@
               </div>
               <div class="card-footer">
                 <a class="btn btn-xs btn-block btn-soft-primary" @click="linkTransaction"
-                  ><!--View all blocks-->查看所有事务</a
+                  ><!--View all blocks-->{{$t('index.View_all_transactions')}}</a
                 >
               </div>
             </div>
@@ -317,12 +317,13 @@
 </template>
 
 <script>
+let  _this
 import comfooter from "@/components/footer";
 import comheader from "@/components/header";
 import {getBlockList,getTransactionList,getRpcStat,getTransactionSize} from '@/API/api';
 import axios from 'axios'
 export default {
-
+ 
   data() {
     return {
 
@@ -344,10 +345,13 @@ export default {
   components: {
     comfooter,comheader
   },
+   beforeCreate () {
+	    _this = this
+    },
   filters:{
     timefilters(val) {
       if (val == null || val == "") {
-        return "暂无时间";
+         return _this.$i18n.t('No_time');
       } else {
         var offset = new Date().getTimezoneOffset()/60;
         if(!val){

@@ -4,12 +4,12 @@
         <div class="tds-block-main">
 
             <div class="container">
-                <div class="page-tilte pb-3 pt-3">事务详情</div>
+                <div class="page-tilte pb-3 pt-3">{{$t('Transaction_details')}}</div>
                 <div  class=" tab-css tab-box detail-tab">
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                              <el-tooltip class="item" effect="dark" content="是把任意长度的输入通过散列算法变换成固定长度的输出,该输出就是哈希值." popper-class="atooltip" placement="bottom">
+                              <el-tooltip class="item" effect="dark" :content="$t('trans_hash_mess')" popper-class="atooltip" placement="bottom">
                                 <span class="mess-icon"></span>
                               </el-tooltip>
                               <span>hash:</span>
@@ -23,8 +23,8 @@
                              v-clipboard:copy="transaction.hash"
                              v-clipboard:success="onCopy"
                              v-clipboard:error="onError"
-                             title="将事务哈希复制到剪贴板"
-                             data-toggle="tooltip" data-placement="top">已复制</a>
+                              :title="$t('block.Block_clipboard')"
+                             data-toggle="tooltip" data-placement="top">{{$t('replicated')}}</a>
                            </div>
                        </div>
                    </div>
@@ -34,7 +34,7 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                              <el-tooltip class="item" effect="dark" content="一个只被使用一次的任意或非重复的随机数值." popper-class="atooltip" placement="bottom">
+                              <el-tooltip class="item" effect="dark" :content="$t('trans_nonce_mess')" popper-class="atooltip" placement="bottom">
                                 <span class="mess-icon"></span>
                               </el-tooltip>
                               <span>nonce:</span>
@@ -52,7 +52,7 @@
                   <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                              <el-tooltip class="item" effect="dark" content="事务创建的时间." popper-class="atooltip" placement="bottom">
+                              <el-tooltip class="item" effect="dark" :content="$t('trans_create_mess')" popper-class="atooltip" placement="bottom">
                                 <span class="mess-icon"></span>
                               </el-tooltip>
                               <span>created_at:</span>
@@ -69,7 +69,7 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                              <el-tooltip class="item" effect="dark" content="事务的发送方." popper-class="atooltip" placement="bottom">
+                              <el-tooltip class="item" effect="dark" :content="$t('trans_from_mess')" popper-class="atooltip" placement="bottom">
                                 <span class="mess-icon"></span>
                               </el-tooltip>
                               <span>from:</span>
@@ -86,7 +86,7 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                              <el-tooltip class="item" effect="dark" content="单笔事务的金额." popper-class="atooltip" placement="bottom">
+                              <el-tooltip class="item" effect="dark" :content="$t('trans_amount_mess')" popper-class="atooltip" placement="bottom">
                                 <span class="mess-icon"></span>
                               </el-tooltip>
                               <span>amount:</span>
@@ -103,7 +103,7 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                              <el-tooltip class="item" effect="dark" content="事务的接收方." popper-class="atooltip" placement="bottom">
+                              <el-tooltip class="item" effect="dark" :content="$t('trans_to_mess')" popper-class="atooltip" placement="bottom">
                                 <span class="mess-icon"></span>
                               </el-tooltip>
                               <span>to:</span>
@@ -120,7 +120,7 @@
                   <div class="row">
                     <div class="col-md-3 detail-col">
                       <div class="lab">
-                        <el-tooltip class="item" effect="dark" content="单笔交易需要的资金.GasPrice越高,提交的交易将越快被接纳." popper-class="atooltip" placement="bottom">
+                        <el-tooltip class="item" effect="dark" :content="$t('gas_price_mess')" popper-class="atooltip" placement="bottom">
                           <span class="mess-icon"></span>
                         </el-tooltip>
                         <span>gas_price:</span>
@@ -137,7 +137,7 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                              <el-tooltip class="item" effect="dark" content="事务类型." popper-class="atooltip" placement="bottom">
+                              <el-tooltip class="item" effect="dark" :content="$t('trans_type_mess')" popper-class="atooltip" placement="bottom">
                                 <span class="mess-icon"></span>
                               </el-tooltip>
                               <span>type:</span>
@@ -153,7 +153,7 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                              <el-tooltip class="item" effect="dark" content="事务的版本号." popper-class="atooltip" placement="bottom">
+                              <el-tooltip class="item" effect="dark" :content="$t('trans_version_mess')" popper-class="atooltip" placement="bottom">
                                 <span class="mess-icon"></span>
                               </el-tooltip>
                               <span>version:</span>
@@ -169,7 +169,7 @@
                   <div class="row">
                     <div class="col-md-3 detail-col">
                       <div class="lab">
-                        <el-tooltip class="item" effect="dark" content="数字签名是使用了公钥加密的技术实现,只有信息的发送者才能产生的别人无法伪造的一段数字串." popper-class="atooltip" placement="bottom">
+                        <el-tooltip class="item" effect="dark" :content="$t('trans_signature_mess')" popper-class="atooltip" placement="bottom">
                           <span class="mess-icon"></span>
                         </el-tooltip>
                         <span>signature:</span>
@@ -185,7 +185,7 @@
                   <div class="row">
                     <div class="col-md-3 detail-col">
                       <div class="lab">
-                        <el-tooltip class="item" effect="dark" content="事务占据的存储容量." popper-class="atooltip" placement="bottom">
+                        <el-tooltip class="item" effect="dark" :content="$t('trans_size_mess')" popper-class="atooltip" placement="bottom">
                           <span class="mess-icon"></span>
                         </el-tooltip>
                         <span>size:</span>
@@ -202,7 +202,7 @@
                   <div class="row">
                     <div class="col-md-3 detail-col">
                       <div class="lab">
-                        <el-tooltip class="item" effect="dark" content="数据传输中对于接收者有用的实际交易信息." popper-class="atooltip" placement="bottom">
+                        <el-tooltip class="item" effect="dark" :content="$t('trans_payload_mess')" popper-class="atooltip" placement="bottom">
                           <span class="mess-icon"></span>
                         </el-tooltip>
                         <span>payload:</span>
@@ -228,6 +228,7 @@
 
 </template>
 <script>
+let _this =this;
    import comheader from "@/components/header";
    import comfooter from "@/components/footer";
    import {getTransactionByTxHash} from '@/API/api';
@@ -246,10 +247,13 @@
      components: {
         comfooter,comheader
      },
+      beforeCreate () {
+	    _this = this
+    },
      filters:{
        timefilters(val) {
          if (val == null || val == "") {
-           return "暂无时间";
+           return _this.$i18n.t('No_time');
          } else {
            var offset = new Date().getTimezoneOffset()/60;
            if(!val){

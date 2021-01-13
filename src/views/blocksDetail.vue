@@ -4,14 +4,14 @@
         <div class="tds-block-main">
 
             <div class="container">
-                <div class="page-tilte pb-3 pt-3">区块详情 <span class="text-secondary">{{block.height}}</span></div>
+                <div class="page-tilte pb-3 pt-3">{{$t('block.Block_details')}} <span class="text-secondary">{{block.height}}</span></div>
                 <div  class=" tab-css tab-box detail-tab">
 
 
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                              <el-tooltip class="item" effect="dark" content="区块高度,区块在主链的个数,也就是连接在区块链上的块数." popper-class="atooltip" placement="bottom">
+                              <el-tooltip class="item" effect="dark" :content="$t('block.Block_height_mess')" popper-class="atooltip" placement="bottom">
                                   <span class="mess-icon"></span>
                               </el-tooltip>
                               <span>height:</span>
@@ -29,7 +29,7 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                              <el-tooltip class="item" effect="dark" content="哈希值，一段数据(或某个文件)的DNA(或身份证);" popper-class="atooltip" placement="bottom">
+                              <el-tooltip class="item" effect="dark" :content="$t('block.hash_mess')" popper-class="atooltip" placement="bottom">
                                 <span class="mess-icon"></span>
                               </el-tooltip>
                               <span>hash:</span>
@@ -43,8 +43,8 @@
                              v-clipboard:copy="block.hash"
                              v-clipboard:success="onCopy"
                              v-clipboard:error="onError"
-                             title="区块哈希复制到剪贴板"
-                             data-toggle="tooltip" data-placement="top">已复制</a>
+                             :title="$t('block.Block_clipboard')"
+                             data-toggle="tooltip" data-placement="top">{{$t('replicated')}}</a>
                            </div>
                        </div>
                    </div>
@@ -55,7 +55,7 @@
                   <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                              <el-tooltip class="item" effect="dark" content="区块创建的时间，即区块时间戳." popper-class="atooltip" placement="bottom">
+                              <el-tooltip class="item" effect="dark" :content="$t('block.create_time_mess')" popper-class="atooltip" placement="bottom">
                                 <span class="mess-icon"></span>
                               </el-tooltip>
                               <span>created_at:</span>
@@ -73,7 +73,7 @@
                   <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                              <el-tooltip class="item" effect="dark" content="定义区块的大小." popper-class="atooltip" placement="bottom">
+                              <el-tooltip class="item" effect="dark"  :content="$t('block.size_mess')" popper-class="atooltip" placement="bottom">
                                 <span class="mess-icon"></span>
                               </el-tooltip>
                               <span>size:</span>
@@ -91,7 +91,7 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                              <el-tooltip class="item" effect="dark" content="矿工地址." popper-class="atooltip" placement="bottom">
+                              <el-tooltip class="item" effect="dark" :content="$t('block.Miner_address')" popper-class="atooltip" placement="bottom">
                                 <span class="mess-icon"></span>
                               </el-tooltip>
                               <span>miner_address:</span>
@@ -108,7 +108,7 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                              <el-tooltip class="item" effect="dark" content="矿工费,区块链网络中的交易费用." popper-class="atooltip" placement="bottom">
+                              <el-tooltip class="item" effect="dark" :content="$t('block.Miner_fees_mess')" popper-class="atooltip" placement="bottom">
                                 <span class="mess-icon"></span>
                               </el-tooltip>
                               <span>all_fee:</span>
@@ -125,7 +125,7 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                              <el-tooltip class="item" effect="dark" content="世界状态的默克尔哈希根." popper-class="atooltip" placement="bottom">
+                              <el-tooltip class="item" effect="dark" :content="$t('block.Merkel_mess')" popper-class="atooltip" placement="bottom">
                                 <span class="mess-icon"></span>
                               </el-tooltip>
                               <span>state_root:</span>
@@ -142,7 +142,7 @@
                    <div class="row">
                        <div class="col-md-3 detail-col">
                             <div class="lab">
-                              <el-tooltip class="item" effect="dark" content="区块体中的交易构成的默克尔哈希根." popper-class="atooltip" placement="bottom">
+                              <el-tooltip class="item" effect="dark" :content="$t('block.Merkel_root_mess')" popper-class="atooltip" placement="bottom">
                                 <span class="mess-icon"></span>
                               </el-tooltip>
                               <span>transaction_root:</span>
@@ -159,7 +159,7 @@
                   <div class="row">
                     <div class="col-md-3 detail-col">
                       <div class="lab">
-                        <el-tooltip class="item" effect="dark" content="区块版本,Version字段并不会存储什么重要信息." popper-class="atooltip" placement="bottom">
+                        <el-tooltip class="item" effect="dark" :content="$t('block.Block_version_mess')" popper-class="atooltip" placement="bottom">
                           <span class="mess-icon"></span>
                         </el-tooltip>
                         <span>version:</span>
@@ -175,7 +175,7 @@
                   <div class="row">
                     <div class="col-md-3 detail-col">
                       <div class="lab">
-                        <el-tooltip class="item" effect="dark" content="上一个区块的哈希值." popper-class="atooltip" placement="bottom">
+                        <el-tooltip class="item" effect="dark" :content="$t('block.previous_block_mess')" popper-class="atooltip" placement="bottom">
                           <span class="mess-icon"></span>
                         </el-tooltip>
                         <span>hash_prev:</span>
@@ -191,7 +191,7 @@
                   <div class="row">
                     <div class="col-md-3 detail-col">
                       <div class="lab">
-                        <el-tooltip class="item" effect="dark" content="区块交易信息." popper-class="atooltip" placement="bottom">
+                        <el-tooltip class="item" effect="dark" :content="$t('block.payload_mess')" popper-class="atooltip" placement="bottom">
                           <span class="mess-icon"></span>
                         </el-tooltip>
                         <span>payload:</span>
@@ -216,6 +216,7 @@
 
 </template>
 <script>
+let _this;
    import comheader from "@/components/header";
    import comfooter from "@/components/footer";
    import {getBlockByHeight,getBlockByHash} from '@/API/api';
@@ -231,13 +232,16 @@
         }
 
      },
+     beforeCreate () {
+	    _this = this
+    },
      components: {
         comfooter,comheader
      },
      filters:{
        timefilters(val) {
          if (val == null || val == "") {
-           return "暂无时间";
+          return _this.$i18n.t('No_time');
          } else {
            var offset = new Date().getTimezoneOffset()/60;
            if(!val){

@@ -4,21 +4,21 @@
         <div class="tds-block-main">
 
             <div class="container">
-                <div class="page-tilte pb-3 pt-3">区块</div>
+                <div class="page-tilte pb-3 pt-3">{{$t('menu.block')}}</div>
                 <div  class=" tab-css tab-box">
                     <div class="com-table-box">
                 	  <table class="com-table block-list-tab">
                 	  	 <tr>
 
-                	  	 	 <th class="tab-th">区块高度
+                	  	 	 <th class="tab-th">{{$t('block.block_height')}}
                 	  	 	 	  <span class="caret-wrapper" :class="{'ascending':sortType==1,'descending':sortType==2}">
                 	  	 	 	  	<i class="sort-caret ascending" @click="sort(1)"></i>
                 	  	 	 	  	<i class="sort-caret descending" @click="sort(2)"></i>
                 	  	 	 	  </span>
                 	  	 	 </th>
-                	  	 	 <th>出块时间</th>
-                	  	 	 <th class="b-tran-num">事务数量</th>
-                	  	 	 <th>矿工地址</th>
+                	  	 	 <th>{{$t('block.Block_time')}}</th>
+                	  	 	 <th class="b-tran-num">{{$t('block.Number_of_transactions')}}</th>
+                	  	 	 <th>{{$t('block.Miner_address')}}</th>
 <!--                	  	 	 <th>总收益</th>-->
                 	  	 </tr>
                 	  	 <tr v-for="(item,index) in blockList" :key="index">
@@ -40,7 +40,7 @@
                   </div>
                     <div class="page-block">
 
-                        <el-pagination
+                        <el-pagination :class="{'el-pagination_en':$i18n.locale=='en'}"
                         @size-change="handleSizeChange"
                         @current-change="handleCurrentChange"
                         :current-page="currentPage"
@@ -65,6 +65,7 @@
 
 </template>
 <script>
+   let _this = this;
    import comheader from "@/components/header";
    import comfooter from "@/components/footer";
    import {getBlockList} from '@/API/api';
@@ -85,10 +86,13 @@
      components: {
         comfooter,comheader
      },
+    beforeCreate () {
+	    _this = this
+    },
      filters:{
         timefilters(val) {
             if (val == null || val == "") {
-                return "暂无时间";
+                return _this.$i18n.t('No_time');
             } else {
               var offset = new Date().getTimezoneOffset()/60;
               if(!val){
