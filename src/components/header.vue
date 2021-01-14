@@ -49,9 +49,9 @@
 						>
 <!--						<option selected="" value="0">All Filters</option>-->
 <!--						<option value="1">Addresses</option>-->
-						<option selected="" value="0">{{$t('Transaction_hash')}}</option>
-						<option value="1">{{$t('Block_hash')}}</option>
-              <option value="2">{{$t('address')}}</option>
+						<option selected="" value="0">{{$t('index.Transaction_hash')}}</option>
+						<option value="1">{{$t('index.Block_hash')}}</option>
+              <option value="2">{{$t('index.address')}}</option>
 						</select>
 						<!-- End Select -->
 					</div>
@@ -62,11 +62,12 @@
 						class="form-control searchautocomplete ui-autocomplete-input list-unstyled py-3 mb-0"
 						autocomplete="off"
 						spellcheck="false"
-						:placeholder="$t('search_placeholder')"
+						:placeholder="$t('index.search_placeholder')"
 						aria-describedby="button-header-search"
 						name="q"
 						maxlength="68"
 					/>
+        
 
 					<div class="input-group-append">
 						<button class="btn btn-primary" @click="link"> <i class="fa fa-search"></i> </button>
@@ -100,7 +101,8 @@ export default {
     //语言切换
     switchLanguage(val){
       let that = this;
-      that.$i18n.locale = val
+      that.$i18n.locale = val;
+      this.reload();
       localStorage.setItem('lang',val)
     },
     linkRouter(num){

@@ -32,7 +32,7 @@
                     </el-tooltip>
                   </div>
                 </td>
-                <td><div><span class="text-pri-default"><span>{{item.type}}</span></span></div></td>
+                <td><div><span class="text-pri-default"><span>{{item.type==0?$t('coin_base'):item.type==1?$t('transfer'):item.type==2?$t('deploy_contract'):$t('call_contract')}}</span></span></div></td>
                 <td><div><span class="text-pri-default"><span>{{item.nonce}}</span></span></div></td>
                 <td><div class=""><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
                 <td>
@@ -303,6 +303,7 @@
             let that = this;
             that.totalElements = res.data.body.length;
             that.transactionList = res.data.body;
+            /*
             for(var i of res.data.content){
               if(i.type == 0){
                 i.type = this.$i18n.t('coin_base'); 
@@ -313,7 +314,7 @@
               }else if(i.type == 3){
                 i.type = this.$i18n.t('call_contract');
               }
-            }
+            }*/
           }else{
             that.$toast(res.message,3000)
           }
@@ -328,6 +329,7 @@
             let that = this;
             that.totalElements = res.data.body.length;
             that.transactionList = res.data.body;
+            /*
             for(var i of res.data.body){
               if(i.type == 0){
                 i.type = this.$i18n.t('coin_base'); 
@@ -338,7 +340,7 @@
               }else if(i.type == 3){
                 i.type = this.$i18n.t('call_contract');
               }
-            }
+            }*/
             that.defaultBlockList = JSON.parse(JSON.stringify(that.transactionList))
           }else{
             that.$toast(res.message,3000)

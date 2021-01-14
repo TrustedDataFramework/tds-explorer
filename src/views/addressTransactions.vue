@@ -10,16 +10,20 @@
 
                       {{$t('index.address')}}
                       <span class="title-address text-secondary">{{address}}</span>
-                      <span class="at-btn at-btn-copy" :class="{'btn-copy-suc':copySecs>0}" :title="$t('copy_the_address')"  data-toggle="tooltip" data-placement="top"
+                      <el-tooltip class="item" effect="dark" :content="$t('copy_the_address')" popper-class="atooltip" placement="top">
+                      <span class="at-btn at-btn-copy" :class="{'btn-copy-suc':copySecs>0}" 
                         v-clipboard:copy="address"
                         v-clipboard:success="onCopy"
                         v-clipboard:error="onError"
                       >
 
                       </span>
-                      <span class="at-btn at-btn-see" :title="$t('view_QR_code')"  data-toggle="tooltip" data-placement="top"  >
+                      </el-tooltip>
+                      <el-tooltip class="item" effect="dark" :content="$t('view_QR_code')" popper-class="atooltip" placement="top">
+                      <span class="at-btn at-btn-see" >
                         <em data-target="#myModal" data-toggle="modal"  @click="qrcodeScan();"></em>
                       </span>
+                      </el-tooltip>
                   </div>
                   <div class="col-md-3 col-balance">
                       {{$t('current_nonce')}}：<span>{{nonce}}</span>
@@ -44,10 +48,10 @@
                 	  	 	 	  </span>
                 	  	 	 </th>
                 	  	 	 <th>{{$t('block.Block_time')}}</th>
-                	  	 	 <th>from</th>
+                	  	 	 <th>{{$t('from')}}</th>
 <!--                         <th></th>-->
-                	  	 	 <th>to</th>
-                	  	 	 <th>amount</th>
+                	  	 	 <th>{{$t('to')}}</th>
+                	  	 	 <th>{{$t('amount')}}</th>
                 	  	 	 <th>{{$t('fee')}}</th>
                 	  	 </tr>
                 	  	 <tr v-for="(item,index) in blockList" :key="index">

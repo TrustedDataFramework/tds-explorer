@@ -20,10 +20,10 @@
                 	  	 	 	  </span>
                 	  	 	 </th>
                 	  	 	 <th>{{$t('block.Block_time')}}</th>
-                	  	 	 <th>from</th>
+                	  	 	 <th>{{$t('from')}}</th>
 <!--                         <th></th>-->
 <!--                	  	 	 <th>to</th>-->
-                	  	 	 <th>amount</th>
+                	  	 	 <th>{{$t('amount')}}</th>
                 	  	 	 <th>{{$t('fee')}}</th>
                 	  	 </tr>
                 	  	 <tr v-for="(item,index) in contractList" :key="index">

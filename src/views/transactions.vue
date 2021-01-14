@@ -32,7 +32,7 @@
                               </el-tooltip>
                             </div>
                         </td>
-                         <td><div><span class="text-pri-default"><span>{{item.type}}</span></span></div></td>
+                         <td><div><span class="text-pri-default"><span>{{item.type==1?$t('transfer'):item.type==2?$t('deploy_contract'):$t('call_contract')}}</span></span></div></td>
                 	  	 	<td><div><span class="text-pri-default"><span>{{item.block_height}}</span></span></div></td>
                 	  	 	<td><div class=""><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
                 	  	 	<td>
@@ -267,6 +267,7 @@ let _this = this;
             if(res.code==200){
               let that = this;
               that.totalElements = res.data.totalElements;
+              /*
               for(let i = 0;i<res.data.content.length;i++){
                 if(res.data.content[i].type == 1){
                   res.data.content[i].type = this.$i18n.t('transfer');
@@ -276,6 +277,7 @@ let _this = this;
                   res.data.content[i].type = this.$i18n.t('call_contract');
                 }
               }
+              */
               that.transactionList = res.data.content;
               that.defaultBlockList = JSON.parse(JSON.stringify(res.data.content))
             }else{
@@ -294,6 +296,7 @@ let _this = this;
             if(res.code==200){
               let that = this;
               that.totalElements = res.data.totalElements;
+              /*
               for(let i = 0;i<res.data.content.length;i++){
                 if(res.data.content[i].type == 1){
                   res.data.content[i].type = this.$i18n.t('transfer');
@@ -302,7 +305,7 @@ let _this = this;
                 }else if(res.data.content[i].type == 3){
                   res.data.content[i].type = this.$i18n.t('call_contract');
                 }
-              }
+              }*/
               that.transactionList = res.data.content;
               that.defaultBlockList = JSON.parse(JSON.stringify(res.data.content))
             }else{
@@ -319,6 +322,7 @@ let _this = this;
            if(res.code==200){
              let that = this;
              that.totalElements = res.data.totalElements;
+             /*
              for(let i = 0;i<res.data.content.length;i++){
                if(res.data.content[i].type == 1){
                  res.data.content[i].type = this.$i18n.t('transfer');
@@ -327,7 +331,7 @@ let _this = this;
                }else if(res.data.content[i].type == 3){
                  res.data.content[i].type = this.$i18n.t('call_contract');
                }
-             }
+             }*/
              that.transactionList = res.data.content;
              that.defaultBlockList = JSON.parse(JSON.stringify(res.data.content))
            }else{

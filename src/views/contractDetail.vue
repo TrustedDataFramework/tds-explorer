@@ -82,7 +82,7 @@
                             <th>{{$t('from')}}</th>
                             <th></th>
                             <th>{{$t('to')}}</th>
-                            <th>amount</th>
+                            <th>{{$t('amount')}}</th>
                             <th>{{$t('fee')}}</th>
                           </tr>
                           <tr v-for="(item,index) in CallContractList" :key="index">
