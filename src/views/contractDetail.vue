@@ -7,7 +7,7 @@
                 <div class="page-tilte pb-3 pt-3 row">
 
                   <div class="col-md-12">
-                      合约地址
+                      {{$t('Contract_address')}}
                       <span class="title-address text-secondary">{{address}}</span>
 
                   </div>
@@ -19,15 +19,15 @@
                       <div class="col-md-6 ">
                           <div class="tab-css">
                             <div class="row">
-                              <div class="col-md-4"><div class="lab">余额：</div></div><div class="col-md-8">{{amount}}</div>
+                              <div class="col-md-4"><div class="lab">{{$t('balance')}}：</div></div><div class="col-md-8">{{amount}}</div>
                             </div>
                             <hr class="hr-space"/>
                             <div class="row">
-                              <div class="col-md-4"><div class="lab">区块高度：</div></div><div class="col-md-8">{{height}}</div>
+                              <div class="col-md-4"><div class="lab">{{$t('block.block_height')}}：</div></div><div class="col-md-8">{{height}}</div>
                             </div>
                             <hr class="hr-space"/>
                            <div class="row">
-                              <div class="col-md-4"><div class="lab">区块时间：</div></div><div class="col-md-8">{{created_at | timefilters}}</div>
+                              <div class="col-md-4"><div class="lab">{{$t('block.Block_time')}}：</div></div><div class="col-md-8">{{created_at | timefilters}}</div>
                             </div>
                           </div>
                       </div>
@@ -35,17 +35,17 @@
                       <div class="col-md-6">
                           <div class="tab-css">
                             <div class="row">
-                              <div class="col-md-3"><div class="lab">事务哈希：</div></div>
+                              <div class="col-md-3"><div class="lab">{{$t('transaction_hash')}}：</div></div>
                               <div class="col-md-9"><div class="line1">{{tx_hash}}</div></div>
                             </div>
                             <hr class="hr-space"/>
                             <div class="row">
-                              <div class="col-md-3"><div class="lab">from：</div></div>
+                              <div class="col-md-3"><div class="lab">{{$t('from')}}：</div></div>
                               <div class="col-md-9"><div class="line1">{{from}}</div></div>
                             </div>
                             <hr class="hr-space"/>
                            <div class="row">
-                              <div class="col-md-3"><div class="lab">to：</div></div>
+                              <div class="col-md-3"><div class="lab">{{$t('to')}}：</div></div>
                               <div class="col-md-9"><div class="line1">{{to}}</div></div>
                             </div>
                           </div>
@@ -58,8 +58,8 @@
                 <div class="contract-tab-box tab-css">
                   <div class="tab-nav">
                      <div class="navbox">
-                        <a :class="{'active':content_tab==1}" @click="content_tab=1">事务列表</a>
-                        <a :class="{'active':content_tab==2}" @click="content_tab=2">合约详情
+                        <a :class="{'active':content_tab==1}" @click="content_tab=1">{{$t('Transaction_list')}}</a>
+                        <a :class="{'active':content_tab==2}" @click="content_tab=2">{{$t('Contract_details')}}
                           <!--合约验证显示-->
                           <span class="s-verified"></span>
                         </a>
@@ -71,19 +71,19 @@
                      <div class="com-table-box">
                         <table class="com-table">
                           <tr>
-                            <th>事务hash</th>
+                            <th>{{$t('transaction_hash')}}</th>
 <!--                            <th class="tab-th">区块高度-->
 <!--                                <span class="caret-wrapper" :class="{'ascending':sortType==1,'descending':sortType==2}">-->
 <!--                                  <i class="sort-caret ascending" @click="sort(1)"></i>-->
 <!--                                  <i class="sort-caret descending" @click="sort(2)"></i>-->
 <!--                                </span>-->
 <!--                            </th>-->
-                            <th>出块时间</th>
-                            <th>from</th>
+                            <th>{{$t('block.Block_time')}}</th>
+                            <th>{{$t('from')}}</th>
                             <th></th>
-                            <th>to</th>
+                            <th>{{$t('to')}}</th>
                             <th>amount</th>
-                            <th>手续费</th>
+                            <th>{{$t('fee')}}</th>
                           </tr>
                           <tr v-for="(item,index) in CallContractList" :key="index">
                             <td>
@@ -120,7 +120,7 @@
                       </div>
                     <div class="page-block">
 
-                        <el-pagination
+                        <el-pagination :class="{'el-pagination_en':$i18n.locale=='en'}"
                         @size-change="handleSizeChange"
                         @current-change="handleCurrentChange"
                         :current-page="currentPage"
@@ -135,18 +135,18 @@
                   <div v-if="content_tab==2" class="contract-params">
                      <div class="param-col param-col1">
                          <div class="param-title">
-                              <span>智能合约源代码</span>
+                              <span>{{$t('smart_contract_source_code')}}</span>
                               <div class="functionBox">
 
                                 <a class="fun-btn copy" >
-                                  <el-tooltip class="item" effect="dark" content="复制合约源码到剪贴板" popper-class="top" placement="top">
+                                  <el-tooltip class="item" effect="dark" :content="$t('copy_contract_code_mess')" popper-class="top" placement="top">
                                     <em></em>
                                     </el-tooltip>
                                 </a>
 
 
                                 <a class="fun-btn qp" :class="{'bp':c_Screen==1}" @click.stop="contractScreen">
-                                  <el-tooltip class="item" effect="dark" content="切换全屏" popper-class="top" placement="top">
+                                  <el-tooltip class="item" effect="dark" :content="$t('full_screen')" popper-class="top" placement="top">
                                     <em></em>
                                   </el-tooltip>
                                 </a>
@@ -168,18 +168,18 @@
 
                      <div class="param-col param-col2">
                          <div class="param-title">
-                              <span>合约ABI</span>
+                              <span>{{$t('Contract_ABI')}}</span>
                               <div class="functionBox">
 
                                 <a class="fun-btn copy">
-                                    <el-tooltip class="item" effect="dark" content="复制合约ABI" popper-class="top" placement="top">
+                                    <el-tooltip class="item" effect="dark" :content="$t('copy_Contract_ABI')" popper-class="top" placement="top">
                                       <em></em>
                                     </el-tooltip>
                                 </a>
 
 
                                 <a class="fun-btn qp" :class="{'bp':a_Screen==1}" @click.stop="abiScreen">
-                                    <el-tooltip class="item" effect="dark" content="切换全屏" popper-class="top" placement="top">
+                                    <el-tooltip class="item" effect="dark" :content="$t('full_screen')" popper-class="top" placement="top">
                                       <em></em>
                                     </el-tooltip>
                                 </a>
@@ -215,6 +215,7 @@
 </template>
 
 <script>
+   let _this = this;
    import comheader from "@/components/header";
    import comfooter from "@/components/footer";
    import editor from 'vue2-ace-editor'
@@ -269,11 +270,14 @@
      components: {
         comfooter,comheader,editor
      },
+      beforeCreate () {
+	    _this = this
+    },
      filters:{
        timefilters(val) {
          //console.log(val)
          if (val == null || val == "") {
-           return "暂无时间";
+           return _this.$i18n.t('No_time');
          } else {
            var offset = new Date().getTimezoneOffset()/60;
            if(!val){

@@ -269,11 +269,11 @@ let _this = this;
               that.totalElements = res.data.totalElements;
               for(let i = 0;i<res.data.content.length;i++){
                 if(res.data.content[i].type == 1){
-                  res.data.content[i].type = 'transfer';
+                  res.data.content[i].type = this.$i18n.t('transfer');
                 }else if(res.data.content[i].type == 2){
-                  res.data.content[i].type = 'deploy contract';
+                  res.data.content[i].type =this.$i18n.t('deploy_contract');
                 }else if(res.data.content[i].type == 3){
-                  res.data.content[i].type = 'call contract';
+                  res.data.content[i].type = this.$i18n.t('call_contract');
                 }
               }
               that.transactionList = res.data.content;
@@ -321,7 +321,7 @@ let _this = this;
              that.totalElements = res.data.totalElements;
              for(let i = 0;i<res.data.content.length;i++){
                if(res.data.content[i].type == 1){
-                 res.data.content[i].type = this.$i18n.t('transfer');;
+                 res.data.content[i].type = this.$i18n.t('transfer');
                }else if(res.data.content[i].type == 2){
                  res.data.content[i].type = this.$i18n.t('deploy_contract');;
                }else if(res.data.content[i].type == 3){

@@ -34,6 +34,8 @@ const fs = require('fs')
 contract.abi = tdsSDK.compileABI('')
 console.log(contract.abi)
 
+
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

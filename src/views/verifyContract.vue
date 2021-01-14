@@ -7,8 +7,8 @@
                 <div class="page-tilte pb-3 pt-3 row">
 
                   <div class="verify-title">
-                       <p class="pt">验证并发布合约源代码</p>
-                       <p class="pmess">输入合约地址和合约源代码</p>
+                       <p class="pt">{{$t('Verify_code')}}</p>
+                       <p class="pmess">{{$t('Enter_code')}}</p>
                   </div>
 
                 </div>
@@ -19,16 +19,16 @@
                   <div  class="contract-params contract-params-form">
 
                      <div class="param-col param-col4">
-                        <div class="param-title"><span>合约地址</span></div>
+                        <div class="param-title"><span>{{$t('Contract_address')}}</span></div>
                         <div class="din din-address">
-                            <input placeholder="请输入合约地址" v-model="address" @change="changeAddress"/>
+                            <input :placeholder="$t('p_enter_contract_address')" v-model="address" @change="changeAddress"/>
                         </div>
 
                      </div>
 
                      <div class="param-col param-col1">
                          <div class="param-title">
-                              <span>智能合约源代码</span>
+                              <span>{{$t('smart_contract_source_code')}}</span>
 
                          </div>
 
@@ -46,7 +46,7 @@
 
                      <div class="param-col param-col2">
                          <div class="param-title">
-                              <span>合约ABI</span>
+                              <span>{{$t('Contract_ABI')}}</span>
 
                          </div>
                          <pre class="wordwrap js-copytextarea2" id="js-copytextarea2" :style="{'height':a_Screen==0?'200px':'400px','max-height': '400px','margin-top': '5px'}">{{ABI}}</pre>
@@ -54,14 +54,14 @@
 
                      <div class="param-col param-col3">
                          <div class="param-title">
-                              <span>构造函数字节码</span>
+                              <span>{{$t('Function_bytecode')}}</span>
                          </div>
                          <pre style="margin-top: 5px; height: 80px; max-height:200px" class="wordwrap"><font style="vertical-align: inherit;"></font>{{binary}}</pre>
                      </div>
 
                      <div class="btnbox">
-                        <input type="button" class="btn btn-primary fun-btn" value="验证并发布" @click="verifyContract"/>
-                        <input type="button" class="btn btn-reset fun-btn" value="重置" @click="reset"/>
+                        <input type="button" class="btn btn-primary fun-btn" :value="$t('Verify_and_release')" @click="verifyContract"/>
+                        <input type="button" class="btn btn-reset fun-btn" :value="$t('reset')" @click="reset"/>
 
                      </div>
 
@@ -236,7 +236,7 @@ import 'brace/ext/language_tools'
            // 编译合约得到字节码
            contract.abi = tdsSDK.compileABI(code);
          }catch(err){
-           that.$toast("校验失败,请检查代码或地址",3000)
+           that.$toast(this.$i18n.t('Verification_failed'),3000)
            return;
          }
          that.ABIByContract = contract.abi;
@@ -254,7 +254,7 @@ import 'brace/ext/language_tools'
            jsonLength2++;
          }
          if(jsonLength1 != jsonLength2) {
-           that.$toast("校验失败,请检查代码或地址",3000);
+           that.$toast(this.$i18n.t('Verification_failed'),3000);
            return;
          }else{
            for(let i = 0;i<that.ABIByBack.length;i++){
@@ -320,9 +320,9 @@ import 'brace/ext/language_tools'
              }
            }
            if(num == jsonLength1){
-             this.$confirm('验证成功，是否上传代码?', '确认', {
-               confirmButtonText: '确定',
-               cancelButtonText: '取消',
+             this.$confirm(this.$i18n.t('Verification_successful_mess'), this.$i18n.t('confirm'), {
+               confirmButtonText: this.$i18n.t('determine'),
+               cancelButtonText:this.$i18n.t('cancel'),
                type: 'warning'
              }).then(() => {
                let obj = {}
@@ -332,7 +332,7 @@ import 'brace/ext/language_tools'
                  if(res.code==200){
                    this.$message({
                      type: 'success',
-                     message: '上传成功'
+                     message:this.$i18n.t('Upload_success')
                    });
                  }else{
                    that.$toast(res.message,3000)
@@ -341,11 +341,11 @@ import 'brace/ext/language_tools'
              }).catch(() => {
                this.$message({
                  type: 'info',
-                 message: '已取消上传'
+                 message: this.$i18n.t('Upload_canceled')  
                });
              });
            }else{
-             this.$confirm('校验失败,请检查代码或地址')
+             this.$confirm(this.$i18n.t('Verification_failed'))
            }
          }
        },

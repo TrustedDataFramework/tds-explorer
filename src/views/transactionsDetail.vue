@@ -23,7 +23,7 @@
                              v-clipboard:copy="transaction.hash"
                              v-clipboard:success="onCopy"
                              v-clipboard:error="onError"
-                              :title="$t('block.Block_clipboard')"
+                              :title="$t('transaction_clipboard')"
                              data-toggle="tooltip" data-placement="top">{{$t('replicated')}}</a>
                            </div>
                        </div>

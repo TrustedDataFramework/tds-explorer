@@ -5,26 +5,26 @@
 
             <div class="container">
                 <div class="page-tilte pb-3 pt-3">
-                    <button class="btn-vefify" @click="linkVerifyContract">验证合约</button>合约
+                    <button class="btn-vefify" @click="linkVerifyContract">{{$t('Verification_contract')}}</button>{{$t('contract')}}
                 </div>
                 <div  class=" tab-css tab-box ">
                 	<div class="com-table-box">
                 	  <table class="com-table contract-table">
                 	  	 <tr>
-                	  	 	 <th>事务hash</th>
-                         <th>合约地址</th>
-                	  	 	 <th class="tab-th">区块高度
+                	  	 	 <th>{{$t('transaction_hash')}}</th>
+                         <th>{{$t('Contract_address')}}</th>
+                	  	 	 <th class="tab-th">{{$t('block.block_height')}}
                 	  	 	 	  <span class="caret-wrapper" :class="{'ascending':sortType==1,'descending':sortType==2}">
                 	  	 	 	  	<i class="sort-caret ascending" @click="sort(1)"></i>
                 	  	 	 	  	<i class="sort-caret descending" @click="sort(2)"></i>
                 	  	 	 	  </span>
                 	  	 	 </th>
-                	  	 	 <th>出块时间</th>
+                	  	 	 <th>{{$t('block.Block_time')}}</th>
                 	  	 	 <th>from</th>
 <!--                         <th></th>-->
 <!--                	  	 	 <th>to</th>-->
                 	  	 	 <th>amount</th>
-                	  	 	 <th>手续费</th>
+                	  	 	 <th>{{$t('fee')}}</th>
                 	  	 </tr>
                 	  	 <tr v-for="(item,index) in contractList" :key="index">
                 	  	 	<td>
@@ -69,7 +69,7 @@
                     <div class="page-block">
 
                         <el-pagination
-                        @size-change="handleSizeChange"
+                        @size-change="handleSizeChange" :class="{'el-pagination_en':$i18n.locale=='en'}"
                         @current-change="handleCurrentChange"
                         :current-page="currentPage"
                         :page-sizes="[10, 25, 50, 100]"
@@ -93,6 +93,7 @@
 
 </template>
 <script>
+   let _this = this;
    import comheader from "@/components/header";
    import comfooter from "@/components/footer";
    import {getContractList} from '@/API/api';
@@ -113,11 +114,14 @@
      components: {
         comfooter,comheader
      },
+      beforeCreate () {
+	    _this = this
+    },
      filters:{
         timefilters(val) {
             //console.log(val)
             if (val == null || val == "") {
-                return "暂无时间";
+                return _this.$i18n.t('No_time');
             } else {
               var offset = new Date().getTimezoneOffset()/60;
               if(!val){

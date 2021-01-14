@@ -8,24 +8,24 @@
 
                   <div class="col-md-6">
 
-                      地址
+                      {{$t('index.address')}}
                       <span class="title-address text-secondary">{{address}}</span>
-                      <span class="at-btn at-btn-copy" :class="{'btn-copy-suc':copySecs>0}" title="点击将地址复制到剪贴板"  data-toggle="tooltip" data-placement="top"
+                      <span class="at-btn at-btn-copy" :class="{'btn-copy-suc':copySecs>0}" :title="$t('copy_the_address')"  data-toggle="tooltip" data-placement="top"
                         v-clipboard:copy="address"
                         v-clipboard:success="onCopy"
                         v-clipboard:error="onError"
                       >
 
                       </span>
-                      <span class="at-btn at-btn-see" title="点击查看二维码"  data-toggle="tooltip" data-placement="top"  >
+                      <span class="at-btn at-btn-see" :title="$t('view_QR_code')"  data-toggle="tooltip" data-placement="top"  >
                         <em data-target="#myModal" data-toggle="modal"  @click="qrcodeScan();"></em>
                       </span>
                   </div>
                   <div class="col-md-3 col-balance">
-                      当前nonce：<span>{{nonce}}</span>
+                      {{$t('current_nonce')}}：<span>{{nonce}}</span>
                   </div>
                   <div class="col-md-3 col-balance">
-                    当前余额：<span>{{amount}}</span>
+                    {{$t('Current_balance')}}：<span>{{amount}}</span>
                   </div>
 
                 </div>
@@ -36,19 +36,19 @@
                 	<div class="com-table-box">
                 	  <table class="com-table">
                 	  	 <tr>
-                	  	 	 <th>事务hash</th>
-                	  	 	 <th class="tab-th">区块高度
+                	  	 	 <th>{{$t('transaction_hash')}}</th>
+                	  	 	 <th class="tab-th">{{$t('block.block_height')}}
                 	  	 	 	  <span class="caret-wrapper" :class="{'ascending':sortType==1,'descending':sortType==2}">
                 	  	 	 	  	<i class="sort-caret ascending" @click="sort(1)"></i>
                 	  	 	 	  	<i class="sort-caret descending" @click="sort(2)"></i>
                 	  	 	 	  </span>
                 	  	 	 </th>
-                	  	 	 <th>出块时间</th>
+                	  	 	 <th>{{$t('block.Block_time')}}</th>
                 	  	 	 <th>from</th>
 <!--                         <th></th>-->
                 	  	 	 <th>to</th>
                 	  	 	 <th>amount</th>
-                	  	 	 <th>手续费</th>
+                	  	 	 <th>{{$t('fee')}}</th>
                 	  	 </tr>
                 	  	 <tr v-for="(item,index) in blockList" :key="index">
                 	  	 	<td>
@@ -87,7 +87,7 @@
                   </div>
                     <div class="page-block">
 
-                        <el-pagination
+                        <el-pagination :class="{'el-pagination_en':$i18n.locale=='en'}"
                         @size-change="handleSizeChange"
                         @current-change="handleCurrentChange"
                         :current-page="currentPage"
@@ -131,6 +131,7 @@
 
 </template>
 <script>
+   let _this = this;
    import QRCode from "qrcode2";
    import comheader from "@/components/header";
    import comfooter from "@/components/footer";
@@ -157,10 +158,13 @@
      components: {
         comfooter,comheader
      },
+      beforeCreate () {
+	    _this = this
+    },
      filters:{
         timefilters(val) {
             if (val == null || val == "") {
-                return "暂无时间";
+                 return _this.$i18n.t('No_time');
             } else {
                 // let d = new Date(val);   //val 为表格内取到的后台时间
                 //

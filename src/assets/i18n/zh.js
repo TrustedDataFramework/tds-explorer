@@ -68,6 +68,8 @@ module.exports = {
     trans_size_mess:'事务占据的存储容量',
     trans_payload_mess:'数据传输中对于接收者有用的实际交易信息',
     trans_amount_mess:'单笔事务的金额',
+    coin_base:'coin base',
+    transaction_clipboard:'将事务哈希复制到剪贴板',
     el:{
         pagination:{
         goto:'前往',
@@ -80,5 +82,39 @@ module.exports = {
     Link:'友情链接',
     TDOS_official_website:'TDOS官网',
     DAPP_official_website:'DAPP官网',
-    No_time:'暂无时间'
+    No_time:'暂无时间',
+
+    /*ddressTransactions */
+    view_QR_code:'点击查看二维码',
+    copy_the_address :'点击将地址复制到剪贴板',
+    current_nonce:'当前nonce',
+    Current_balance:'当前余额',
+
+    /*contract */
+    contract:'合约',
+    Verification_contract:'验证合约',
+    Contract_address:'合约地址',
+    balance:'余额',
+    Transaction_list:'事务列表',
+    Contract_details:'合约详情',
+    from:'from',
+    to:'to',
+    smart_contract_source_code:'智能合约源代码',
+    Contract_ABI:'合约ABI',
+    Verify_code:'验证并发布合约源代码',
+    Enter_code:'输入合约地址和合约源代码',
+    p_enter_contract_address:'请输入合约地址',
+    Verify_and_release:'验证并发布',
+    reset:'重置',
+    Function_bytecode:'函数字节码',
+    Verification_failed:'校验失败,请检查代码或地址',
+    cancel:'取消',
+    confirm:'确认',
+    determine:'确定',
+    Upload_success:'上传成功',
+    Upload_canceled:'已取消上传',
+    Verification_successful_mess:'验证成功，是否上传代码?',
+    copy_contract_code_mess:'复制合约源码到剪贴板',
+    copy_Contract_ABI:'复制合约ABI',
+    full_screen:'切换全屏'
 }

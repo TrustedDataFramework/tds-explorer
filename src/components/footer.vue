@@ -9,8 +9,8 @@
   	   	 
 			   <div class="link">
 					{{$t('link')}}:
-			     <a href="https://www.wisdchain.com">{{$t('TDOS_official_website')}}</a>
-			    <a href="https://www.wisdchain.com">{{$t('DAPP_official_website')}}</a>
+			     <a href="https://www.tdos.net/">{{$t('TDOS_official_website')}}</a>
+			    <a href="http://120.76.101.153:8282/#/">{{$t('DAPP_official_website')}}</a>
 			   </div>
   	   </div>
   	   <hr class="opacity-md">
