@@ -103,7 +103,8 @@ export default {
       let that = this;
       that.$i18n.locale = val;
       this.reload();
-      localStorage.setItem('lang',val)
+      sessionStorage.setItem('lang', val);
+      //localStorage.setItem('lang',val)
     },
     linkRouter(num){
       let that = this

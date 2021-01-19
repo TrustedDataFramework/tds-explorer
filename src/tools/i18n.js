@@ -12,24 +12,26 @@ const messages = {
  
 var type=navigator.appName  
 var language = '';
+
 if (type=="Netscape"){  
-var lang = navigator.language  
+   var lang = navigator.language  
 }  
 else{  
 var lang = navigator.userLanguage  
-}  
-var lang = lang.substr(0,2)  
-if (lang == "en"){  
-  language='en' 
-}  
-else if (lang == "zh"){  
-  language='zh'
+
 }  
 
+
+var language = lang.toLowerCase().startsWith('zh')?'zh':'en';
+/*
+console.log(navigator)
+console.log(lang)
+console.log(language)
+*/
 
 // 最后 export default，这一步肯定要写的。
 export default new VueI18n({
-  locale : localStorage.getItem('lang') || language, // set locale 默认显示英文
+  locale : sessionStorage.getItem("lang")?sessionStorage.getItem("lang"):language, // set locale 默认显示英文
   messages : messages, // set locale messages
   silentTranslationWarn: true
 })
