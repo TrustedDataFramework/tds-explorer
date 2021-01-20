@@ -88,7 +88,7 @@
 
                 <div class="tran-right box-flex">
                     <div>
-                        <h2 class="font-size-1 text-secondary">{{$t('index.Average_block_time')}}</h2>
+                        <h2 class="font-size-1 text-secondary title_tab">{{$t('index.Average_block_time')}}</h2>
                         <div>
                           <span class="text-size-1 text-link" >
                             {{averageBlockInterval}}s
@@ -105,7 +105,7 @@
                 <div class="tran-left box-flex flex-middle">
                   <div class="icon"><img src="../assets/img/icon-51.svg"/></div>
                   <div class="tran-params">
-                     <h2 class="font-size-1 text-secondary">{{$t('index.Current_difficulty_value')}}</h2>
+                     <h2 class="font-size-1 text-secondary title_tab">{{$t('index.Current_difficulty_value')}}</h2>
                      <div style="max-width:210px">
 <!--                       <el-tooltip class="item" effect="dark"  popper-class="atooltip" placement="left">-->
                        <span class="text-size-1 text-link" >
@@ -119,9 +119,9 @@
                   </div >
                 </div>
 
-              <div class="tran-right box-flex">
+              <div class="tran-right right_home_tab box-flex">
                 <div>
-                  <h2 class="font-size-1 text-secondary">{{$t('index.Transaction_pool_size')}}</h2>
+                  <h2 class="font-size-1 text-secondary title_tab">{{$t('index.Transaction_pool_size')}}</h2>
                   <div>
 <!--                    <el-tooltip class="item" effect="dark" content="Average Hash Rate (The last 12 hours)" popper-class="atooltip" placement="bottom">-->
                           <span class="text-size-1 text-link" >
@@ -132,9 +132,9 @@
                 </div>
               </div>
 
-                <div class="tran-right box-flex">
+                <div class="tran-right right_home_tab box-flex">
                     <div>
-                        <h2 class="font-size-1 text-secondary">{{$t('index.Consensus_mechanism')}}</h2>
+                        <h2 class="font-size-1 text-secondary title_tab">{{$t('index.Consensus_mechanism')}}</h2>
                         <div>
 <!--                          <el-tooltip class="item" effect="dark" content="Average Hash Rate (The last 12 hours)" popper-class="atooltip" placement="bottom">-->
                           <span class="text-size-1 text-link" >
