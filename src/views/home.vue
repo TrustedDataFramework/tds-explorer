@@ -106,10 +106,10 @@
                   <div class="icon"><img src="../assets/img/icon-51.svg"/></div>
                   <div class="tran-params">
                      <h2 class="font-size-1 text-secondary">{{$t('index.Current_difficulty_value')}}</h2>
-                     <div>
+                     <div style="max-width:210px">
 <!--                       <el-tooltip class="item" effect="dark"  popper-class="atooltip" placement="left">-->
-                       <span class="text-size-1 text-link">
-                         {{currentDifficulty}}
+                       <span class="text-size-1 text-link" >
+                         {{currentDifficulty}} 
                          </span>
 <!--                       </el-tooltip>-->
                         <el-tooltip class="item" effect="dark" content="Transactions per Second" popper-class="atooltip" placement="bottom">
