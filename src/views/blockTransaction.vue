@@ -33,7 +33,7 @@
                   </div>
                 </td>
                 <td><div><span class="text-pri-default"><span>{{item.type==0?$t('coin_base'):item.type==1?$t('transfer'):item.type==2?$t('deploy_contract'):$t('call_contract')}}</span></span></div></td>
-                <td><div><span class="text-pri-default"><span>{{item.nonce}}</span></span></div></td>
+                <td><div><span class="text-pri-default"><span>{{item.height}}</span></span></div></td>
                 <td><div class=""><span class="text-pri-default">{{item.created_at | timefilters}}</span></div></td>
                 <td>
                   <div class="d-hash">
@@ -277,7 +277,7 @@
             that.transactionList = res.data.body;
             for(var i of res.data.content){
               if(i.type == 0){
-                i.type = this.$i18n.t('coin_base'); 
+                i.type = this.$i18n.t('coin_base');
               }else if(i.type == 1){
                 i.type = this.$i18n.t('transfer');
               }else if(i.type == 2){
@@ -306,7 +306,7 @@
             /*
             for(var i of res.data.content){
               if(i.type == 0){
-                i.type = this.$i18n.t('coin_base'); 
+                i.type = this.$i18n.t('coin_base');
               }else if(i.type == 1){
                 i.type = this.$i18n.t('transfer');
               }else if(i.type == 2){
@@ -329,10 +329,11 @@
             let that = this;
             that.totalElements = res.data.body.length;
             that.transactionList = res.data.body;
+            that.transactionList.height = res.data.height;
             /*
             for(var i of res.data.body){
               if(i.type == 0){
-                i.type = this.$i18n.t('coin_base'); 
+                i.type = this.$i18n.t('coin_base');
               }else if(i.type == 1){
                 i.type = this.$i18n.t('transfer');
               }else if(i.type == 2){
