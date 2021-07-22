@@ -5,7 +5,7 @@
 
             <div class="container">
                 <div class="page-tilte pb-3 pt-3">
-                    <button class="btn-vefify" @click="linkVerifyContract">{{$t('Verification_contract')}}</button>{{$t('contract')}}
+                    <button class="btn-vefify" @click="linkVerifyContract" v-if="false" >{{$t('Verification_contract')}}</button>{{$t('contract')}}
                 </div>
                 <div  class=" tab-css tab-box ">
                 	<div class="com-table-box">

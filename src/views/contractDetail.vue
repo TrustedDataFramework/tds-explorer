@@ -410,7 +410,7 @@
              that.tx_hash = res.data.tx_hash;
              that.created_at = res.data.created_at;
              that.getCallContractList(that.address);
-             that.getABIByAddress(that.address);
+            //  that.getABIByAddress(that.address);
              that.getPayloadByAddress(that.address);
              that.getCodeByAddress(that.address);
            }else{

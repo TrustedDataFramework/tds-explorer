@@ -109,7 +109,7 @@
                      <div style="max-width:210px">
 <!--                       <el-tooltip class="item" effect="dark"  popper-class="atooltip" placement="left">-->
                        <span class="text-size-1 text-link" >
-                         {{currentDifficulty}} 
+                         {{currentDifficulty}}
                          </span>
 <!--                       </el-tooltip>-->
                         <el-tooltip class="item" effect="dark" content="Transactions per Second" popper-class="atooltip" placement="bottom">
@@ -323,7 +323,7 @@ import comheader from "@/components/header";
 import {getBlockList,getTransactionList,getRpcStat,getTransactionSize} from '@/API/api';
 import axios from 'axios'
 export default {
- 
+
   data() {
     return {
 
@@ -508,7 +508,9 @@ export default {
         if (res.code == 200) {
           that.blocksPerDay = res.data.blocksPerDay;
           that.averageBlockInterval = res.data.averageBlockInterval;
-          that.p2pAddress = res.data.p2pAddress.split(":")[0];
+          if (res.data.p2pAddress !=null && res.data.p2pAddress.split(":").length > 0){
+              that.p2pAddress = res.data.p2pAddress.split(":")[0];
+          }
           if(res.data.currentDifficulty == ""){
             that.currentDifficulty = 0 ;
           }else{
